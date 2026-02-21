@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Vinheria Agnello | App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        wine: {
+                            50: '#fbf5f6', 100: '#f7ebed', 200: '#edd2d7', 300: '#e1b0b8',
+                            400: '#d08492', 500: '#bc5b6e', 600: '#a34255', 700: '#893344',
+                            800: '#732d3b', 900: '#602a34', 950: '#34131a',
+                        },
+                        sand: {
+                            50: '#fdfdfc', 100: '#fbfaf8', 200: '#f5f3ef', 300: '#ebe6dd',
+                            400: '#dfd6c7', 500: '#d0c1ab',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        body { overscroll-behavior-y: none; }
+    </style>
+</head>
+<body class="bg-sand-50 text-stone-800 font-sans antialiased pb-20 md:pb-0 flex flex-col min-h-screen">
+    <header class="fixed top-0 w-full bg-sand-50/95 backdrop-blur-md z-40 border-b border-sand-200 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 md:h-20">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="app.navigate('home')">
+                    <i data-lucide="wine" class="text-wine-800 h-6 w-6 md:h-8 md:w-8"></i>
+                    <span class="font-serif text-xl md:text-2xl font-semibold tracking-tight text-wine-950">Agnello</span>
+                </div>
+
+                <nav class="hidden md:flex space-x-8">
+                    <button onclick="app.navigate('home')" class="nav-link text-wine-800 font-medium transition-colors" data-target="home">Início</button>
+                    <button onclick="app.navigate('adega')" class="nav-link text-stone-500 hover:text-wine-800 font-medium transition-colors" data-target="adega">Adega</button>
+                    <button onclick="app.navigate('sobre')" class="nav-link text-stone-500 hover:text-wine-800 font-medium transition-colors" data-target="sobre">Nossa História</button>
+                    <button onclick="app.mockSommelier()" class="text-stone-500 hover:text-wine-800 font-medium transition-colors">Sommelier</button>
+                </nav>
+
+                <div class="flex items-center gap-4">
+                    <button aria-label="Buscar" onclick="app.navigate('adega', true)" class="text-stone-600 hover:text-wine-800 transition-colors">
+                        <i data-lucide="search" class="w-5 h-5 md:w-6 md:h-6"></i>
+                    </button>
+                    <button aria-label="Carrinho" onclick="app.toggleCart()" class="relative text-stone-600 hover:text-wine-800 transition-colors">
+                        <i data-lucide="shopping-bag" class="w-5 h-5 md:w-6 md:h-6"></i>
+                        <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-wine-800 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="md:hidden fixed bottom-0 w-full bg-white border-t border-sand-200 z-40 pb-safe">
+        <div class="flex justify-around items-center h-16">
+            <button onclick="app.navigate('home')" class="mobile-nav-link flex flex-col items-center gap-1 text-wine-800 w-full" data-target="home">
+                <i data-lucide="home" class="w-5 h-5"></i>
+                <span class="text-[10px] font-medium">Início</span>
+            </button>
+            <button onclick="app.navigate('adega')" class="mobile-nav-link flex flex-col items-center gap-1 text-stone-400 hover:text-wine-800 w-full" data-target="adega">
+                <i data-lucide="layout-grid" class="w-5 h-5"></i>
+                <span class="text-[10px] font-medium">Adega</span>
+            </button>
+            <button onclick="app.navigate('sobre')" class="mobile-nav-link flex flex-col items-center gap-1 text-stone-400 hover:text-wine-800 w-full" data-target="sobre">
+                <i data-lucide="book-open" class="w-5 h-5"></i>
+                <span class="text-[10px] font-medium">História</span>
+            </button>
+            <button onclick="app.toggleCart()" class="flex flex-col items-center gap-1 text-stone-400 hover:text-wine-800 w-full relative">
+                <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                <span class="text-[10px] font-medium">Sacola</span>
+                <span id="mobile-cart-badge" class="absolute top-0 right-[25%] bg-wine-800 text-white text-[9px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center hidden">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="pt-16 md:pt-20 flex-grow">
+        <div id="view-home" class="view-section block">
+            <section class="relative h-[85vh] md:h-[90vh] flex items-center overflow-hidden">
+                <div class="absolute inset-0 z-0">
+                    <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Adega e Degustação" class="w-full h-full object-cover" />
+                    <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-stone-950/90 via-stone-900/60 to-transparent"></div>
+                </div>
+                <div class="relative z-10 px-6 sm:px-12 md:px-24 w-full max-w-7xl mx-auto">
+                    <div class="max-w-2xl">
+                        <span class="text-wine-300 tracking-[0.2em] uppercase text-xs font-bold mb-4 block flex items-center gap-2">
+                            <i class="w-6 h-px bg-wine-300"></i> Tradição Italiana
+                        </span>
+                        <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl text-white mb-6 leading-[1.1]">
+                            O vinho certo,<br>para a hora <span class="text-wine-400 italic">certa</span>.
+                        </h1>
+                        <p class="text-sand-100 text-base md:text-xl mb-10 font-light leading-relaxed max-w-lg">
+                            Deguste a curadoria exclusiva do Sr. Giulio com rótulos selecionados para momentos reais da sua vida.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="app.navigate('adega')" class="bg-wine-800 hover:bg-wine-700 text-white px-8 py-4 text-sm tracking-wide uppercase font-semibold transition-all duration-300 flex items-center justify-center gap-2">
+                                Explorar a Adega
+                            </button>
+                            <button onclick="app.mockSommelier()" class="bg-transparent border border-sand-100/50 hover:bg-white/10 hover:border-white text-white px-8 py-4 text-sm tracking-wide uppercase font-semibold transition-all duration-300 backdrop-blur-sm w-full sm:w-auto">
+                                Consultar Sommelier
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-16 md:py-24 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between items-end mb-10 border-b border-sand-200 pb-6">
+                        <div>
+                            <span class="text-wine-700 tracking-widest uppercase text-[10px] md:text-xs font-semibold mb-2 block">Seleção do Giulio</span>
+                            <h2 class="font-serif text-3xl md:text-4xl text-stone-900">Destaques da Semana</h2>
+                        </div>
+                        <button onclick="app.navigate('adega')" class="hidden md:flex items-center gap-2 text-wine-900 font-medium hover:text-wine-600 transition-colors text-sm group">
+                            Ver todos <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+
+                    <div id="home-products" class="flex md:grid md:grid-cols-4 gap-6 overflow-x-auto no-scrollbar pb-4 snap-x"></div>
+                    
+                    <div class="mt-8 text-center md:hidden">
+                        <button onclick="app.navigate('adega')" class="w-full border border-wine-800 text-wine-900 py-4 font-medium hover:bg-wine-50 transition-colors text-sm uppercase tracking-wide">
+                            Ver Adega Completa
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="view-adega" class="view-section hidden min-h-screen bg-sand-50 pb-10">
+            <div class="bg-white border-b border-sand-200 sticky top-16 md:top-20 z-30 shadow-sm">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                    <div class="relative">
+                        <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-stone-400 w-5 h-5"></i>
+                        <input type="text" id="search-input" placeholder="Busque por uva, país ou nome..." 
+                            class="w-full bg-sand-100 border-transparent focus:border-wine-500 focus:bg-white focus:ring-0 rounded-sm py-3 pl-10 pr-4 text-sm transition-all outline-none"
+                            oninput="app.filterProducts(this.value)">
+                    </div>
+                    <div class="flex gap-2 mt-4 overflow-x-auto no-scrollbar pb-1">
+                        <button onclick="app.filterCategory('all')" class="filter-btn active px-4 py-1.5 rounded-full border border-wine-800 bg-wine-800 text-white text-xs whitespace-nowrap transition-colors" data-cat="all">Todos</button>
+                        <button onclick="app.filterCategory('Tinto')" class="filter-btn px-4 py-1.5 rounded-full border border-sand-300 text-stone-600 hover:border-wine-800 hover:text-wine-800 text-xs whitespace-nowrap transition-colors" data-cat="Tinto">Tintos</button>
+                        <button onclick="app.filterCategory('Branco')" class="filter-btn px-4 py-1.5 rounded-full border border-sand-300 text-stone-600 hover:border-wine-800 hover:text-wine-800 text-xs whitespace-nowrap transition-colors" data-cat="Branco">Brancos</button>
+                        <button onclick="app.filterCategory('Rosé')" class="filter-btn px-4 py-1.5 rounded-full border border-sand-300 text-stone-600 hover:border-wine-800 hover:text-wine-800 text-xs whitespace-nowrap transition-colors" data-cat="Rosé">Rosés</button>
+                        <button onclick="app.filterCategory('Espumante')" class="filter-btn px-4 py-1.5 rounded-full border border-sand-300 text-stone-600 hover:border-wine-800 hover:text-wine-800 text-xs whitespace-nowrap transition-colors" data-cat="Espumante">Espumantes</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <h2 class="font-serif text-2xl text-stone-900 mb-6 hidden md:block">Nossa Coleção</h2>
+                <div id="adega-products" class="grid grid-cols-2 lg:grid-cols-4 md:gap-8 gap-4"></div>
+                <div id="empty-state" class="hidden text-center py-20">
+                    <i data-lucide="wine-off" class="w-12 h-12 text-sand-400 mx-auto mb-4"></i>
+                    <p class="text-stone-500 font-medium">Nenhum vinho encontrado com este termo.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-sobre" class="view-section hidden bg-white">
+            <section class="py-16 md:py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-wine-700 tracking-widest uppercase text-xs font-semibold mb-3 block">Tradição & Família</span>
+                    <h1 class="font-serif text-4xl md:text-5xl text-stone-900 mb-6">Agnello, muito além da taça.</h1>
+                </div>
+
+                <div class="relative h-64 md:h-96 w-full mb-12 overflow-hidden rounded-sm shadow-xl">
+                    <img src="/public/img/giulio-bianca.png" alt="Senhor servindo vinho no balcão" class="w-full h-full object-cover" />
+                </div>
+
+                <div class="prose prose-stone prose-lg mx-auto text-stone-600 leading-relaxed">
+                    <p class="mb-6">Tudo começou com o balcão de madeira rústica, onde o Sr. Giulio, com seu sorriso acolhedor, passava horas entendendo não apenas o paladar, mas a história de cada cliente que entrava na Vinheria Agnello. <em>"O que você vai jantar hoje?"</em>, ele costumava perguntar. Essa era a chave para a garrafa perfeita.</p>
+                    
+                    <p class="mb-6">Por anos, fomos exclusivamente uma loja física. Acreditávamos que a experiência de escolher um vinho exigia o toque, o olhar e a conversa. Porém, o mundo mudou, e a saudade dos nossos clientes que se mudaram ou que não tinham mais tempo para visitas nos fez refletir.</p>
+
+                    <h3 class="font-serif text-2xl text-stone-900 mt-10 mb-4">O Desafio do Digital</h3>
+                    <p class="mb-6">Como traduzir a nossa alma para uma tela fria de vidro? A internet está cheia de catálogos intermináveis e filtros complexos que mais confundem do que ajudam. Bianca, filha do Sr. Giulio, percebeu que precisávamos de uma abordagem diferente: <strong>o digital focado na experiência humana.</strong></p>
+
+                    <p class="mb-6">Nós não transportamos o nosso estoque inteiro para a internet. Nós transportamos a nossa <em>curadoria</em>. Cada vinho que você encontra aqui passou pelo crivo rigoroso da família. Nossa missão é evitar a fadiga de decisão. Você não precisa ser um sommelier profissional para escolher um bom vinho; nós fazemos o trabalho duro para que você apenas desfrute o momento.</p>
+
+                    <blockquote class="border-l-4 border-wine-700 pl-6 my-8 italic text-stone-500">
+                        "O melhor vinho não é o mais caro. É aquele que você abre cercado de boas companhias, sem medo de errar na escolha." — Giulio Agnello
+                    </blockquote>
+
+                    <p>Seja bem-vindo à nossa casa digital. E se precisar de qualquer ajuda, a Bianca está à disposição no botão do Sommelier. Salute!</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer id="main-footer" class="bg-wine-950 text-wine-100 py-16 border-t border-wine-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+                <div class="flex items-center gap-2 mb-6 cursor-pointer" onclick="app.navigate('home')">
+                    <i data-lucide="wine" class="text-wine-400 h-6 w-6"></i>
+                    <span class="font-serif text-xl font-semibold text-white">Agnello</span>
+                </div>
+                <p class="text-sm text-wine-300 max-w-xs leading-relaxed">Trazendo a tradição e o calor do atendimento italiano para o ambiente digital. O mesmo cuidado da nossa loja física, agora onde você estiver.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-medium mb-4 uppercase tracking-wider text-sm">Nossa Casa</h4>
+                <ul class="space-y-3 text-sm text-wine-300">
+                    <li><button onclick="app.navigate('home')" class="hover:text-white transition-colors">Início</button></li>
+                    <li><button onclick="app.navigate('adega')" class="hover:text-white transition-colors">A Adega</button></li>
+                    <li><button onclick="app.navigate('sobre')" class="hover:text-white transition-colors">Nossa História</button></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-medium mb-4 uppercase tracking-wider text-sm">Fale Conosco</h4>
+                <ul class="space-y-3 text-sm text-wine-300">
+                    <li class="flex items-center gap-3"><i data-lucide="map-pin" class="w-4 h-4 text-wine-500"></i> Rua das Videiras, 123 - SP</li>
+                    <li class="flex items-center gap-3"><i data-lucide="phone" class="w-4 h-4 text-wine-500"></i> (11) 99999-9999</li>
+                    <li>
+                        <button onclick="app.mockSommelier()" class="mt-4 bg-wine-800 hover:bg-wine-700 text-white px-4 py-2 text-xs font-medium rounded-sm transition-colors flex items-center gap-2">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i> Chamar a Bianca
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 pt-8 border-t border-wine-900/50 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-wine-400/60">
+            <p>&copy; 2026 Vinheria Agnello. Venda proibida para menores de 18 anos.</p>
+            <p>Beba com moderação.</p>
+        </div>
+    </footer>
+
+    <div id="cart-overlay" class="fixed inset-0 bg-stone-900/50 z-50 hidden opacity-0 transition-opacity duration-300" onclick="app.toggleCart()"></div>
+    <div id="cart-drawer" class="fixed inset-y-0 right-0 w-full md:w-96 bg-white z-50 transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col">
+        <div class="p-4 border-b border-sand-200 flex justify-between items-center bg-sand-50">
+            <h2 class="font-serif text-xl font-semibold text-wine-950 flex items-center gap-2">
+                <i data-lucide="shopping-bag" class="w-5 h-5"></i> Sua Sacola
+            </h2>
+            <button onclick="app.toggleCart()" class="p-2 text-stone-400 hover:text-stone-700 transition-colors">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+        
+        <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-4">
+        </div>
+
+        <div class="p-6 border-t border-sand-200 bg-sand-50">
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-stone-500 text-sm">Total</span>
+                <span id="cart-total" class="text-2xl font-serif font-bold text-wine-900">R$ 0,00</span>
+            </div>
+            <button onclick="app.checkout()" class="w-full bg-wine-800 hover:bg-wine-900 text-white py-4 rounded-sm font-medium transition-colors flex justify-center items-center gap-2">
+                Finalizar Compra <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-20 md:bottom-10 left-1/2 transform -translate-x-1/2 bg-stone-900 text-white px-6 py-3 rounded-full text-sm font-medium shadow-xl z-50 transition-all duration-300 opacity-0 pointer-events-none translate-y-4 flex items-center gap-2">
+        <i data-lucide="check-circle-2" class="w-4 h-4 text-green-400"></i>
+        <span>Adicionado à sacola</span>
+    </div>
+
+    <script>
+        const productsDB = [
+            { id: 1, name: "Brunello di Montalcino DOCG", type: "Tinto", origin: "Toscana, IT", price: 429.00, img: "https://images.unsplash.com/photo-1681210744266-c6a23b8ed176?q=80&w=698&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", desc: "Estruturado e majestoso. Perfeito para uma macarronada em família no domingo.", featured: true },
+            { id: 2, name: "Chardonnay Reserva", type: "Branco", origin: "Mendoza, AR", price: 145.00, img: "https://images.unsplash.com/photo-1587000098522-812f8896e8df?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", desc: "Fresco, com notas amanteigadas. Ideal para acompanhar peixes assados.", featured: true },
+            { id: 3, name: "Côtes de Provence", type: "Rosé", origin: "Provence, FR", price: 180.00, img: "https://images.unsplash.com/photo-1593455427837-93e1f58b0df2?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", desc: "Leve, frutado e elegante. Para beber gelado em uma tarde na varanda.", featured: true },
+            { id: 4, name: "Prosecco Valdobbiadene", type: "Espumante", origin: "Veneto, IT", price: 165.00, img: "https://images.unsplash.com/photo-1620421122564-760cfab6bd4a?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", desc: "Borbulhas finas e refrescantes. A melhor forma de celebrar conquistas.", featured: true },
+            { id: 5, name: "Barolo DOCG", type: "Tinto", origin: "Piemonte, IT", price: 520.00, img: "https://images.unsplash.com/photo-1687952291665-8e46d794e0cd?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", desc: "O rei dos vinhos italianos. Complexo, com notas de trufas e rosas secas.", featured: false },
+            { id: 6, name: "Sauvignon Blanc", type: "Branco", origin: "Marlborough, NZ", price: 130.00, img: "https://images.unsplash.com/photo-1736217292598-a200e3f0aae8?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", desc: "Acidez vibrante, notas de maracujá e um frescor inconfundível.", featured: false },
+            { id: 7, name: "Malbec Gran Reserva", type: "Tinto", origin: "Salta, AR", price: 210.00, img: "https://images.unsplash.com/photo-1585867313424-06b0fd07d314?q=80&w=1100&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", desc: "Encorpado, taninos doces e muita fruta escura. Exige uma boa carne vermelha.", featured: false },
+            { id: 8, name: "Pinot Noir", type: "Tinto", origin: "Borgonha, FR", price: 350.00, img: "https://images.unsplash.com/photo-1620679393872-2501651282c1?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", desc: "Elegante, sutil e delicado. Frutas vermelhas frescas que dançam na taça.", featured: false },
+            { id: 9, name: "Primitivo di Manduria", type: "Tinto", origin: "Puglia, IT", price: 185.00, img: "https://images.unsplash.com/photo-1566065739035-8148a9aa8548?q=80&w=736&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", desc: "Intenso e aveludado, com toque de geleia de amora. Um abraço em forma de vinho.", featured: false },
+            { id: 10, name: "Chianti Classico Riserva", type: "Tinto", origin: "Toscana, IT", price: 230.00, img: "https://images.unsplash.com/photo-1568930157403-9ad464e5f075?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", desc: "Equilibrado, acidez no ponto. Pede um prato com molho de tomate fresco.", featured: false },
+            { id: 11, name: "Carmenère Estate", type: "Tinto", origin: "Valle de Colchagua, CL", price: 110.00, img: "https://plus.unsplash.com/premium_photo-1698430568354-d01ce48ea22f?q=80&w=688&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", desc: "Especiarias, pimenta e frutas maduras. Excelente relação qualidade e preço.", featured: false },
+            { id: 12, name: "Champagne Brut", type: "Espumante", origin: "Champagne, FR", price: 490.00, img: "https://images.unsplash.com/photo-1666351028798-8920e510b705?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", desc: "O clássico francês. Brioche, maçã verde e uma elegância inigualável.", featured: false }
+        ];
+
+        const app = {
+            state: {
+                cart: [],
+                currentView: 'home',
+                searchQuery: '',
+                currentCategory: 'all'
+            },
+
+            init() {
+                lucide.createIcons();
+                this.renderHomeProducts();
+                this.renderAdegaProducts();
+                this.updateCartUI();
+            },
+
+            formatMoney(value) {
+                return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+            },
+
+            navigate(view, focusSearch = false) {
+                this.state.currentView = view;
+                
+                document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+                document.getElementById(`view-${view}`).classList.remove('hidden');
+
+                const footer = document.getElementById('main-footer');
+                if (footer) {
+                    if (view === 'adega') {
+                        footer.classList.add('hidden');
+                    } else {
+                        footer.classList.remove('hidden');
+                    }
+                }
+
+                document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(el => {
+                    const isTarget = el.dataset.target === view;
+                    if (el.classList.contains('mobile-nav-link')) {
+                        el.className = `mobile-nav-link flex flex-col items-center gap-1 w-full transition-colors ${isTarget ? 'text-wine-800' : 'text-stone-400 hover:text-wine-800'}`;
+                    } else {
+                        el.className = `nav-link font-medium transition-colors ${isTarget ? 'text-wine-800' : 'text-stone-500 hover:text-wine-800'}`;
+                    }
+                });
+
+                window.scrollTo(0, 0);
+
+                if (focusSearch && view === 'adega') {
+                    setTimeout(() => document.getElementById('search-input').focus(), 100);
+                }
+            },
+
+            createProductCard(product, isCompact = false) {
+                const compactClasses = isCompact ? "min-w-[260px] md:min-w-0 snap-center" : "";
+                const highlightBadge = product.featured ? `<div class="absolute top-3 left-3 bg-wine-900 text-white text-[9px] font-bold px-2 py-1 uppercase tracking-wider z-10">Destaque</div>` : '';
+                
+                const fallbackImg = "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80";
+
+                return `
+                    <div class="group cursor-pointer flex flex-col h-full bg-white rounded-md shadow-sm border border-sand-100 overflow-hidden ${compactClasses}">
+                        <div class="relative aspect-[4/5] overflow-hidden bg-sand-200">
+                            ${highlightBadge}
+                            <img loading="lazy" src="${product.img}" alt="${product.name}" onerror="this.onerror=null;this.src='${fallbackImg}'" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                            <div class="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
+                        </div>
+                        <div class="p-5 flex flex-col flex-grow">
+                            <span class="text-[10px] md:text-xs text-stone-400 uppercase tracking-wider mb-2 block font-medium">${product.type} • ${product.origin}</span>
+                            <h3 class="font-serif text-lg md:text-xl text-stone-900 mb-2 leading-tight">${product.name}</h3>
+                            <p class="text-stone-500 text-xs md:text-sm mb-5 line-clamp-2 flex-grow">"${product.desc}"</p>
+                            <div class="flex justify-between items-center mt-auto pt-4 border-t border-sand-100">
+                                <span class="text-lg font-semibold text-wine-900">${this.formatMoney(product.price)}</span>
+                                <button onclick="app.addToCart(${product.id})" aria-label="Adicionar ${product.name}" class="bg-wine-50 text-wine-800 p-2 rounded-full hover:bg-wine-800 hover:text-white transition-colors">
+                                    <i data-lucide="plus" class="w-5 h-5"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            },
+
+            renderHomeProducts() {
+                const container = document.getElementById('home-products');
+                const featured = productsDB.filter(p => p.featured).slice(0, 4); 
+                container.innerHTML = featured.map(p => this.createProductCard(p, true)).join('');
+                lucide.createIcons();
+            },
+
+            renderAdegaProducts() {
+                const container = document.getElementById('adega-products');
+                const emptyState = document.getElementById('empty-state');
+                
+                let filtered = productsDB;
+                
+                if (this.state.currentCategory !== 'all') {
+                    filtered = filtered.filter(p => p.type === this.state.currentCategory);
+                }
+                
+                if (this.state.searchQuery) {
+                    const q = this.state.searchQuery.toLowerCase();
+                    filtered = filtered.filter(p => 
+                        p.name.toLowerCase().includes(q) || 
+                        p.type.toLowerCase().includes(q) || 
+                        p.origin.toLowerCase().includes(q)
+                    );
+                }
+
+                if (filtered.length === 0) {
+                    container.innerHTML = '';
+                    emptyState.classList.remove('hidden');
+                } else {
+                    emptyState.classList.add('hidden');
+                    container.innerHTML = filtered.map(p => this.createProductCard(p)).join('');
+                }
+                lucide.createIcons();
+            },
+
+            filterProducts(query) {
+                this.state.searchQuery = query;
+                this.renderAdegaProducts();
+            },
+
+            filterCategory(cat) {
+                this.state.currentCategory = cat;
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    if (btn.dataset.cat === cat) {
+                        btn.className = "filter-btn active px-4 py-1.5 rounded-full border border-wine-800 bg-wine-800 text-white text-xs whitespace-nowrap transition-colors";
+                    } else {
+                        btn.className = "filter-btn px-4 py-1.5 rounded-full border border-sand-300 text-stone-600 hover:border-wine-800 hover:text-wine-800 text-xs whitespace-nowrap transition-colors";
+                    }
+                });
+                this.renderAdegaProducts();
+            },
+
+            addToCart(productId) {
+                const product = productsDB.find(p => p.id === productId);
+                if (!product) return;
+
+                const existingItem = this.state.cart.find(item => item.id === productId);
+                if (existingItem) {
+                    existingItem.qtd++;
+                } else {
+                    this.state.cart.push({ ...product, qtd: 1 });
+                }
+                
+                this.updateCartUI();
+                this.showToast();
+            },
+
+            removeFromCart(productId) {
+                this.state.cart = this.state.cart.filter(item => item.id !== productId);
+                this.updateCartUI();
+            },
+
+            changeQtd(productId, delta) {
+                const item = this.state.cart.find(item => item.id === productId);
+                if (!item) return;
+                
+                item.qtd += delta;
+                if (item.qtd <= 0) {
+                    this.removeFromCart(productId);
+                } else {
+                    this.updateCartUI();
+                }
+            },
+
+            toggleCart() {
+                const drawer = document.getElementById('cart-drawer');
+                const overlay = document.getElementById('cart-overlay');
+                const isClosed = drawer.classList.contains('translate-x-full');
+
+                if (isClosed) {
+                    overlay.classList.remove('hidden');
+                    setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+                    drawer.classList.remove('translate-x-full');
+                } else {
+                    overlay.classList.add('opacity-0');
+                    drawer.classList.add('translate-x-full');
+                    setTimeout(() => overlay.classList.add('hidden'), 300);
+                }
+            },
+
+            updateCartUI() {
+                const container = document.getElementById('cart-items');
+                const totalEl = document.getElementById('cart-total');
+                const badges = [document.getElementById('cart-badge'), document.getElementById('mobile-cart-badge')];
+                
+                const totalItems = this.state.cart.reduce((sum, item) => sum + item.qtd, 0);
+                const totalPrice = this.state.cart.reduce((sum, item) => sum + (item.price * item.qtd), 0);
+
+                badges.forEach(badge => {
+                    if (totalItems > 0) {
+                        badge.textContent = totalItems;
+                        badge.classList.remove('hidden');
+                    } else {
+                        badge.classList.add('hidden');
+                    }
+                });
+
+                totalEl.textContent = this.formatMoney(totalPrice);
+
+                const fallbackImg = "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80";
+
+                if (this.state.cart.length === 0) {
+                    container.innerHTML = `
+                        <div class="h-full flex flex-col items-center justify-center text-stone-400">
+                            <i data-lucide="shopping-cart" class="w-12 h-12 mb-4 opacity-50"></i>
+                            <p>Sua sacola está vazia.</p>
+                        </div>
+                    `;
+                } else {
+                    container.innerHTML = this.state.cart.map(item => `
+                        <div class="flex gap-4 bg-white p-3 rounded-md border border-sand-100 shadow-sm">
+                            <div class="w-16 h-16 bg-sand-100 rounded overflow-hidden flex-shrink-0">
+                                <img src="${item.img}" alt="${item.name}" onerror="this.onerror=null;this.src='${fallbackImg}'" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-serif text-sm font-semibold text-stone-900 line-clamp-1">${item.name}</h4>
+                                <div class="text-wine-800 font-medium text-sm mt-1">${this.formatMoney(item.price)}</div>
+                                <div class="flex items-center gap-3 mt-2">
+                                    <div class="flex items-center bg-sand-100 rounded-sm">
+                                        <button onclick="app.changeQtd(${item.id}, -1)" class="px-2 py-0.5 text-stone-500 hover:text-stone-900">-</button>
+                                        <span class="text-xs font-medium w-4 text-center">${item.qtd}</span>
+                                        <button onclick="app.changeQtd(${item.id}, 1)" class="px-2 py-0.5 text-stone-500 hover:text-stone-900">+</button>
+                                    </div>
+                                    <button onclick="app.removeFromCart(${item.id})" class="text-xs text-stone-400 hover:text-red-500 underline ml-auto">Remover</button>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+                lucide.createIcons();
+            },
+
+            showToast() {
+                const toast = document.getElementById('toast');
+                toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+                
+                if(this.toastTimeout) clearTimeout(this.toastTimeout);
+                
+                this.toastTimeout = setTimeout(() => {
+                    toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                }, 2500);
+            },
+
+            mockSommelier() {
+                alert("Redirecionando para o WhatsApp da Bianca (Sommelier)...");
+            },
+
+            checkout() {
+                if(this.state.cart.length === 0) {
+                    alert("Sua sacola está vazia.");
+                    return;
+                }
+                alert("Redirecionando para o gateway de pagamento simulado...");
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            app.init();
+        });
+    </script>
+</body>
+</html>
