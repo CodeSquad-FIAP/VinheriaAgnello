@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vinheria Agnello — Figma Prototype Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --wine-950: #34131a;
+    --wine-900: #602a34;
+    --wine-800: #732d3b;
+    --wine-700: #893344;
+    --wine-600: #a34255;
+    --wine-500: #bc5b6e;
+    --wine-400: #d08492;
+    --wine-300: #e1b0b8;
+    --wine-100: #f7ebed;
+    --wine-50: #fbf5f6;
+    --sand-50: #fdfdfc;
+    --sand-100: #fbfaf8;
+    --sand-200: #f5f3ef;
+    --sand-300: #ebe6dd;
+    --stone-800: #292524;
+    --stone-600: #57534e;
+    --stone-400: #a8a29e;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #1a1a1a;
+    color: var(--stone-800);
+    min-height: 100vh;
+  }
+
+  /* ===== LAYOUT WRAPPER ===== */
+  .prototype-wrapper {
+    padding: 40px 24px 60px;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  .prototype-header {
+    text-align: center;
+    margin-bottom: 60px;
+    color: #fff;
+  }
+  .prototype-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+  .prototype-header p {
+    color: #888;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .screens-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+
+  .screen-block {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .screen-label {
+    color: #888;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding-left: 4px;
+  }
+  .screen-frame {
+    background: var(--sand-50);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+    position: relative;
+  }
+
+  /* ===== SHARED COMPONENTS ===== */
+  .header-bar {
+    background: rgba(253,253,252,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--sand-300);
+    padding: 0 32px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 10;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .logo-icon {
+    width: 28px; height: 28px;
+    color: var(--wine-800);
+  }
+  .logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--wine-950);
+    letter-spacing: 0.02em;
+  }
+  .header-nav {
+    display: flex;
+    gap: 32px;
+  }
+  .header-nav a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--stone-600);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .header-nav a.active { color: var(--wine-800); }
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: var(--stone-600);
+  }
+  .cart-icon-wrap { position: relative; }
+  .cart-badge {
+    position: absolute;
+    top: -6px; right: -6px;
+    background: var(--wine-800);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  svg.icon {
+    width: 20px; height: 20px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* ===== SCREEN 1: HOME HERO ===== */
+  .hero-section {
+    position: relative;
+    height: 560px;
+    background: linear-gradient(120deg, #1a0a0d 0%, #3d1520 40%, #5a2030 70%, #7a3040 100%);
+    overflow: hidden;
+  }
+  .hero-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=60') center/cover;
+    opacity: 0.35;
+  }
+  .hero-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(26,10,13,0.92) 0%, rgba(26,10,13,0.65) 50%, rgba(26,10,13,0.1) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 72px 56px;
+    max-width: 560px;
+  }
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--wine-400);
+    margin-bottom: 20px;
+  }
+  .hero-eyebrow-line {
+    width: 32px;
+    height: 1px;
+    background: var(--wine-400);
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 300;
+    line-height: 1.08;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  .hero-title em { color: var(--wine-400); font-style: italic; }
+  .hero-subtitle {
+    font-size: 15px;
+    color: rgba(235,214,219,0.8);
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 380px;
+    margin-bottom: 36px;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 12px;
+  }
+  .btn-primary {
+    background: var(--wine-800);
+    color: #fff;
+    padding: 14px 28px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-secondary {
+    background: transparent;
+    color: #fff;
+    padding: 14px 28px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.35);
+    cursor: pointer;
+  }
+
+  /* Featured products section */
+  .featured-section {
+    background: #fff;
+    padding: 48px 40px;
+  }
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--sand-300);
+  }
+  .section-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--wine-700);
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--stone-800);
+  }
+  .section-link {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--wine-900);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .products-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .product-card {
+    background: var(--sand-50);
+    border: 1px solid var(--sand-200);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .product-img-wrap {
+    position: relative;
+    aspect-ratio: 4/5;
+    background: var(--sand-300);
+    overflow: hidden;
+  }
+  .product-img-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .product-badge {
+    position: absolute;
+    top: 10px; left: 10px;
+    background: var(--wine-900);
+    color: #fff;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+  }
+  .product-body {
+    padding: 16px;
+  }
+  .product-meta {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--stone-400);
+    margin-bottom: 6px;
+  }
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--stone-800);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .product-desc {
+    font-size: 11px;
+    color: var(--stone-600);
+    line-height: 1.6;
+    margin-bottom: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--sand-200);
+  }
+  .product-price {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--wine-900);
+  }
+  .add-btn {
+    width: 32px; height: 32px;
+    background: var(--wine-50);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--wine-800);
+    border: none; cursor: pointer;
+  }
+
+  /* ===== SCREEN 2: ADEGA ===== */
+  .adega-filter-bar {
+    background: #fff;
+    border-bottom: 1px solid var(--sand-200);
+    padding: 16px 32px;
+    position: sticky;
+    top: 72px;
+    z-index: 5;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .search-box {
+    position: relative;
+    margin-bottom: 14px;
+  }
+  .search-box input {
+    width: 100%;
+    background: var(--sand-100);
+    border: 1px solid transparent;
+    padding: 11px 16px 11px 40px;
+    font-size: 13px;
+    border-radius: 2px;
+    color: var(--stone-800);
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+  }
+  .search-icon {
+    position: absolute;
+    left: 12px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--stone-400);
+  }
+  .filter-pills {
+    display: flex;
+    gap: 8px;
+  }
+  .pill {
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    border: 1px solid var(--sand-300);
+    color: var(--stone-600);
+    background: transparent;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .pill.active {
+    background: var(--wine-800);
+    border-color: var(--wine-800);
+    color: #fff;
+  }
+  .adega-content {
+    padding: 32px;
+    background: var(--sand-50);
+  }
+  .adega-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  /* ===== SCREEN 3: SOBRE ===== */
+  .sobre-hero {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+  }
+  .sobre-hero img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7);
+  }
+  .sobre-content {
+    background: #fff;
+    padding: 56px 64px;
+  }
+  .sobre-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--wine-700);
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .sobre-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 300;
+    text-align: center;
+    color: var(--stone-800);
+    margin-bottom: 36px;
+  }
+  .sobre-text {
+    font-size: 15px;
+    color: var(--stone-600);
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 20px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .sobre-quote {
+    border-left: 3px solid var(--wine-700);
+    padding: 16px 24px;
+    margin: 32px auto;
+    max-width: 560px;
+    background: var(--wine-50);
+  }
+  .sobre-quote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--stone-600);
+    line-height: 1.6;
+  }
+  .sobre-quote cite {
+    display: block;
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--stone-400);
+    letter-spacing: 0.08em;
+    font-style: normal;
+  }
+
+  /* ===== SCREEN 4: CART DRAWER ===== */
+  .cart-screen {
+    display: flex;
+    height: 640px;
+  }
+  .cart-dimmed-bg {
+    flex: 1;
+    background: rgba(26,10,13,0.5);
+  }
+  .cart-drawer-panel {
+    width: 380px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+  }
+  .cart-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--sand-200);
+    background: var(--sand-50);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cart-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--wine-950);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cart-items-list {
+    flex: 1;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
+  }
+  .cart-item {
+    display: flex;
+    gap: 12px;
+    background: var(--sand-50);
+    border: 1px solid var(--sand-200);
+    border-radius: 4px;
+    padding: 12px;
+  }
+  .cart-item-img {
+    width: 64px; height: 64px;
+    border-radius: 2px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  .cart-item-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .cart-item-price { color: var(--wine-800); font-size: 13px; font-weight: 600; }
+  .cart-qty-ctrl {
+    display: inline-flex;
+    align-items: center;
+    background: var(--sand-200);
+    border-radius: 2px;
+    margin-top: 8px;
+  }
+  .cart-qty-ctrl button {
+    width: 24px; height: 24px;
+    border: none; background: none;
+    font-size: 14px; cursor: pointer;
+    color: var(--stone-600);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cart-qty-ctrl span { font-size: 12px; font-weight: 600; width: 20px; text-align: center; }
+  .cart-footer {
+    padding: 20px 24px;
+    border-top: 1px solid var(--sand-200);
+    background: var(--sand-50);
+  }
+  .cart-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .cart-total-label { color: var(--stone-600); font-size: 13px; }
+  .cart-total-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--wine-900);
+  }
+  .checkout-btn {
+    width: 100%;
+    background: var(--wine-800);
+    color: #fff;
+    padding: 15px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  /* ===== SCREEN 5: MOBILE HOME ===== */
+  .mobile-frame {
+    width: 390px;
+    margin: 0 auto;
+    background: var(--sand-50);
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 0 0 10px #2a2a2a, 0 30px 80px rgba(0,0,0,0.6);
+    position: relative;
+  }
+  .mobile-status-bar {
+    background: rgba(0,0,0,0.85);
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+  }
+  .status-time { color: #fff; font-size: 13px; font-weight: 600; }
+  .status-icons { color: #fff; font-size: 11px; }
+  .mobile-hero {
+    height: 420px;
+    background: linear-gradient(160deg, #2d0e14 0%, #5a1e28 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .mobile-hero-img {
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60') center/cover;
+    opacity: 0.3;
+  }
+  .mobile-hero-grad {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(26,10,13,0.9) 0%, rgba(26,10,13,0.4) 60%, transparent 100%);
+  }
+  .mobile-header {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+  }
+  .mobile-hero-content {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 28px 24px;
+    z-index: 2;
+  }
+  .mobile-hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 300;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .mobile-hero-title em { color: var(--wine-400); font-style: italic; }
+  .mobile-hero-sub {
+    font-size: 12px;
+    color: rgba(235,214,219,0.75);
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .mobile-btn {
+    background: var(--wine-800);
+    color: #fff;
+    padding: 13px 24px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: inline-block;
+  }
+  .mobile-featured {
+    background: #fff;
+    padding: 24px 20px;
+  }
+  .mobile-feat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .mobile-feat-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+  }
+  .mobile-products-scroll {
+    display: flex;
+    gap: 12px;
+    overflow: hidden;
+  }
+  .mobile-card {
+    width: 160px;
+    flex-shrink: 0;
+    background: var(--sand-50);
+    border: 1px solid var(--sand-200);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .mobile-card-img {
+    height: 180px;
+    background: var(--sand-300);
+    overflow: hidden;
+  }
+  .mobile-card-img img { width: 100%; height: 100%; object-fit: cover; }
+  .mobile-card-body { padding: 12px; }
+  .mobile-card-meta { font-size: 8px; color: var(--stone-400); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .mobile-card-name { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+  .mobile-card-footer { display: flex; justify-content: space-between; align-items: center; }
+  .mobile-card-price { font-size: 13px; font-weight: 600; color: var(--wine-900); }
+  .mobile-add-btn {
+    width: 26px; height: 26px;
+    background: var(--wine-50);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--wine-800);
+    font-size: 16px;
+    line-height: 1;
+  }
+  .mobile-bottom-nav {
+    background: #fff;
+    border-top: 1px solid var(--sand-200);
+    display: flex;
+    padding: 8px 0 20px;
+  }
+  .mobile-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    font-size: 9px;
+    font-weight: 500;
+    color: var(--stone-400);
+    padding-top: 4px;
+  }
+  .mobile-nav-item.active { color: var(--wine-800); }
+  .mobile-nav-item svg { width: 18px; height: 18px; }
+
+  /* ===== FOOTER SCREEN ===== */
+  .site-footer {
+    background: var(--wine-950);
+    padding: 56px 48px 32px;
+    color: rgba(225,176,184,0.7);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  .footer-brand-text {
+    font-size: 12px;
+    line-height: 1.7;
+    color: rgba(225,176,184,0.6);
+    margin-top: 12px;
+    max-width: 220px;
+  }
+  .footer-heading {
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .footer-links { display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a { font-size: 12px; color: rgba(225,176,184,0.6); text-decoration: none; }
+  .footer-contact-item {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    color: rgba(225,176,184,0.6);
+  }
+  .footer-cta-btn {
+    margin-top: 16px;
+    background: var(--wine-800);
+    color: #fff;
+    padding: 9px 16px;
+    font-size: 11px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: rgba(225,176,184,0.35);
+  }
+
+  /* Dividers */
+  .full-width-screen { grid-column: 1 / -1; }
+</style>
+</head>
+<body>
+
+<div class="prototype-wrapper">
+  <div class="prototype-header">
+    <h1>Vinheria Agnello</h1>
+    <p>Figma Prototype Reference — All Screens</p>
+  </div>
+
+  <div class="screens-grid">
+
+    <!-- SCREEN 1: HOME -->
+    <div class="screen-block">
+      <div class="screen-label">01 — Home (Desktop)</div>
+      <div class="screen-frame">
+        <!-- Header -->
+        <div class="header-bar">
+          <div class="logo">
+            <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 22h8M12 11v11M7 3h10l2 7a5 5 0 01-10 0L7 3z"/></svg>
+            <span class="logo-text">Agnello</span>
+          </div>
+          <nav class="header-nav">
+            <a href="#" class="active">Início</a>
+            <a href="#">Adega</a>
+            <a href="#">Nossa História</a>
+            <a href="#">Sommelier</a>
+          </nav>
+          <div class="header-actions">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <div class="cart-icon-wrap">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            </div>
+          </div>
+        </div>
+        <!-- Hero -->
+        <div class="hero-section">
+          <div class="hero-image-overlay"></div>
+          <div class="hero-gradient"></div>
+          <div class="hero-content">
+            <div class="hero-eyebrow"><span class="hero-eyebrow-line"></span>Tradição Italiana</div>
+            <h1 class="hero-title">O vinho certo,<br>para a hora <em>certa</em>.</h1>
+            <p class="hero-subtitle">Deguste a curadoria exclusiva do Sr. Giulio com rótulos selecionados para momentos reais da sua vida.</p>
+            <div class="hero-ctas">
+              <button class="btn-primary">Explorar a Adega</button>
+              <button class="btn-secondary">Consultar Sommelier</button>
+            </div>
+          </div>
+        </div>
+        <!-- Featured -->
+        <div class="featured-section">
+          <div class="section-header">
+            <div>
+              <div class="section-eyebrow">Seleção do Giulio</div>
+              <div class="section-title">Destaques da Semana</div>
+            </div>
+            <div class="section-link">Ver todos →</div>
+          </div>
+          <div class="products-row">
+            <div class="product-card">
+              <div class="product-img-wrap"><img src="https://images.unsplash.com/photo-1681210744266-c6a23b8ed176?q=80&w=400&auto=format&fit=crop" alt="Brunello"/><div class="product-badge">Destaque</div></div>
+              <div class="product-body">
+                <div class="product-meta">Tinto · Toscana, IT</div>
+                <div class="product-name">Brunello di Montalcino</div>
+                <div class="product-desc">"Estruturado e majestoso. Perfeito para uma macarronada em família."</div>
+                <div class="product-footer"><span class="product-price">R$ 429</span><button class="add-btn">+</button></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-img-wrap"><img src="https://images.unsplash.com/photo-1587000098522-812f8896e8df?q=80&w=400&auto=format&fit=crop" alt="Chardonnay"/><div class="product-badge">Destaque</div></div>
+              <div class="product-body">
+                <div class="product-meta">Branco · Mendoza, AR</div>
+                <div class="product-name">Chardonnay Reserva</div>
+                <div class="product-desc">"Fresco, com notas amanteigadas. Ideal para peixes assados."</div>
+                <div class="product-footer"><span class="product-price">R$ 145</span><button class="add-btn">+</button></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-img-wrap"><img src="https://images.unsplash.com/photo-1593455427837-93e1f58b0df2?q=80&w=400&auto=format&fit=crop" alt="Rosé"/><div class="product-badge">Destaque</div></div>
+              <div class="product-body">
+                <div class="product-meta">Rosé · Provence, FR</div>
+                <div class="product-name">Côtes de Provence</div>
+                <div class="product-desc">"Leve, frutado e elegante. Para beber gelado na varanda."</div>
+                <div class="product-footer"><span class="product-price">R$ 180</span><button class="add-btn">+</button></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-img-wrap"><img src="https://images.unsplash.com/photo-1620421122564-760cfab6bd4a?q=80&w=400&auto=format&fit=crop" alt="Prosecco"/><div class="product-badge">Destaque</div></div>
+              <div class="product-body">
+                <div class="product-meta">Espumante · Veneto, IT</div>
+                <div class="product-name">Prosecco Valdobbiadene</div>
+                <div class="product-desc">"Borbulhas finas. A melhor forma de celebrar conquistas."</div>
+                <div class="product-footer"><span class="product-price">R$ 165</span><button class="add-btn">+</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 2: ADEGA -->
+    <div class="screen-block">
+      <div class="screen-label">02 — Adega (Desktop)</div>
+      <div class="screen-frame">
+        <div class="header-bar">
+          <div class="logo">
+            <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 22h8M12 11v11M7 3h10l2 7a5 5 0 01-10 0L7 3z"/></svg>
+            <span class="logo-text">Agnello</span>
+          </div>
+          <nav class="header-nav">
+            <a href="#">Início</a>
+            <a href="#" class="active">Adega</a>
+            <a href="#">Nossa História</a>
+            <a href="#">Sommelier</a>
+          </nav>
+          <div class="header-actions">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <div class="cart-icon-wrap">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+              <div class="cart-badge">3</div>
+            </div>
+          </div>
+        </div>
+        <div class="adega-filter-bar">
+          <div class="search-box">
+            <span class="search-icon"><svg style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+            <input type="text" placeholder="Busque por uva, país ou nome...">
+          </div>
+          <div class="filter-pills">
+            <button class="pill active">Todos</button>
+            <button class="pill">Tintos</button>
+            <button class="pill">Brancos</button>
+            <button class="pill">Rosés</button>
+            <button class="pill">Espumantes</button>
+          </div>
+        </div>
+        <div class="adega-content">
+          <div class="adega-grid">
+            <div class="product-card">
+              <div class="product-img-wrap"><img src="https://images.unsplash.com/photo-1687952291665-8e46d794e0cd?q=80&w=400&auto=format&fit=crop" alt="Barolo"/></div>
+              <div class="product-body">
+                <div class="product-meta">Tinto · Piemonte, IT</div>
+                <div class="product-name">Barolo DOCG</div>
+                <div class="product-desc">"O rei dos vinhos italianos. Complexo, com notas de trufas."</div>
+                <div class="product-footer"><span class="product-price">R$ 520</span><button class="add-btn">+</button></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-img-wrap"><img src="https://images.unsplash.com/photo-1736217292598-a200e3f0aae8?q=80&w=400&auto=format&fit=crop" alt="SB"/></div>
+              <div class="product-body">
+                <div class="product-meta">Branco · Marlborough, NZ</div>
+                <div class="product-name">Sauvignon Blanc</div>
+                <div class="product-desc">"Acidez vibrante, notas de maracujá e frescor inconfundível."</div>
+                <div class="product-footer"><span class="product-price">R$ 130</span><button class="add-btn">+</button></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-img-wrap"><img src="https://images.unsplash.com/photo-1585867313424-06b0fd07d314?q=80&w=400&auto=format&fit=crop" alt="Malbec"/></div>
+              <div class="product-body">
+                <div class="product-meta">Tinto · Salta, AR</div>
+                <div class="product-name">Malbec Gran Reserva</div>
+                <div class="product-desc">"Encorpado, taninos doces e muita fruta escura."</div>
+                <div class="product-footer"><span class="product-price">R$ 210</span><button class="add-btn">+</button></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-img-wrap"><img src="https://images.unsplash.com/photo-1620679393872-2501651282c1?q=80&w=400&auto=format&fit=crop" alt="Pinot"/></div>
+              <div class="product-body">
+                <div class="product-meta">Tinto · Borgonha, FR</div>
+                <div class="product-name">Pinot Noir</div>
+                <div class="product-desc">"Elegante, sutil. Frutas vermelhas que dançam na taça."</div>
+                <div class="product-footer"><span class="product-price">R$ 350</span><button class="add-btn">+</button></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-img-wrap"><img src="https://images.unsplash.com/photo-1566065739035-8148a9aa8548?q=80&w=400&auto=format&fit=crop" alt="Primitivo"/></div>
+              <div class="product-body">
+                <div class="product-meta">Tinto · Puglia, IT</div>
+                <div class="product-name">Primitivo di Manduria</div>
+                <div class="product-desc">"Intenso e aveludado. Um abraço em forma de vinho."</div>
+                <div class="product-footer"><span class="product-price">R$ 185</span><button class="add-btn">+</button></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-img-wrap"><img src="https://images.unsplash.com/photo-1666351028798-8920e510b705?q=80&w=400&auto=format&fit=crop" alt="Champagne"/></div>
+              <div class="product-body">
+                <div class="product-meta">Espumante · Champagne, FR</div>
+                <div class="product-name">Champagne Brut</div>
+                <div class="product-desc">"Brioche, maçã verde e elegância inigualável."</div>
+                <div class="product-footer"><span class="product-price">R$ 490</span><button class="add-btn">+</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 3: SOBRE -->
+    <div class="screen-block">
+      <div class="screen-label">03 — Nossa História</div>
+      <div class="screen-frame">
+        <div class="header-bar">
+          <div class="logo">
+            <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 22h8M12 11v11M7 3h10l2 7a5 5 0 01-10 0L7 3z"/></svg>
+            <span class="logo-text">Agnello</span>
+          </div>
+          <nav class="header-nav">
+            <a href="#">Início</a>
+            <a href="#">Adega</a>
+            <a href="#" class="active">Nossa História</a>
+            <a href="#">Sommelier</a>
+          </nav>
+          <div class="header-actions">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <svg class="icon" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          </div>
+        </div>
+        <div class="sobre-hero">
+          <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=60" alt="Adega">
+        </div>
+        <div class="sobre-content">
+          <div class="sobre-eyebrow">Tradição & Família</div>
+          <h1 class="sobre-title">Agnello, muito além da taça.</h1>
+          <p class="sobre-text">Tudo começou com o balcão de madeira rústica, onde o Sr. Giulio, com seu sorriso acolhedor, passava horas entendendo não apenas o paladar, mas a história de cada cliente.</p>
+          <p class="sobre-text">Por anos, fomos exclusivamente uma loja física. Acreditávamos que a experiência de escolher um vinho exigia o toque, o olhar e a conversa.</p>
+          <div class="sobre-quote">
+            <p>"O melhor vinho não é o mais caro. É aquele que você abre cercado de boas companhias, sem medo de errar na escolha."</p>
+            <cite>— Giulio Agnello</cite>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 4: CART DRAWER -->
+    <div class="screen-block">
+      <div class="screen-label">04 — Carrinho (Drawer)</div>
+      <div class="screen-frame">
+        <div class="header-bar">
+          <div class="logo">
+            <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 22h8M12 11v11M7 3h10l2 7a5 5 0 01-10 0L7 3z"/></svg>
+            <span class="logo-text">Agnello</span>
+          </div>
+          <div class="header-actions">
+            <div class="cart-icon-wrap">
+              <svg class="icon" style="color:var(--wine-800);" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+              <div class="cart-badge">2</div>
+            </div>
+          </div>
+        </div>
+        <div class="cart-screen">
+          <div class="cart-dimmed-bg"></div>
+          <div class="cart-drawer-panel">
+            <div class="cart-header">
+              <div class="cart-title">
+                <svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                Sua Sacola
+              </div>
+              <svg style="width:20px;height:20px;stroke:var(--stone-400);fill:none;stroke-width:1.8;" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </div>
+            <div class="cart-items-list">
+              <div class="cart-item">
+                <img class="cart-item-img" src="https://images.unsplash.com/photo-1681210744266-c6a23b8ed176?q=80&w=200&auto=format&fit=crop" alt="Brunello">
+                <div>
+                  <div class="cart-item-name">Brunello di Montalcino</div>
+                  <div class="cart-item-price">R$ 429,00</div>
+                  <div class="cart-qty-ctrl"><button>−</button><span>1</span><button>+</button></div>
+                </div>
+              </div>
+              <div class="cart-item">
+                <img class="cart-item-img" src="https://images.unsplash.com/photo-1620421122564-760cfab6bd4a?q=80&w=200&auto=format&fit=crop" alt="Prosecco">
+                <div>
+                  <div class="cart-item-name">Prosecco Valdobbiadene</div>
+                  <div class="cart-item-price">R$ 165,00</div>
+                  <div class="cart-qty-ctrl"><button>−</button><span>2</span><button>+</button></div>
+                </div>
+              </div>
+            </div>
+            <div class="cart-footer">
+              <div class="cart-total-row">
+                <span class="cart-total-label">Total</span>
+                <span class="cart-total-value">R$ 759,00</span>
+              </div>
+              <button class="checkout-btn">Finalizar Compra →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 5: MOBILE -->
+    <div class="screen-block">
+      <div class="screen-label">05 — Mobile Home (iOS)</div>
+      <div style="display:flex;justify-content:center;padding:20px;">
+        <div class="mobile-frame">
+          <div class="mobile-status-bar">
+            <span class="status-time">9:41</span>
+            <span class="status-icons">●●● ◀ 🔋</span>
+          </div>
+          <div class="mobile-hero">
+            <div class="mobile-hero-img"></div>
+            <div class="mobile-hero-grad"></div>
+            <div class="mobile-header">
+              <div class="logo">
+                <svg style="width:22px;height:22px;color:var(--wine-300);stroke:currentColor;fill:none;stroke-width:1.8;" viewBox="0 0 24 24"><path d="M8 22h8M12 11v11M7 3h10l2 7a5 5 0 01-10 0L7 3z"/></svg>
+                <span style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:#fff;">Agnello</span>
+              </div>
+              <div class="cart-icon-wrap">
+                <svg style="width:20px;height:20px;stroke:#fff;fill:none;stroke-width:1.8;" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+              </div>
+            </div>
+            <div class="mobile-hero-content">
+              <h1 class="mobile-hero-title">O vinho certo,<br>para a hora <em>certa</em>.</h1>
+              <p class="mobile-hero-sub">Curadoria do Sr. Giulio para momentos reais da sua vida.</p>
+              <button class="mobile-btn">Explorar Adega</button>
+            </div>
+          </div>
+          <div class="mobile-featured">
+            <div class="mobile-feat-header">
+              <div class="mobile-feat-title">Destaques</div>
+              <span style="font-size:11px;color:var(--wine-700);font-weight:500;">Ver todos</span>
+            </div>
+            <div class="mobile-products-scroll">
+              <div class="mobile-card">
+                <div class="mobile-card-img"><img src="https://images.unsplash.com/photo-1681210744266-c6a23b8ed176?q=80&w=300&auto=format&fit=crop" alt="Brunello"></div>
+                <div class="mobile-card-body">
+                  <div class="mobile-card-meta">Tinto · IT</div>
+                  <div class="mobile-card-name">Brunello di Montalcino</div>
+                  <div class="mobile-card-footer"><span class="mobile-card-price">R$ 429</span><div class="mobile-add-btn">+</div></div>
+                </div>
+              </div>
+              <div class="mobile-card">
+                <div class="mobile-card-img"><img src="https://images.unsplash.com/photo-1587000098522-812f8896e8df?q=80&w=300&auto=format&fit=crop" alt="Chardonnay"></div>
+                <div class="mobile-card-body">
+                  <div class="mobile-card-meta">Branco · AR</div>
+                  <div class="mobile-card-name">Chardonnay Reserva</div>
+                  <div class="mobile-card-footer"><span class="mobile-card-price">R$ 145</span><div class="mobile-add-btn">+</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mobile-bottom-nav">
+            <div class="mobile-nav-item active">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              Início
+            </div>
+            <div class="mobile-nav-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+              Adega
+            </div>
+            <div class="mobile-nav-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+              História
+            </div>
+            <div class="mobile-nav-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+              Sacola
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 6: FOOTER -->
+    <div class="screen-block">
+      <div class="screen-label">06 — Footer</div>
+      <div class="screen-frame">
+        <div class="site-footer">
+          <div class="footer-grid">
+            <div>
+              <div class="logo">
+                <svg style="width:22px;height:22px;color:var(--wine-400);stroke:currentColor;fill:none;stroke-width:1.8;" viewBox="0 0 24 24"><path d="M8 22h8M12 11v11M7 3h10l2 7a5 5 0 01-10 0L7 3z"/></svg>
+                <span style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:#fff;">Agnello</span>
+              </div>
+              <p class="footer-brand-text">Trazendo a tradição e o calor do atendimento italiano para o ambiente digital. O mesmo cuidado da nossa loja física, agora onde você estiver.</p>
+            </div>
+            <div>
+              <div class="footer-heading">Nossa Casa</div>
+              <div class="footer-links">
+                <a href="#">Início</a>
+                <a href="#">A Adega</a>
+                <a href="#">Nossa História</a>
+              </div>
+            </div>
+            <div>
+              <div class="footer-heading">Fale Conosco</div>
+              <div class="footer-contact-item">📍 Rua das Videiras, 123 — SP</div>
+              <div class="footer-contact-item">📞 (11) 99999-9999</div>
+              <button class="footer-cta-btn">💬 Chamar a Bianca</button>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <span>© 2026 Vinheria Agnello. Venda proibida para menores de 18 anos.</span>
+            <span>Beba com moderação.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

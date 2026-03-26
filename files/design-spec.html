@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vinheria Agnello — Design System (Dark)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Wine Palette */
+    --wine-50:  #fbf5f6;
+    --wine-100: #f7ebed;
+    --wine-200: #edd2d7;
+    --wine-300: #e1b0b8;
+    --wine-400: #d08492;
+    --wine-500: #bc5b6e;
+    --wine-600: #a34255;
+    --wine-700: #893344;
+    --wine-800: #732d3b;
+    --wine-900: #602a34;
+    --wine-950: #34131a;
+
+    /* Sand Palette */
+    --sand-50:  #fdfdfc;
+    --sand-100: #fbfaf8;
+    --sand-200: #f5f3ef;
+    --sand-300: #ebe6dd;
+    --sand-400: #dfd6c7;
+    --sand-500: #d0c1ab;
+
+    /* Stone (Tailwind defaults used in the site) */
+    --stone-400: #a8a29e;
+    --stone-500: #78716c;
+    --stone-600: #57534e;
+    --stone-700: #44403c;
+    --stone-800: #292524;
+    --stone-900: #1c1917;
+    --stone-950: #0c0a09;
+
+    /* Typography */
+    --font-sans: 'DM Sans', sans-serif;
+    --font-serif: 'Cormorant Garamond', serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* Spacing scale (px) */
+    --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+    --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px;
+    --sp-12: 48px; --sp-16: 64px; --sp-20: 80px; --sp-24: 96px;
+
+    /* Border radius */
+    --radius-sm: 2px; /* "rounded-sm" used sitewide */
+    --radius-md: 6px;
+    --radius-full: 9999px;
+
+    /* Shadows */
+    --shadow-sm:  0 1px 2px 0 rgb(0 0 0 / .05);
+    --shadow-md:  0 4px 6px -1px rgb(0 0 0 / .07), 0 2px 4px -2px rgb(0 0 0 / .07);
+    --shadow-xl:  0 20px 25px -5px rgb(0 0 0 / .10), 0 8px 10px -6px rgb(0 0 0 / .10);
+    --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / .25);
+
+    /* Transitions */
+    --ease: cubic-bezier(.4,0,.2,1);
+    --duration-300: 300ms;
+    --duration-500: 500ms;
+    --duration-700: 700ms;
+
+    /* Layout */
+    --header-h-mobile: 64px;
+    --header-h-desktop: 80px;
+    --max-w: 1280px;
+
+    /* DS page styles — DARK MODE */
+    --bg: #0f0b0c;
+    --card-bg: #1a1214;
+    --card-bg-2: #211619;
+    --border: #2e1f22;
+    --border-subtle: #231618;
+    --text: #f0e8ea;
+    --text-muted: #9e7e85;
+    --accent: #d08492;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #3a2028; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #602a34; }
+
+  /* ── Layout ─────────────────────────────────── */
+  .ds-header {
+    background: linear-gradient(135deg, #1a0d10 0%, #0f0b0c 60%);
+    color: white;
+    padding: 48px 40px;
+    border-bottom: 1px solid #3a1e23;
+    position: relative;
+    overflow: hidden;
+  }
+  .ds-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 80% 50%, rgba(115,45,59,.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .ds-header h1 { font-family: var(--font-serif); font-size: 2.5rem; font-weight: 600; margin-bottom: 8px; position: relative; }
+  .ds-header p  { color: var(--wine-300); font-size: .9rem; letter-spacing: .05em; position: relative; }
+  .ds-header .badge {
+    display: inline-block; margin-top: 16px; padding: 4px 12px;
+    background: rgba(115,45,59,.4); border: 1px solid rgba(208,132,146,.2); border-radius: 9999px;
+    font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--wine-300);
+    position: relative;
+  }
+
+  .ds-nav {
+    background: #130c0e; border-bottom: 1px solid var(--border);
+    padding: 0 40px; display: flex; gap: 0; position: sticky; top: 0; z-index: 100;
+    overflow-x: auto;
+  }
+  .ds-nav a {
+    display: block; padding: 16px 20px; font-size: .8rem; font-weight: 600;
+    text-decoration: none; color: var(--text-muted); white-space: nowrap;
+    border-bottom: 2px solid transparent; transition: all .2s;
+    letter-spacing: .06em; text-transform: uppercase;
+  }
+  .ds-nav a:hover { color: var(--accent); border-color: var(--accent); }
+
+  .ds-main { max-width: 1100px; margin: 0 auto; padding: 60px 40px; }
+
+  section { margin-bottom: 80px; }
+  section:last-child { margin-bottom: 0; }
+
+  .section-title {
+    font-family: var(--font-serif); font-size: 1.75rem; font-weight: 600;
+    color: var(--text); margin-bottom: 6px;
+  }
+  .section-sub {
+    font-size: .85rem; color: var(--text-muted); margin-bottom: 32px;
+    padding-bottom: 20px; border-bottom: 1px solid var(--border);
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 28px; margin-bottom: 20px;
+  }
+  .card-title {
+    font-size: .65rem; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px;
+  }
+
+  /* Token tables */
+  .token-table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+  .token-table th {
+    text-align: left; padding: 10px 14px; background: #110d0e;
+    font-size: .65rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--text-muted); border-bottom: 1px solid var(--border);
+  }
+  .token-table td {
+    padding: 11px 14px; border-bottom: 1px solid #1f1214; vertical-align: middle; color: var(--text);
+  }
+  .token-table tr:last-child td { border-bottom: none; }
+  .token-table code {
+    font-family: var(--font-mono); font-size: .78rem;
+    background: #110d0e; padding: 2px 7px; border-radius: 4px;
+    color: var(--accent);
+  }
+
+  /* Color grids */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 12px; }
+  .color-swatch { border-radius: 6px; overflow: hidden; box-shadow: var(--shadow-sm); }
+  .color-swatch .swatch-block { height: 72px; }
+  .color-swatch .swatch-info {
+    padding: 8px 10px; background: #1a1214; border-top: 1px solid var(--border);
+  }
+  .swatch-name { font-size: .68rem; font-weight: 700; color: var(--text); display: block; }
+  .swatch-val  { font-family: var(--font-mono); font-size: .62rem; color: var(--text-muted); }
+
+  /* Typography specimens */
+  .type-row {
+    display: grid; grid-template-columns: 200px 1fr; gap: 24px; align-items: start;
+    padding: 20px 0; border-bottom: 1px solid var(--border);
+  }
+  .type-row:last-child { border-bottom: none; }
+  .type-meta { font-family: var(--font-mono); font-size: .72rem; color: var(--text-muted); line-height: 1.8; }
+  .type-meta strong { color: var(--text); display: block; margin-bottom: 2px; }
+
+  /* Component demos */
+  .demo-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 16px; }
+  .demo-stack { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+
+  /* Buttons */
+  .btn-primary {
+    background: var(--wine-800); color: white;
+    padding: 14px 28px; font-size: .78rem; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase; border: none;
+    cursor: pointer; transition: background .3s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--wine-700); }
+
+  .btn-outline {
+    background: transparent; color: white;
+    border: 1px solid rgba(255,255,255,.5);
+    padding: 14px 28px; font-size: .78rem; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    cursor: pointer; transition: all .3s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-outline:hover { border-color: white; background: rgba(255,255,255,.1); }
+
+  .btn-ghost {
+    background: transparent; color: var(--wine-300);
+    border: 1px solid var(--wine-800);
+    padding: 14px 28px; font-size: .78rem; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    cursor: pointer; transition: background .3s;
+  }
+  .btn-ghost:hover { background: rgba(115,45,59,.15); }
+
+  .btn-icon {
+    background: var(--wine-50); color: var(--wine-800);
+    border: none; border-radius: 9999px; width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all .3s; font-size: 1rem;
+  }
+  .btn-icon:hover { background: var(--wine-800); color: white; }
+
+  .btn-text-link {
+    background: none; border: none; color: var(--text); font-weight: 500;
+    font-size: .85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+    transition: color .2s;
+  }
+  .btn-text-link:hover { color: var(--accent); }
+
+  /* Badge */
+  .badge-highlight {
+    background: var(--wine-900); color: white;
+    font-size: .58rem; font-weight: 700; padding: 4px 8px;
+    letter-spacing: .14em; text-transform: uppercase;
+  }
+  .filter-active {
+    padding: 6px 16px; border-radius: 9999px; border: 1px solid var(--wine-800);
+    background: var(--wine-800); color: white; font-size: .75rem; font-weight: 500; cursor: pointer;
+  }
+  .filter-inactive {
+    padding: 6px 16px; border-radius: 9999px; border: 1px solid #d6cfc4;
+    background: transparent; color: var(--stone-600); font-size: .75rem; font-weight: 500; cursor: pointer;
+    transition: all .2s;
+  }
+  .filter-inactive:hover { border-color: var(--wine-800); color: var(--wine-800); }
+
+  /* Eyebrow */
+  .eyebrow {
+    font-size: .62rem; font-weight: 700; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--wine-500);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--wine-700); }
+
+  /* Product card demo */
+  .product-card-demo {
+    width: 240px; background: #1a1214; border: 1px solid var(--border);
+    border-radius: 6px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,.4);
+  }
+  .product-card-demo .card-img {
+    height: 180px; background: #251419;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem; position: relative;
+  }
+  .product-card-demo .card-body { padding: 16px; }
+  .product-card-demo .card-type { font-size: .62rem; text-transform: uppercase; letter-spacing: .14em; color: #6b5055; font-weight: 500; margin-bottom: 6px; }
+  .product-card-demo .card-name { font-family: var(--font-serif); font-size: 1.05rem; color: var(--text); line-height: 1.3; margin-bottom: 6px; }
+  .product-card-demo .card-desc { font-size: .72rem; color: #7d6068; line-height: 1.5; margin-bottom: 14px; }
+  .product-card-demo .card-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 12px; border-top: 1px solid #2a1a1e;
+  }
+  .card-price { font-size: 1rem; font-weight: 600; color: var(--wine-300); }
+
+  /* Header demo */
+  .header-demo {
+    background: rgba(15,11,12,.96); border-bottom: 1px solid #2e1f22;
+    padding: 0 24px; height: 64px; display: flex; align-items: center;
+    justify-content: space-between; border-radius: 6px;
+  }
+  .header-demo .logo {
+    font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600;
+    color: var(--text); display: flex; align-items: center; gap: 8px;
+  }
+  .header-demo nav { display: flex; gap: 28px; }
+  .header-demo nav a { font-size: .82rem; font-weight: 500; color: #6b5055; text-decoration: none; }
+  .header-demo nav a.active { color: var(--wine-400); }
+
+  /* Input demo */
+  .input-demo {
+    width: 100%; background: #1a1214; border: 1px solid #2e1f22;
+    padding: 12px 16px 12px 42px; font-size: .85rem; outline: none;
+    transition: all .2s; font-family: var(--font-sans); color: var(--text);
+  }
+  .input-demo:focus { border-color: var(--wine-500); background: #1f1517; }
+  .input-wrap { position: relative; max-width: 400px; }
+  .input-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #6b5055; }
+
+  /* Toast demo */
+  .toast-demo {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--stone-900); color: white;
+    padding: 10px 20px; border-radius: 9999px; font-size: .82rem; font-weight: 500;
+    box-shadow: var(--shadow-xl);
+  }
+
+  /* Cart drawer preview */
+  .cart-preview {
+    width: 320px; border: 1px solid var(--border); border-radius: 8px;
+    overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,.5);
+  }
+  .cart-header {
+    padding: 16px 20px; background: #130c0e; border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .cart-header h4 { font-family: var(--font-serif); font-size: 1.1rem; color: var(--text); }
+  .cart-item { display: flex; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--border-subtle); background: var(--card-bg); }
+  .cart-item-img {
+    width: 52px; height: 52px; background: #251419; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0;
+  }
+  .cart-item-name { font-family: var(--font-serif); font-size: .85rem; font-weight: 600; color: var(--text); }
+  .cart-item-price { font-size: .82rem; color: var(--wine-400); font-weight: 500; margin-top: 3px; }
+  .cart-footer { padding: 20px; background: #130c0e; border-top: 1px solid var(--border); }
+  .cart-total { display: flex; justify-content: space-between; margin-bottom: 14px; }
+  .cart-total-label { font-size: .85rem; color: var(--text-muted); }
+  .cart-total-val { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700; color: var(--wine-300); }
+
+  /* Footer preview */
+  .footer-preview {
+    background: #080607; color: var(--wine-100);
+    padding: 40px; border-radius: 8px; border: 1px solid #1a0d10;
+  }
+  .footer-preview .f-logo { font-family: var(--font-serif); font-size: 1.25rem; color: white; margin-bottom: 12px; }
+  .footer-preview .f-body { font-size: .8rem; color: var(--wine-300); line-height: 1.7; max-width: 240px; }
+  .footer-preview .f-heading { font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: white; margin-bottom: 14px; }
+  .footer-preview .f-link { font-size: .82rem; color: var(--wine-300); text-decoration: none; display: block; margin-bottom: 10px; }
+  .footer-preview .f-legal { font-size: .72rem; color: rgba(255,255,255,.2); margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.06); display: flex; justify-content: space-between; }
+  .footer-cols { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; }
+
+  /* Spacing viz */
+  .sp-row { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .sp-block { background: #3d2028; height: 20px; border-radius: 2px; }
+  .sp-label { font-family: var(--font-mono); font-size: .72rem; color: var(--text-muted); min-width: 120px; }
+  .sp-px { font-size: .72rem; color: var(--text-muted); }
+
+  /* Elevation */
+  .elev-row { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 16px; }
+  .elev-card {
+    width: 100px; height: 80px; background: #1a1214; border-radius: 6px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+    font-family: var(--font-mono); font-size: .65rem; color: var(--text-muted);
+  }
+
+  /* Motion */
+  .motion-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 0; border-bottom: 1px solid var(--border);
+  }
+  .motion-item:last-child { border-bottom: none; }
+  .motion-bar { height: 4px; background: #2e1f22; border-radius: 2px; overflow: hidden; flex: 1; margin: 0 20px; }
+  .motion-fill { height: 100%; background: var(--wine-700); border-radius: 2px; }
+
+  /* Dividers */
+  .divider-demo { display: flex; flex-direction: column; gap: 16px; }
+  .divider-1 { border: none; border-top: 1px solid var(--sand-200); }
+  .divider-2 { border: none; border-top: 1px solid var(--wine-900); opacity: .5; }
+
+  /* Icons reference */
+  .icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 8px; }
+  .icon-item {
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px;
+    padding: 18px 8px 12px; display: flex; flex-direction: column; align-items: center; gap: 10px;
+    font-size: .65rem; color: var(--text-muted); text-align: center;
+    transition: border-color .2s, background .2s;
+  }
+  .icon-item:hover { border-color: var(--wine-700); background: #1f1416; }
+  .icon-item .icon-sym { color: var(--text); display: flex; align-items: center; justify-content: center; }
+  .icon-item .icon-sym svg { width: 22px; height: 22px; stroke: var(--text); }
+  .icon-item .icon-name { font-family: var(--font-mono); font-size: .62rem; color: var(--wine-400); font-weight: 500; }
+  .icon-item .icon-use  { font-size: .6rem; color: var(--text-muted); }
+
+  /* Size showcase row */
+  .icon-size-row { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+  .icon-size-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .icon-size-item span { font-family: var(--font-mono); font-size: .65rem; color: var(--text-muted); }
+  .icon-size-item svg { stroke: var(--wine-300); }
+
+  /* Color showcase */
+  .icon-color-row { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
+  .icon-color-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .icon-color-item span { font-family: var(--font-mono); font-size: .62rem; color: var(--text-muted); }
+
+  /* Responsive grid info */
+  .grid-demo { display: grid; gap: 8px; margin-top: 12px; }
+  .grid-col { background: #2e1820; border-radius: 4px; padding: 12px 8px; text-align: center; font-size: .72rem; color: var(--wine-400); font-weight: 600; }
+
+  /* Two col */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: .65rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-left: 8px; }
+  .tag-mobile { background: #dbeafe; color: #1e40af; }
+  .tag-desktop { background: #dcfce7; color: #166534; }
+  .tag-both { background: #f3e8ff; color: #6b21a8; }
+
+  .blockquote-demo {
+    border-left: 4px solid var(--wine-700); padding-left: 24px; margin: 24px 0;
+    font-style: italic; color: #7d6068; font-size: 1rem; line-height: 1.8;
+  }
+
+  /* Hero preview */
+  .hero-preview {
+    position: relative; height: 280px; border-radius: 8px; overflow: hidden;
+    background: linear-gradient(to right, rgba(28,25,23,.9) 30%, rgba(28,25,23,.5) 70%, transparent);
+    display: flex; align-items: center; padding: 0 48px;
+    background-color: var(--stone-900);
+  }
+  .hero-preview::before {
+    content: ''; position: absolute; inset: 0; z-index: -1;
+    background: url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=1200&q=60') center/cover;
+    opacity: .4;
+  }
+  .hero-content .hero-eyebrow { font-size: .65rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--wine-300); margin-bottom: 12px; }
+  .hero-content .hero-h1 { font-family: var(--font-serif); font-size: 2.5rem; font-weight: 700; color: white; line-height: 1.1; margin-bottom: 12px; }
+  .hero-content .hero-h1 em { color: var(--wine-400); font-style: italic; }
+  .hero-content .hero-body { font-size: .85rem; color: rgba(255,255,255,.7); max-width: 360px; margin-bottom: 20px; }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<div class="ds-header">
+  <p>DESIGN SYSTEM</p>
+  <h1>Vinheria Agnello</h1>
+  <p>Complete tokens, typography, components & patterns for Figma replication.</p>
+  <span class="badge">v1.0 · 2026</span>
+</div>
+
+<nav class="ds-nav">
+  <a href="#colors">Colors</a>
+  <a href="#typography">Typography</a>
+  <a href="#spacing">Spacing</a>
+  <a href="#elevation">Elevation</a>
+  <a href="#motion">Motion</a>
+  <a href="#buttons">Buttons</a>
+  <a href="#forms">Forms</a>
+  <a href="#components">Components</a>
+  <a href="#layout">Layout</a>
+  <a href="#icons">Icons</a>
+</nav>
+
+<div class="ds-main">
+
+  <!-- ── COLORS ─────────────────────────── -->
+  <section id="colors">
+    <h2 class="section-title">Color Tokens</h2>
+    <p class="section-sub">Two primary palettes (Wine + Sand) complemented by Tailwind Stone neutrals. All usage is referenced as CSS variable names matching the tailwind.config extension.</p>
+
+    <div class="card">
+      <div class="card-title">Wine — Primary Brand Palette</div>
+      <div class="color-grid">
+        <div class="color-swatch"><div class="swatch-block" style="background:#fbf5f6"></div><div class="swatch-info"><span class="swatch-name">wine-50</span><span class="swatch-val">#fbf5f6</span></div></div>
+        <div class="color-swatch"><div class="swatch-block" style="background:#f7ebed"></div><div class="swatch-info"><span class="swatch-name">wine-100</span><span class="swatch-val">#f7ebed</span></div></div>
+        <div class="color-swatch"><div class="swatch-block" style="background:#edd2d7"></div><div class="swatch-info"><span class="swatch-name">wine-200</span><span class="swatch-val">#edd2d7</span></div></div>
+        <div class="color-swatch"><div class="swatch-block" style="background:#e1b0b8"></div><div class="swatch-info"><span class="swatch-name">wine-300</span><span class="swatch-val">#e1b0b8</span></div></div>
+        <div class="color-swatch"><div class="swatch-block" style="background:#d08492"></div><div class="swatch-info"><span class="swatch-name">wine-400</span><span class="swatch-val">#d08492</span></div></div>
+        <div class="color-swatch"><div class="swatch-block" style="background:#bc5b6e"></div><div class="swatch-info"><span class="swatch-name">wine-500</span><span class="swatch-val">#bc5b6e</span></div></div>
+        <div class="color-swatch"><div class="swatch-block" style="background:#a34255"></div><div class="swatch-info"><span class="swatch-name">wine-600</span><span class="swatch-val">#a34255</span></div></div>
+        <div class="color-swatch"><div class="swatch-block" style="background:#893344"></div><div class="swatch-info"><span class="swatch-name">wine-700</span><span class="swatch-val">#893344</span></div></div>
+        <div class="color-swatch"><div class="swatch-block" style="background:#732d3b"></div><div class="swatch-info"><span class="swatch-name">wine-800 ★</span><span class="swatch-val">#732d3b</span></div></div>
+        <div class="color-swatch"><div class="swatch-block" style="background:#602a34"></div><div class="swatch-info"><span class="swatch-name">wine-900</span><span class="swatch-val">#602a34</span></div></div>
+        <div class="color-swatch"><div class="swatch-block" style="background:#34131a"></div><div class="swatch-info"><span class="swatch-name">wine-950 ★</span><span class="swatch-val">#34131a</span></div></div>
+      </div>
+      <p style="margin-top:14px;font-size:.75rem;color:var(--text-muted);">★ Most used: <code style="font-family:var(--font-mono);background:#110d0e;padding:2px 6px;border-radius:3px;color:var(--accent);">wine-800</code> for CTAs &amp; interactive elements. <code style="font-family:var(--font-mono);background:#110d0e;padding:2px 6px;border-radius:3px;color:var(--accent);">wine-950</code> for footer backgrounds.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Sand — Background & Surface Palette</div>
+      <div class="color-grid">
+        <div class="color-swatch"><div class="swatch-block" style="background:#fdfdfc;border:1px solid #eee"></div><div class="swatch-info"><span class="swatch-name">sand-50 ★</span><span class="swatch-val">#fdfdfc</span></div></div>
+        <div class="color-swatch"><div class="swatch-block" style="background:#fbfaf8"></div><div class="swatch-info"><span class="swatch-name">sand-100</span><span class="swatch-val">#fbfaf8</span></div></div>
+        <div class="color-swatch"><div class="swatch-block" style="background:#f5f3ef"></div><div class="swatch-info"><span class="swatch-name">sand-200 ★</span><span class="swatch-val">#f5f3ef</span></div></div>
+        <div class="color-swatch"><div class="swatch-block" style="background:#ebe6dd"></div><div class="swatch-info"><span class="swatch-name">sand-300</span><span class="swatch-val">#ebe6dd</span></div></div>
+        <div class="color-swatch"><div class="swatch-block" style="background:#dfd6c7"></div><div class="swatch-info"><span class="swatch-name">sand-400</span><span class="swatch-val">#dfd6c7</span></div></div>
+        <div class="color-swatch"><div class="swatch-block" style="background:#d0c1ab"></div><div class="swatch-info"><span class="swatch-name">sand-500</span><span class="swatch-val">#d0c1ab</span></div></div>
+      </div>
+      <p style="margin-top:14px;font-size:.75rem;color:var(--text-muted);">★ Most used: <code style="font-family:var(--font-mono);background:#110d0e;padding:2px 6px;border-radius:3px;color:var(--accent);">sand-50</code> page background. <code style="font-family:var(--font-mono);background:#110d0e;padding:2px 6px;border-radius:3px;color:var(--accent);">sand-200</code> dividers &amp; subtle borders.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Stone (Tailwind Built-in) — Text & Neutral</div>
+      <div class="color-grid">
+        <div class="color-swatch"><div class="swatch-block" style="background:#a8a29e"></div><div class="swatch-info"><span class="swatch-name">stone-400</span><span class="swatch-val">#a8a29e</span></div></div>
+        <div class="color-swatch"><div class="swatch-block" style="background:#78716c"></div><div class="swatch-info"><span class="swatch-name">stone-500 ★</span><span class="swatch-val">#78716c</span></div></div>
+        <div class="color-swatch"><div class="swatch-block" style="background:#57534e"></div><div class="swatch-info"><span class="swatch-name">stone-600</span><span class="swatch-val">#57534e</span></div></div>
+        <div class="color-swatch"><div class="swatch-block" style="background:#44403c"></div><div class="swatch-info"><span class="swatch-name">stone-700</span><span class="swatch-val">#44403c</span></div></div>
+        <div class="color-swatch"><div class="swatch-block" style="background:#292524"></div><div class="swatch-info"><span class="swatch-name">stone-800</span><span class="swatch-val">#292524</span></div></div>
+        <div class="color-swatch"><div class="swatch-block" style="background:#1c1917"></div><div class="swatch-info"><span class="swatch-name">stone-900 ★</span><span class="swatch-val">#1c1917</span></div></div>
+        <div class="color-swatch"><div class="swatch-block" style="background:#0c0a09"></div><div class="swatch-info"><span class="swatch-name">stone-950</span><span class="swatch-val">#0c0a09</span></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Semantic Color Roles</div>
+      <table class="token-table">
+        <thead><tr><th>Role</th><th>Value</th><th>Token</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#732d3b;vertical-align:middle;margin-right:8px;"></span>Brand Primary</td><td>#732d3b</td><td><code>wine-800</code></td><td>CTA buttons, interactive highlights</td></tr>
+          <tr><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#34131a;vertical-align:middle;margin-right:8px;"></span>Brand Dark</td><td>#34131a</td><td><code>wine-950</code></td><td>Footer bg, logo color</td></tr>
+          <tr><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#602a34;vertical-align:middle;margin-right:8px;"></span>Text Accent</td><td>#602a34</td><td><code>wine-900</code></td><td>Product prices, section headings</td></tr>
+          <tr><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#893344;vertical-align:middle;margin-right:8px;"></span>Body Accent</td><td>#893344</td><td><code>wine-700</code></td><td>Eyebrow text, blockquote border</td></tr>
+          <tr><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#fdfdfc;border:1px solid #eee;vertical-align:middle;margin-right:8px;"></span>Page BG</td><td>#fdfdfc</td><td><code>sand-50</code></td><td>Overall page background</td></tr>
+          <tr><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#ffffff;border:1px solid #eee;vertical-align:middle;margin-right:8px;"></span>Surface</td><td>#ffffff</td><td><code>white</code></td><td>Cards, header, section bgs</td></tr>
+          <tr><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#f5f3ef;vertical-align:middle;margin-right:8px;"></span>Border Default</td><td>#f5f3ef</td><td><code>sand-200</code></td><td>Dividers, card borders</td></tr>
+          <tr><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#78716c;vertical-align:middle;margin-right:8px;"></span>Text Secondary</td><td>#78716c</td><td><code>stone-500</code></td><td>Subtitles, nav links (inactive)</td></tr>
+          <tr><td><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#1c1917;vertical-align:middle;margin-right:8px;"></span>Text Primary</td><td>#1c1917</td><td><code>stone-900</code></td><td>Headings, product names</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── TYPOGRAPHY ─────────────────────── -->
+  <section id="typography">
+    <h2 class="section-title">Typography</h2>
+    <p class="section-sub">Two typefaces create a refined editorial feel: Cormorant Garamond for elegance and character, DM Sans for clean, legible UI.</p>
+
+    <div class="card">
+      <div class="card-title">Typefaces</div>
+      <div class="two-col">
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;line-height:1.15;margin-bottom:8px;color:var(--text);">Cormorant Garamond</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--wine-400);margin-bottom:12px;">Italic variant — headlines & quotes</div>
+          <div style="font-size:.75rem;color:var(--text-muted);line-height:1.8;">
+            <strong style="color:var(--text);">Role:</strong> Display, Headings, Prices, Logo<br>
+            <strong style="color:var(--text);">Weights:</strong> 300 (Light), 400 (Regular), 500 (Medium), 600 (SemiBold), 700 (Bold)<br>
+            <strong style="color:var(--text);">Style:</strong> Normal + Italic<br>
+            <strong style="color:var(--text);">Source:</strong> Google Fonts
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:2rem;margin-bottom:8px;font-weight:300;color:var(--text);">DM Sans Light</div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:500;margin-bottom:12px;color:#9e8890;">Medium weight for body & UI</div>
+          <div style="font-size:.75rem;color:var(--text-muted);line-height:1.8;">
+            <strong style="color:var(--text);">Role:</strong> Body, UI, Labels, Captions<br>
+            <strong style="color:var(--text);">Weights:</strong> 300, 400, 500, 600, 700<br>
+            <strong style="color:var(--text);">Source:</strong> Google Fonts
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Type Scale</div>
+
+      <div class="type-row">
+        <div class="type-meta"><strong>Hero H1 (Desktop)</strong>font-serif · 700<br>6rem / 96px<br>line-height: 1.1<br>color: white (on dark)<br><span class="tag tag-desktop">Desktop</span></div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,4rem);font-weight:700;line-height:1.1;">Il vino certo,<br>per l'<em style="color:var(--wine-400);">ora giusta</em>.</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta"><strong>Hero H1 (Mobile)</strong>font-serif · 700<br>3rem / 48px<br>line-height: 1.1<br><span class="tag tag-mobile">Mobile</span></div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;line-height:1.1;">Il vino certo,<br>per l'<em style="color:var(--wine-400);">ora giusta</em>.</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta"><strong>Section Heading</strong>font-serif · 400–600<br>2.25rem / 36px<br>color: stone-900<br><span class="tag tag-both">Both</span></div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:600;color:var(--text);">Nossa Coleção</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta"><strong>H3 / Sub-section</strong>font-serif · 400<br>1.5rem / 24px<br>color: stone-900<br><span class="tag tag-both">Both</span></div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--text);">O Desafio do Digital</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta"><strong>Product Name</strong>font-serif · 400<br>1.125rem–1.25rem<br>line-height: 1.3<br>color: stone-900</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--text);line-height:1.3;">Brunello di Montalcino DOCG</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta"><strong>Price</strong>font-serif · 700<br>1.4rem (cart) / 1rem (card)<br>color: wine-900</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--wine-900);">R$ 429,00</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta"><strong>Eyebrow / Label</strong>font-sans · 700<br>0.625rem / 10px<br>tracking: 0.22em<br>UPPERCASE<br>color: wine-700</div>
+        <div class="eyebrow">Seleção do Giulio</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta"><strong>Body Large</strong>font-sans · 300<br>1.125rem / 18px<br>line-height: 1.6<br>color: sand-100 or stone-600</div>
+        <div style="font-weight:300;font-size:1.1rem;color:#9e8890;line-height:1.7;max-width:500px;">Deguste a curadoria exclusiva do Sr. Giulio com rótulos selecionados para momentos reais da sua vida.</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta"><strong>Body / Description</strong>font-sans · 400<br>0.875rem / 14px<br>line-height: 1.5<br>color: stone-500</div>
+        <div style="font-size:.875rem;color:#7d6068;line-height:1.5;max-width:400px;">"Estruturado e majestoso. Perfeito para uma macarronada em família no domingo."</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta"><strong>UI / Navigation</strong>font-sans · 500<br>0.875rem / 14px<br>color: stone-500 / wine-800 (active)</div>
+        <div style="display:flex;gap:24px;">
+          <span style="font-weight:500;font-size:.875rem;color:var(--wine-400);">Início</span>
+          <span style="font-weight:500;font-size:.875rem;color:#6b5055;">Adega</span>
+          <span style="font-weight:500;font-size:.875rem;color:#6b5055;">Nossa História</span>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta"><strong>Caption / Micro</strong>font-sans · 500<br>0.625–0.75rem / 10–12px<br>tracking: 0.14em<br>UPPERCASE<br>color: stone-400</div>
+        <div style="font-size:.65rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--stone-400);">Tinto · Toscana, IT</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta"><strong>Blockquote</strong>font-sans · 400 italic<br>1rem / 16px<br>line-height: 1.8<br>border-left: 4px wine-700</div>
+        <div class="blockquote-demo">"O melhor vinho não é o mais caro. É aquele que você abre cercado de boas companhias." — Giulio Agnello</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta"><strong>Button Label</strong>font-sans · 600<br>0.78rem / ~12.5px<br>tracking: 0.1em<br>UPPERCASE</div>
+        <div style="font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;">EXPLORAR A ADEGA</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta"><strong>Legal / Footer</strong>font-sans · 400<br>0.72rem / ~11.5px<br>color: wine-400 / 60% opacity</div>
+        <div style="font-size:.72rem;color:rgba(208,132,146,.3);">© 2026 Vinheria Agnello. Venda proibida para menores de 18 anos.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SPACING ─────────────────────────── -->
+  <section id="spacing">
+    <h2 class="section-title">Spacing System</h2>
+    <p class="section-sub">Based on a 4px base unit (Tailwind default). Values used throughout the site.</p>
+    <div class="card">
+      <div class="card-title">Scale</div>
+      <div class="sp-row"><div class="sp-block" style="width:4px"></div><span class="sp-label"><code>sp-1 / p-1</code></span><span class="sp-px">4px</span></div>
+      <div class="sp-row"><div class="sp-block" style="width:8px"></div><span class="sp-label"><code>sp-2 / p-2</code></span><span class="sp-px">8px</span></div>
+      <div class="sp-row"><div class="sp-block" style="width:12px"></div><span class="sp-label"><code>sp-3 / p-3</code></span><span class="sp-px">12px</span></div>
+      <div class="sp-row"><div class="sp-block" style="width:16px"></div><span class="sp-label"><code>sp-4 / p-4</code></span><span class="sp-px">16px — default padding</span></div>
+      <div class="sp-row"><div class="sp-block" style="width:20px"></div><span class="sp-label"><code>sp-5 / p-5</code></span><span class="sp-px">20px</span></div>
+      <div class="sp-row"><div class="sp-block" style="width:24px"></div><span class="sp-label"><code>sp-6 / p-6</code></span><span class="sp-px">24px — card padding</span></div>
+      <div class="sp-row"><div class="sp-block" style="width:32px"></div><span class="sp-label"><code>sp-8 / p-8</code></span><span class="sp-px">32px</span></div>
+      <div class="sp-row"><div class="sp-block" style="width:40px"></div><span class="sp-label"><code>sp-10 / p-10</code></span><span class="sp-px">40px — section inner spacing</span></div>
+      <div class="sp-row"><div class="sp-block" style="width:48px"></div><span class="sp-label"><code>sp-12 / p-12</code></span><span class="sp-px">48px</span></div>
+      <div class="sp-row"><div class="sp-block" style="width:64px"></div><span class="sp-label"><code>sp-16 / p-16</code></span><span class="sp-px">64px — section vertical padding (mobile)</span></div>
+      <div class="sp-row"><div class="sp-block" style="width:80px"></div><span class="sp-label"><code>sp-20 / py-20</code></span><span class="sp-px">80px</span></div>
+      <div class="sp-row"><div class="sp-block" style="width:96px"></div><span class="sp-label"><code>sp-24 / py-24</code></span><span class="sp-px">96px — section vertical padding (desktop)</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Key Dimensions</div>
+      <table class="token-table">
+        <thead><tr><th>Element</th><th>Value</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Header height (mobile)</td><td>64px / h-16</td><td>Fixed top bar</td></tr>
+          <tr><td>Header height (desktop)</td><td>80px / h-20</td><td>Fixed top bar</td></tr>
+          <tr><td>Mobile nav bar height</td><td>64px / h-16</td><td>Fixed bottom bar</td></tr>
+          <tr><td>Page bottom padding (mobile)</td><td>80px / pb-20</td><td>Clears mobile nav</td></tr>
+          <tr><td>Hero section height</td><td>85vh (mobile) / 90vh (desktop)</td><td></td></tr>
+          <tr><td>Product card image ratio</td><td>4:5 (aspect-[4/5])</td><td>Portrait crop</td></tr>
+          <tr><td>Cart drawer width</td><td>100% mobile / 384px / w-96 desktop</td><td></td></tr>
+          <tr><td>Max content width</td><td>1280px / max-w-7xl</td><td>All sections</td></tr>
+          <tr><td>Horizontal page padding</td><td>16px (sm) → 24px (md) → 32px (lg)</td><td>px-4 sm:px-6 lg:px-8</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── ELEVATION ─────────────────────── -->
+  <section id="elevation">
+    <h2 class="section-title">Elevation & Borders</h2>
+    <p class="section-sub">Shadow tokens used for depth hierarchy.</p>
+    <div class="card">
+      <div class="card-title">Shadow Tokens</div>
+      <div class="elev-row">
+        <div class="elev-card" style="box-shadow:none;border:1px solid var(--border);">none<br>Flat</div>
+        <div class="elev-card" style="box-shadow:0 1px 2px 0 rgb(0 0 0/.05);">shadow-sm<br>1px</div>
+        <div class="elev-card" style="box-shadow:0 4px 6px -1px rgb(0 0 0/.07),0 2px 4px -2px rgb(0 0 0/.07);">shadow-md<br>6px</div>
+        <div class="elev-card" style="box-shadow:0 20px 25px -5px rgb(0 0 0/.10),0 8px 10px -6px rgb(0 0 0/.10);">shadow-xl<br>25px</div>
+        <div class="elev-card" style="box-shadow:0 25px 50px -12px rgb(0 0 0/.25);">shadow-2xl<br>50px</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+      <div class="card-title">Border Styles</div>
+      <table class="token-table">
+        <thead><tr><th>Usage</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Default dividers (sand)</td><td><code>border: 1px solid #f5f3ef (sand-200)</code></td></tr>
+          <tr><td>Card borders</td><td><code>border: 1px solid #f5f3ef (sand-100~200)</code></td></tr>
+          <tr><td>Footer inner divider</td><td><code>border-top: 1px solid rgba(255,255,255,.08)</code></td></tr>
+          <tr><td>Filter pill (inactive)</td><td><code>border: 1px solid #ebe6dd (sand-300)</code></td></tr>
+          <tr><td>Filter pill (active)</td><td><code>border: 1px solid #732d3b (wine-800)</code></td></tr>
+          <tr><td>Focus ring (input)</td><td><code>border-color: #bc5b6e (wine-500)</code></td></tr>
+          <tr><td>Blockquote accent</td><td><code>border-left: 4px solid #893344 (wine-700)</code></td></tr>
+          <tr><td>Border radius (most elements)</td><td><code>border-radius: 2px (rounded-sm)</code> — nearly square</td></tr>
+          <tr><td>Border radius (pills/badges)</td><td><code>border-radius: 9999px (rounded-full)</code></td></tr>
+          <tr><td>Border radius (product card, cart)</td><td><code>border-radius: 6px (rounded-md)</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── MOTION ─────────────────────────── -->
+  <section id="motion">
+    <h2 class="section-title">Motion & Animation</h2>
+    <p class="section-sub">Subtle, purposeful transitions. The site favors smooth ease-in-out transitions over dramatic effects.</p>
+    <div class="card">
+      <div class="card-title">Transition Tokens</div>
+      <div class="motion-item">
+        <span style="font-size:.82rem;min-width:200px;">Easing</span>
+        <div class="motion-bar"><div class="motion-fill" style="width:100%"></div></div>
+        <span style="font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);">cubic-bezier(.4,0,.2,1) — ease-in-out</span>
+      </div>
+      <div class="motion-item">
+        <span style="font-size:.82rem;min-width:200px;">Fast (hover, color)</span>
+        <div class="motion-bar"><div class="motion-fill" style="width:25%"></div></div>
+        <span style="font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);">200ms</span>
+      </div>
+      <div class="motion-item">
+        <span style="font-size:.82rem;min-width:200px;">Default (buttons, links)</span>
+        <div class="motion-bar"><div class="motion-fill" style="width:35%"></div></div>
+        <span style="font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);">300ms</span>
+      </div>
+      <div class="motion-item">
+        <span style="font-size:.82rem;min-width:200px;">Cart drawer / overlay</span>
+        <div class="motion-bar"><div class="motion-fill" style="width:35%"></div></div>
+        <span style="font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);">300ms — translate-x + opacity</span>
+      </div>
+      <div class="motion-item">
+        <span style="font-size:.82rem;min-width:200px;">Product image hover scale</span>
+        <div class="motion-bar"><div class="motion-fill" style="width:55%"></div></div>
+        <span style="font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);">700ms — scale(1.05)</span>
+      </div>
+      <div class="motion-item">
+        <span style="font-size:.82rem;min-width:200px;">Toast appear / dismiss</span>
+        <div class="motion-bar"><div class="motion-fill" style="width:35%"></div></div>
+        <span style="font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);">300ms — opacity + translateY(-4)</span>
+      </div>
+      <div class="motion-item">
+        <span style="font-size:.82rem;min-width:200px;">Toast auto-dismiss delay</span>
+        <div class="motion-bar"><div class="motion-fill" style="width:90%"></div></div>
+        <span style="font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);">2500ms timeout</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BUTTONS ─────────────────────────── -->
+  <section id="buttons">
+    <h2 class="section-title">Buttons & Interactive Elements</h2>
+    <p class="section-sub">All buttons use uppercase text, wide letter-spacing, and nearly-square radius. No rounded corners on primary actions.</p>
+
+    <div class="card">
+      <div class="card-title">Primary CTA — Dark Background</div>
+      <div class="demo-row" style="background:var(--stone-900);padding:32px;border-radius:6px;">
+        <button class="btn-primary">Explorar a Adega</button>
+        <button class="btn-outline">Consultar Sommelier</button>
+      </div>
+      <table class="token-table" style="margin-top:16px;">
+        <thead><tr><th>Variant</th><th>BG</th><th>Text</th><th>Border</th><th>Hover</th></tr></thead>
+        <tbody>
+          <tr><td>Primary</td><td>wine-800 #732d3b</td><td>white</td><td>none</td><td>bg → wine-700</td></tr>
+          <tr><td>Outline (dark)</td><td>transparent</td><td>white</td><td>rgba(white, .5)</td><td>border → white, bg → white/10</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Light Background Variants</div>
+      <div class="demo-row">
+        <button class="btn-primary">Adicionar</button>
+        <button class="btn-ghost">Ver Adega Completa</button>
+        <button class="btn-text-link">Ver todos →</button>
+      </div>
+      <table class="token-table" style="margin-top:16px;">
+        <thead><tr><th>Variant</th><th>BG</th><th>Text</th><th>Border</th><th>Hover</th></tr></thead>
+        <tbody>
+          <tr><td>Primary (light ctx)</td><td>wine-800</td><td>white</td><td>none</td><td>bg → wine-900</td></tr>
+          <tr><td>Ghost / Outline</td><td>transparent</td><td>wine-900</td><td>1px wine-800</td><td>bg → wine-50</td></tr>
+          <tr><td>Text link</td><td>none</td><td>wine-900</td><td>none</td><td>color → wine-600</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Icon Button (Add to Cart)</div>
+      <div class="demo-row">
+        <button class="btn-icon">+</button>
+        <span style="font-size:.8rem;color:var(--text-muted);">Default state</span>
+        <button class="btn-icon" style="background:var(--wine-800);color:white;">+</button>
+        <span style="font-size:.8rem;color:var(--text-muted);">Hover state</span>
+      </div>
+      <table class="token-table" style="margin-top:16px;">
+        <thead><tr><th>State</th><th>BG</th><th>Icon color</th></tr></thead>
+        <tbody>
+          <tr><td>Default</td><td>wine-50 #fbf5f6</td><td>wine-800</td></tr>
+          <tr><td>Hover</td><td>wine-800 #732d3b</td><td>white</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Filter Pills</div>
+      <div class="demo-row">
+        <button class="filter-active">Todos</button>
+        <button class="filter-inactive">Tintos</button>
+        <button class="filter-inactive">Brancos</button>
+        <button class="filter-inactive">Rosés</button>
+        <button class="filter-inactive">Espumantes</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Button Anatomy</div>
+      <table class="token-table">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Padding (standard)</td><td>14px 28px (py-3.5 px-7 approx)</td></tr>
+          <tr><td>Padding (compact)</td><td>8px 16px</td></tr>
+          <tr><td>Font size</td><td>0.78rem ≈ 12.5px</td></tr>
+          <tr><td>Font weight</td><td>600 (semi-bold)</td></tr>
+          <tr><td>Letter spacing</td><td>0.1em</td></tr>
+          <tr><td>Text transform</td><td>uppercase</td></tr>
+          <tr><td>Border radius</td><td>0 (square) — primary & outline</td></tr>
+          <tr><td>Transition</td><td>background 300ms ease</td></tr>
+          <tr><td>Min height</td><td>~48px (py-4 = 16px × 2 + text)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── FORMS ─────────────────────────── -->
+  <section id="forms">
+    <h2 class="section-title">Form Elements</h2>
+    <p class="section-sub">Minimal input styling — flat, sand-100 background, no visible border until focus.</p>
+
+    <div class="card">
+      <div class="card-title">Search Input</div>
+      <div class="input-wrap" style="max-width:400px;">
+        <span class="input-icon"><i data-lucide="search" style="width:18px;height:18px;stroke:#6b5055;"></i></span>
+        <input type="text" class="input-demo" placeholder="Busque por uva, país ou nome...">
+      </div>
+      <table class="token-table" style="margin-top:16px;">
+        <thead><tr><th>State</th><th>BG</th><th>Border</th></tr></thead>
+        <tbody>
+          <tr><td>Default</td><td>sand-100 #fbfaf8</td><td>transparent</td></tr>
+          <tr><td>Focus</td><td>white</td><td>1px wine-500 #bc5b6e</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:12px;font-size:.75rem;color:var(--text-muted);">
+        Padding: 12px 16px 12px 40px (leaves room for left icon) · Font: 0.875rem · Border-radius: 2px (rounded-sm) · Outline: none (outline-none)
+      </div>
+    </div>
+  </section>
+
+  <!-- ── COMPONENTS ────────────────────── -->
+  <section id="components">
+    <h2 class="section-title">Components</h2>
+    <p class="section-sub">Core UI components with full spec breakdowns.</p>
+
+    <!-- Header -->
+    <div class="card">
+      <div class="card-title">Header / Navigation Bar</div>
+      <div class="header-demo">
+        <div class="logo"><i data-lucide="wine" style="width:20px;height:20px;stroke:var(--wine-400);"></i> Agnello</div>
+        <nav>
+          <a href="#" class="active">Início</a>
+          <a href="#">Adega</a>
+          <a href="#">Nossa História</a>
+          <a href="#">Sommelier</a>
+        </nav>
+        <div style="display:flex;gap:16px;align-items:center;">
+          <i data-lucide="search" style="width:20px;height:20px;stroke:#6b5055;"></i>
+          <i data-lucide="shopping-bag" style="width:20px;height:20px;stroke:#6b5055;"></i>
+        </div>
+      </div>
+      <table class="token-table" style="margin-top:16px;">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Height (mobile)</td><td>64px</td></tr>
+          <tr><td>Height (desktop)</td><td>80px</td></tr>
+          <tr><td>Background</td><td>sand-50/95 + backdrop-blur-md</td></tr>
+          <tr><td>Border</td><td>bottom 1px sand-200</td></tr>
+          <tr><td>Position</td><td>fixed top-0, z-40</td></tr>
+          <tr><td>Logo font</td><td>Cormorant Garamond, 1.5rem, semibold, wine-950</td></tr>
+          <tr><td>Nav link (inactive)</td><td>stone-500, font-medium 500, 0.875rem</td></tr>
+          <tr><td>Nav link (active)</td><td>wine-800</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Hero section -->
+    <div class="card" style="margin-top:20px;">
+      <div class="card-title">Hero Section</div>
+      <div class="hero-preview">
+        <div class="hero-content">
+          <div class="hero-eyebrow">Tradição Italiana</div>
+          <h1 class="hero-h1">O vinho certo,<br>para a hora <em>certa</em>.</h1>
+          <p class="hero-body">Deguste a curadoria exclusiva do Sr. Giulio.</p>
+          <div class="hero-btns">
+            <button class="btn-primary" style="font-size:.72rem;padding:12px 20px;">Explorar a Adega</button>
+            <button class="btn-outline" style="font-size:.72rem;padding:12px 20px;">Consultar Sommelier</button>
+          </div>
+        </div>
+      </div>
+      <table class="token-table" style="margin-top:16px;">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Height</td><td>85vh (mobile) / 90vh (desktop)</td></tr>
+          <tr><td>Background image overlay</td><td>Mobile: gradient-to-top · Desktop: gradient-to-right, from stone-950/90 via stone-900/60 to transparent</td></tr>
+          <tr><td>Eyebrow color</td><td>wine-300 with 6px wide decorative line prefix (bg-wine-300, 1px tall)</td></tr>
+          <tr><td>H1 italic accent</td><td>color: wine-400 + font-style: italic</td></tr>
+          <tr><td>Body text</td><td>sand-100, font-weight 300, max-width: 32rem</td></tr>
+          <tr><td>Content padding</td><td>px-6 sm:px-12 md:px-24</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Product Card -->
+    <div class="card" style="margin-top:20px;">
+      <div class="card-title">Product Card</div>
+      <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:4px;">
+        <div class="product-card-demo">
+          <div class="card-img" style="background:#251419;">
+            <i data-lucide="wine" style="width:48px;height:48px;stroke:var(--wine-700);opacity:.5;"></i>
+            <span class="badge-highlight" style="position:absolute;top:10px;left:10px;">Destaque</span>
+          </div>
+          <div class="card-body">
+            <div class="card-type">Tinto · Toscana, IT</div>
+            <div class="card-name">Brunello di Montalcino DOCG</div>
+            <div class="card-desc">"Estruturado e majestoso. Perfeito para uma macarronada em família."</div>
+            <div class="card-footer">
+              <span class="card-price">R$ 429,00</span>
+              <button class="btn-icon"><i data-lucide="plus" style="width:18px;height:18px;stroke:var(--wine-400);"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <table class="token-table" style="margin-top:20px;">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Background</td><td>white</td></tr>
+          <tr><td>Border</td><td>1px solid sand-100</td></tr>
+          <tr><td>Border radius</td><td>6px (rounded-md)</td></tr>
+          <tr><td>Shadow</td><td>shadow-sm</td></tr>
+          <tr><td>Image aspect ratio</td><td>4:5 (portrait)</td></tr>
+          <tr><td>Image hover</td><td>scale(1.05), 700ms transition</td></tr>
+          <tr><td>Image overlay</td><td>bg-stone-900/10 → transparent on hover</td></tr>
+          <tr><td>Badge (featured)</td><td>wine-900 bg, white text, 9px, 0.14em tracking, UPPERCASE, top-3 left-3</td></tr>
+          <tr><td>Card body padding</td><td>20px (p-5)</td></tr>
+          <tr><td>Type + Origin</td><td>10–12px, stone-400, 0.14em tracking, UPPERCASE, weight 500</td></tr>
+          <tr><td>Name</td><td>Cormorant Garamond 1.1–1.25rem, stone-900, line-height 1.3</td></tr>
+          <tr><td>Description</td><td>12–14px italic (quoted), stone-500, 2-line clamp</td></tr>
+          <tr><td>Footer border</td><td>1px solid sand-100, pt-4</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Section heading pattern -->
+    <div class="card" style="margin-top:20px;">
+      <div class="card-title">Section Heading Pattern</div>
+      <div style="border-bottom:1px solid var(--border);padding-bottom:24px;display:flex;justify-content:space-between;align-items:flex-end;">
+        <div>
+          <div class="eyebrow" style="margin-bottom:8px;">Seleção do Giulio</div>
+          <h2 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:var(--text);">Destaques da Semana</h2>
+        </div>
+        <button class="btn-text-link">Ver todos →</button>
+      </div>
+      <p style="margin-top:12px;font-size:.75rem;color:var(--text-muted);">Pattern: eyebrow (ALL CAPS, wine-700) + Serif H2 + optional right-aligned text link. Always separated from content by 1px sand-200 border-bottom.</p>
+    </div>
+
+    <!-- Toast notification -->
+    <div class="card" style="margin-top:20px;">
+      <div class="card-title">Toast Notification</div>
+      <div style="padding:20px;background:#110d0e;border-radius:6px;display:flex;justify-content:center;border:1px solid var(--border);">
+        <div class="toast-demo"><i data-lucide="check-circle-2" style="width:16px;height:16px;stroke:#4ade80;flex-shrink:0;"></i> Adicionado à sacola</div>
+      </div>
+      <table class="token-table" style="margin-top:16px;">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Background</td><td>stone-900 #1c1917</td></tr>
+          <tr><td>Text</td><td>white, 0.82rem, font-weight 500</td></tr>
+          <tr><td>Icon</td><td>check-circle-2 (lucide), green-400</td></tr>
+          <tr><td>Shape</td><td>rounded-full, px-6 py-3</td></tr>
+          <tr><td>Shadow</td><td>shadow-xl</td></tr>
+          <tr><td>Position</td><td>fixed bottom-20 (mobile) / bottom-10 (desktop), horizontally centered</td></tr>
+          <tr><td>Entry animation</td><td>opacity 0→1, translateY(+4px→0), 300ms</td></tr>
+          <tr><td>Auto-dismiss</td><td>2500ms</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Cart drawer -->
+    <div class="card" style="margin-top:20px;">
+      <div class="card-title">Cart Drawer (Side Panel)</div>
+      <div style="display:flex;justify-content:center;">
+        <div class="cart-preview">
+          <div class="cart-header">
+            <h4 style="display:flex;align-items:center;gap:8px;"><i data-lucide="shopping-bag" style="width:18px;height:18px;stroke:var(--text);"></i> Sua Sacola</h4>
+            <span style="color:var(--text-muted);cursor:pointer;display:flex;"><i data-lucide="x" style="width:20px;height:20px;stroke:var(--text-muted);"></i></span>
+          </div>
+          <div class="cart-item">
+            <div class="cart-item-img"><i data-lucide="wine" style="width:24px;height:24px;stroke:var(--wine-600);"></i></div>
+            <div>
+              <div class="cart-item-name">Brunello di Montalcino</div>
+              <div class="cart-item-price">R$ 429,00</div>
+              <div style="display:flex;align-items:center;gap:12px;margin-top:6px;">
+                <div style="display:flex;align-items:center;background:#251419;border-radius:2px;">
+                  <button style="padding:2px 8px;border:none;background:none;cursor:pointer;color:#7d6068;">−</button>
+                  <span style="font-size:.75rem;font-weight:500;width:16px;text-align:center;color:var(--text);">1</span>
+                  <button style="padding:2px 8px;border:none;background:none;cursor:pointer;color:#7d6068;">+</button>
+                </div>
+                <span style="font-size:.72rem;color:#6b5055;text-decoration:underline;cursor:pointer;">Remover</span>
+              </div>
+            </div>
+          </div>
+          <div class="cart-footer">
+            <div class="cart-total">
+              <span class="cart-total-label">Total</span>
+              <span class="cart-total-val">R$ 429,00</span>
+            </div>
+            <button class="btn-primary" style="width:100%;justify-content:center;">Finalizar Compra →</button>
+          </div>
+        </div>
+      </div>
+      <table class="token-table" style="margin-top:20px;">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Width</td><td>100vw (mobile) / 384px / w-96 (desktop)</td></tr>
+          <tr><td>Position</td><td>fixed inset-y-0 right-0, z-50</td></tr>
+          <tr><td>Open animation</td><td>translate-x-full → 0, 300ms ease</td></tr>
+          <tr><td>Overlay</td><td>stone-900/50 covering full screen</td></tr>
+          <tr><td>Header BG</td><td>sand-50</td></tr>
+          <tr><td>Item thumbnail</td><td>64×64px, bg sand-100, border-radius 4px</td></tr>
+          <tr><td>Qty control</td><td>sand-100 bg, rounded-sm, ± buttons</td></tr>
+          <tr><td>Footer BG</td><td>sand-50</td></tr>
+          <tr><td>Total label</td><td>stone-500, 0.875rem</td></tr>
+          <tr><td>Total value</td><td>Cormorant Garamond, 1.5rem, font-bold, wine-900</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Footer -->
+    <div class="card" style="margin-top:20px;">
+      <div class="card-title">Footer</div>
+      <div class="footer-preview">
+        <div class="footer-cols">
+          <div>
+            <div class="f-logo" style="display:flex;align-items:center;gap:8px;"><i data-lucide="wine" style="width:20px;height:20px;stroke:var(--wine-400);"></i> Agnello</div>
+            <p class="f-body">Trazendo a tradição e o calor do atendimento italiano para o ambiente digital.</p>
+          </div>
+          <div>
+            <div class="f-heading">Nossa Casa</div>
+            <a href="#" class="f-link">Início</a>
+            <a href="#" class="f-link">A Adega</a>
+            <a href="#" class="f-link">Nossa História</a>
+          </div>
+          <div>
+            <div class="f-heading">Fale Conosco</div>
+            <a href="#" class="f-link" style="display:flex;align-items:center;gap:8px;"><i data-lucide="map-pin" style="width:14px;height:14px;stroke:var(--wine-500);flex-shrink:0;"></i> Rua das Videiras, 123 - SP</a>
+            <a href="#" class="f-link" style="display:flex;align-items:center;gap:8px;"><i data-lucide="phone" style="width:14px;height:14px;stroke:var(--wine-500);flex-shrink:0;"></i> (11) 99999-9999</a>
+            <button style="margin-top:12px;background:var(--wine-800);color:white;border:none;padding:8px 16px;font-size:.72rem;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:8px;border-radius:2px;"><i data-lucide="message-circle" style="width:14px;height:14px;stroke:white;"></i> Chamar a Bianca</button>
+          </div>
+        </div>
+        <div class="f-legal">
+          <span>© 2026 Vinheria Agnello. Venda proibida para menores de 18 anos.</span>
+          <span>Beba com moderação.</span>
+        </div>
+      </div>
+      <table class="token-table" style="margin-top:16px;">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Background</td><td>wine-950 #34131a</td></tr>
+          <tr><td>Top border</td><td>1px wine-900</td></tr>
+          <tr><td>Grid</td><td>1 col (mobile) / 3 col (desktop)</td></tr>
+          <tr><td>Column gap</td><td>48px</td></tr>
+          <tr><td>Vertical padding</td><td>64px (py-16)</td></tr>
+          <tr><td>Heading style</td><td>white, 0.875rem, uppercase, tracking-wider, font-medium</td></tr>
+          <tr><td>Link color</td><td>wine-300, hover → white</td></tr>
+          <tr><td>Legal text</td><td>0.72rem, wine-400 at 60% opacity, between top border and bottom</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Mobile Bottom Nav -->
+    <div class="card" style="margin-top:20px;">
+      <div class="card-title">Mobile Bottom Navigation Bar <span class="tag tag-mobile">Mobile Only</span></div>
+      <div style="background:#130c0e;border-top:1px solid #2e1f22;border-radius:6px;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-around;max-width:400px;border:1px solid var(--border);">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--wine-400);"><i data-lucide="home" style="width:20px;height:20px;stroke:var(--wine-400);"></i><span style="font-size:.62rem;font-weight:500;">Início</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;color:#6b5055;"><i data-lucide="layout-grid" style="width:20px;height:20px;stroke:#6b5055;"></i><span style="font-size:.62rem;font-weight:500;">Adega</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;color:#6b5055;"><i data-lucide="book-open" style="width:20px;height:20px;stroke:#6b5055;"></i><span style="font-size:.62rem;font-weight:500;">História</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;color:#6b5055;position:relative;"><i data-lucide="shopping-bag" style="width:20px;height:20px;stroke:#6b5055;"></i><span style="font-size:.62rem;font-weight:500;">Sacola</span><span style="position:absolute;top:0;right:-4px;background:var(--wine-800);color:white;font-size:.55rem;font-weight:700;width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center;">2</span></div>
+      </div>
+      <table class="token-table" style="margin-top:16px;">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Height</td><td>64px</td></tr>
+          <tr><td>Background</td><td>white</td></tr>
+          <tr><td>Top border</td><td>1px sand-200</td></tr>
+          <tr><td>Position</td><td>fixed bottom-0, z-40</td></tr>
+          <tr><td>Icon size</td><td>20px (w-5 h-5)</td></tr>
+          <tr><td>Label</td><td>10px (text-[10px]), font-medium</td></tr>
+          <tr><td>Active state</td><td>wine-800 text</td></tr>
+          <tr><td>Inactive state</td><td>stone-400 text</td></tr>
+          <tr><td>Cart badge</td><td>14×14px, wine-800 bg, white 9px text, rounded-full</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── LAYOUT ─────────────────────────── -->
+  <section id="layout">
+    <h2 class="section-title">Layout & Grid</h2>
+    <p class="section-sub">Responsive system using Tailwind breakpoints. Max content width: 1280px.</p>
+
+    <div class="card">
+      <div class="card-title">Breakpoints</div>
+      <table class="token-table">
+        <thead><tr><th>Name</th><th>Min Width</th><th>Prefix</th></tr></thead>
+        <tbody>
+          <tr><td>Mobile (default)</td><td>0px</td><td>(none)</td></tr>
+          <tr><td>sm</td><td>640px</td><td><code>sm:</code></td></tr>
+          <tr><td>md</td><td>768px</td><td><code>md:</code></td></tr>
+          <tr><td>lg</td><td>1024px</td><td><code>lg:</code></td></tr>
+          <tr><td>xl</td><td>1280px</td><td><code>xl:</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+      <div class="card-title">Product Grid (Adega view)</div>
+      <div class="grid-demo" style="grid-template-columns:repeat(2,1fr);">
+        <div class="grid-col">col 1</div><div class="grid-col">col 2</div>
+      </div>
+      <p style="font-size:.72rem;color:var(--text-muted);margin:8px 0 4px;">Mobile: 2 columns</p>
+      <div class="grid-demo" style="grid-template-columns:repeat(4,1fr);">
+        <div class="grid-col">1</div><div class="grid-col">2</div><div class="grid-col">3</div><div class="grid-col">4</div>
+      </div>
+      <p style="font-size:.72rem;color:var(--text-muted);margin:8px 0 4px;">Desktop (lg+): 4 columns. Gap: 16px (mobile) / 32px (md+)</p>
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+      <div class="card-title">Home Featured Products</div>
+      <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:12px;">Mobile: horizontal scroll (overflow-x-auto, snap-x). Desktop: 4-column CSS grid.<br>Cards have min-w-[260px] on mobile for the horizontal scroll.</p>
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+      <div class="card-title">Footer Grid</div>
+      <div class="grid-demo" style="grid-template-columns:1fr;">
+        <div class="grid-col">Single column (mobile)</div>
+      </div>
+      <div class="grid-demo" style="grid-template-columns:1.5fr 1fr 1fr;margin-top:8px;">
+        <div class="grid-col">Brand col (wider)</div><div class="grid-col">Links</div><div class="grid-col">Contact</div>
+      </div>
+      <p style="font-size:.72rem;color:var(--text-muted);margin-top:6px;">Desktop: 3 col, first column 1.5fr. Gap: 48px (gap-12)</p>
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+      <div class="card-title">Page Structure & Z-Index Stack</div>
+      <table class="token-table">
+        <thead><tr><th>Layer</th><th>Element</th><th>z-index</th></tr></thead>
+        <tbody>
+          <tr><td>Base</td><td>Page content, product cards</td><td>auto</td></tr>
+          <tr><td>Sticky</td><td>Adega filter bar (sticky top-16/20)</td><td>z-30</td></tr>
+          <tr><td>Fixed</td><td>Header, mobile bottom nav</td><td>z-40</td></tr>
+          <tr><td>Overlay</td><td>Cart overlay, cart drawer, toast</td><td>z-50</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── ICONS ─────────────────────────── -->
+  <section id="icons">
+    <h2 class="section-title">Icon Set — Lucide</h2>
+    <p class="section-sub">All icons come from <strong>Lucide</strong> (<code style="font-family:var(--font-mono);font-size:.8rem;background:#110d0e;padding:2px 8px;border-radius:4px;color:var(--accent);">unpkg.com/lucide@latest</code>). Default stroke-width: <strong>1.5</strong>. Initialized via <code style="font-family:var(--font-mono);font-size:.8rem;background:#110d0e;padding:2px 8px;border-radius:4px;color:var(--accent);">lucide.createIcons()</code>.</p>
+
+    <!-- All icons used -->
+    <div class="card">
+      <div class="card-title">All Icons Used in the Project</div>
+      <div class="icon-grid">
+
+        <div class="icon-item">
+          <div class="icon-sym"><i data-lucide="wine"></i></div>
+          <span class="icon-name">wine</span>
+          <span class="icon-use">Logo, footer</span>
+        </div>
+
+        <div class="icon-item">
+          <div class="icon-sym"><i data-lucide="search"></i></div>
+          <span class="icon-name">search</span>
+          <span class="icon-use">Header, input prefix</span>
+        </div>
+
+        <div class="icon-item">
+          <div class="icon-sym"><i data-lucide="shopping-bag"></i></div>
+          <span class="icon-name">shopping-bag</span>
+          <span class="icon-use">Cart trigger</span>
+        </div>
+
+        <div class="icon-item">
+          <div class="icon-sym"><i data-lucide="home"></i></div>
+          <span class="icon-name">home</span>
+          <span class="icon-use">Mobile nav</span>
+        </div>
+
+        <div class="icon-item">
+          <div class="icon-sym"><i data-lucide="layout-grid"></i></div>
+          <span class="icon-name">layout-grid</span>
+          <span class="icon-use">Mobile nav (Adega)</span>
+        </div>
+
+        <div class="icon-item">
+          <div class="icon-sym"><i data-lucide="book-open"></i></div>
+          <span class="icon-name">book-open</span>
+          <span class="icon-use">Mobile nav (História)</span>
+        </div>
+
+        <div class="icon-item">
+          <div class="icon-sym"><i data-lucide="arrow-right"></i></div>
+          <span class="icon-name">arrow-right</span>
+          <span class="icon-use">CTAs, text links</span>
+        </div>
+
+        <div class="icon-item">
+          <div class="icon-sym"><i data-lucide="plus"></i></div>
+          <span class="icon-name">plus</span>
+          <span class="icon-use">Add to cart button</span>
+        </div>
+
+        <div class="icon-item">
+          <div class="icon-sym"><i data-lucide="x"></i></div>
+          <span class="icon-name">x</span>
+          <span class="icon-use">Close cart drawer</span>
+        </div>
+
+        <div class="icon-item">
+          <div class="icon-sym"><i data-lucide="shopping-cart"></i></div>
+          <span class="icon-name">shopping-cart</span>
+          <span class="icon-use">Empty cart state</span>
+        </div>
+
+        <div class="icon-item">
+          <div class="icon-sym"><i data-lucide="check-circle-2"></i></div>
+          <span class="icon-name">check-circle-2</span>
+          <span class="icon-use">Toast notification</span>
+        </div>
+
+        <div class="icon-item">
+          <div class="icon-sym"><i data-lucide="map-pin"></i></div>
+          <span class="icon-name">map-pin</span>
+          <span class="icon-use">Footer address</span>
+        </div>
+
+        <div class="icon-item">
+          <div class="icon-sym"><i data-lucide="phone"></i></div>
+          <span class="icon-name">phone</span>
+          <span class="icon-use">Footer contact</span>
+        </div>
+
+        <div class="icon-item">
+          <div class="icon-sym"><i data-lucide="message-circle"></i></div>
+          <span class="icon-name">message-circle</span>
+          <span class="icon-use">Sommelier CTA</span>
+        </div>
+
+        <div class="icon-item">
+          <div class="icon-sym"><i data-lucide="wine-off"></i></div>
+          <span class="icon-name">wine-off</span>
+          <span class="icon-use">Empty search state</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Sizes -->
+    <div class="card" style="margin-top:20px;">
+      <div class="card-title">Sizes Used</div>
+      <div class="icon-size-row" style="margin-top:8px;">
+        <div class="icon-size-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
+          <span>16px / w-4 h-4<br>Footer contact icons</span>
+        </div>
+        <div class="icon-size-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
+          <span>20px / w-5 h-5<br>Standard UI icons</span>
+        </div>
+        <div class="icon-size-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
+          <span>24px / w-6 h-6<br>Header (desktop)</span>
+        </div>
+        <div class="icon-size-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
+          <span>32px / w-8 h-8<br>Logo icon (desktop)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Colors in context -->
+    <div class="card" style="margin-top:20px;">
+      <div class="card-title">Icon Colors in Context</div>
+      <div class="icon-color-row">
+        <div class="icon-color-item">
+          <i data-lucide="wine" style="width:24px;height:24px;stroke:var(--wine-400);display:block;"></i>
+          <span>wine-400<br>Logo (dark bg)</span>
+        </div>
+        <div class="icon-color-item">
+          <i data-lucide="shopping-bag" style="width:24px;height:24px;stroke:var(--wine-400);display:block;"></i>
+          <span>wine-400<br>Header active</span>
+        </div>
+        <div class="icon-color-item">
+          <i data-lucide="search" style="width:24px;height:24px;stroke:#6b5055;display:block;"></i>
+          <span>#6b5055<br>Input prefix</span>
+        </div>
+        <div class="icon-color-item">
+          <i data-lucide="home" style="width:24px;height:24px;stroke:var(--wine-400);display:block;"></i>
+          <span>wine-400<br>Nav active</span>
+        </div>
+        <div class="icon-color-item">
+          <i data-lucide="layout-grid" style="width:24px;height:24px;stroke:#6b5055;display:block;"></i>
+          <span>#6b5055<br>Nav inactive</span>
+        </div>
+        <div class="icon-color-item">
+          <i data-lucide="plus" style="width:24px;height:24px;stroke:var(--wine-400);display:block;"></i>
+          <span>wine-400<br>Icon btn default</span>
+        </div>
+        <div class="icon-color-item">
+          <i data-lucide="plus" style="width:24px;height:24px;stroke:#ffffff;display:block;"></i>
+          <span>white<br>Icon btn hover</span>
+        </div>
+        <div class="icon-color-item">
+          <i data-lucide="check-circle-2" style="width:24px;height:24px;stroke:#4ade80;display:block;"></i>
+          <span>green-400<br>Toast icon</span>
+        </div>
+        <div class="icon-color-item">
+          <i data-lucide="map-pin" style="width:24px;height:24px;stroke:var(--wine-500);display:block;"></i>
+          <span>wine-500<br>Footer accents</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stroke width reference -->
+    <div class="card" style="margin-top:20px;">
+      <div class="card-title">Stroke Width</div>
+      <div style="display:flex;gap:32px;align-items:center;flex-wrap:wrap;margin-top:4px;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--wine-300)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22H5a2 2 0 0 1-2-2V9l7-5 7 5v11a2 2 0 0 1-2 2h-3"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span style="font-family:var(--font-mono);font-size:.65rem;color:var(--text-muted);">stroke-width: 1</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--wine-300)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22H5a2 2 0 0 1-2-2V9l7-5 7 5v11a2 2 0 0 1-2 2h-3"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span style="font-family:var(--font-mono);font-size:.65rem;color:var(--wine-400);font-weight:700;">stroke-width: 1.5 ★</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--wine-300)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22H5a2 2 0 0 1-2-2V9l7-5 7 5v11a2 2 0 0 1-2 2h-3"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span style="font-family:var(--font-mono);font-size:.65rem;color:var(--text-muted);">stroke-width: 2</span>
+        </div>
+      </div>
+      <p style="margin-top:14px;font-size:.75rem;color:var(--text-muted);">★ Lucide default is <strong style="color:var(--text);">1.5</strong> — this is what the site uses throughout. Avoid overriding it unless for specific emphasis.</p>
+    </div>
+
+    <!-- Implementation snippet -->
+    <div class="card" style="margin-top:20px;">
+      <div class="card-title">Implementation Reference</div>
+      <pre style="background:#080607;border:1px solid var(--border);border-radius:6px;padding:20px;font-family:var(--font-mono);font-size:.75rem;color:#c9a4ad;line-height:1.8;overflow-x:auto;margin-top:4px;"><span style="color:#6b5055;">// 1. Load from CDN in &lt;head&gt;</span>
+&lt;script src=<span style="color:#d08492;">"https://unpkg.com/lucide@latest"</span>&gt;&lt;/script&gt;
+
+<span style="color:#6b5055;">// 2. Use data attribute in HTML</span>
+&lt;i data-lucide=<span style="color:#d08492;">"wine"</span> class=<span style="color:#d08492;">"w-6 h-6 text-wine-400"</span>&gt;&lt;/i&gt;
+&lt;i data-lucide=<span style="color:#d08492;">"shopping-bag"</span> class=<span style="color:#d08492;">"w-5 h-5"</span>&gt;&lt;/i&gt;
+
+<span style="color:#6b5055;">// 3. Initialize after DOM is ready</span>
+document.addEventListener(<span style="color:#d08492;">'DOMContentLoaded'</span>, () =&gt; {
+  lucide.createIcons();
+});
+
+<span style="color:#6b5055;">// 4. Re-initialize after dynamic renders (e.g. cart update)</span>
+lucide.createIcons(); <span style="color:#6b5055;">// call again after innerHTML changes</span></pre>
+    </div>
+
+  </section>
+
+  <!-- Figma checklist -->
+  <section>
+    <h2 class="section-title">Figma Setup Checklist</h2>
+    <p class="section-sub">Recommended structure for recreating this design system in Figma.</p>
+    <div class="card">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+        <div>
+          <div style="font-weight:600;margin-bottom:12px;font-size:.85rem;color:var(--text);">1. Color Styles</div>
+          <ul style="font-size:.8rem;color:var(--text-muted);line-height:2.2;list-style:none;">
+            <li>□ Wine palette (wine/50 → wine/950)</li>
+            <li>□ Sand palette (sand/50 → sand/500)</li>
+            <li>□ Stone neutrals used</li>
+            <li>□ Semantic roles as aliases</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;margin-bottom:12px;font-size:.85rem;color:var(--text);">2. Text Styles</div>
+          <ul style="font-size:.8rem;color:var(--text-muted);line-height:2.2;list-style:none;">
+            <li>□ Hero/H1 (desktop + mobile)</li>
+            <li>□ Section heading / H2</li>
+            <li>□ H3 sub-section</li>
+            <li>□ Product name</li>
+            <li>□ Price (serif bold)</li>
+            <li>□ Eyebrow/label</li>
+            <li>□ Body large / body / caption</li>
+            <li>□ Button label</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;margin-bottom:12px;font-size:.85rem;color:var(--text);">3. Effect Styles (Shadows)</div>
+          <ul style="font-size:.8rem;color:var(--text-muted);line-height:2.2;list-style:none;">
+            <li>□ Elevation/none</li>
+            <li>□ Elevation/sm</li>
+            <li>□ Elevation/md</li>
+            <li>□ Elevation/xl</li>
+            <li>□ Elevation/2xl</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;margin-bottom:12px;font-size:.85rem;color:var(--text);">4. Components</div>
+          <ul style="font-size:.8rem;color:var(--text-muted);line-height:2.2;list-style:none;">
+            <li>□ Header (mobile + desktop)</li>
+            <li>□ Bottom nav bar (mobile)</li>
+            <li>□ Hero section</li>
+            <li>□ Product card</li>
+            <li>□ Section heading</li>
+            <li>□ Buttons (5 variants)</li>
+            <li>□ Filter pills</li>
+            <li>□ Search input</li>
+            <li>□ Cart drawer</li>
+            <li>□ Toast notification</li>
+            <li>□ Footer</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div style="background:#080607;color:#6b5055;text-align:center;padding:20px;font-size:.72rem;letter-spacing:.06em;border-top:1px solid #1a0d10;">
+  Vinheria Agnello Design System · Dark Mode · Generated 2026 · For Figma use
+</div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+  lucide.createIcons();
+</script>
+</body>
+</html>
