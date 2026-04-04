@@ -4,6 +4,28 @@ This repository contains the JSP/Tomcat architecture for the Vinheria Agnello e-
 
 The project is fully containerized to ensure identical behavior across all environments. **You do not need to install Java, Maven, or Tomcat locally to run or develop this application.**
 
+## 🌐 Routes (URLs)
+
+### Authentication (“pretty” routes + backwards compatibility)
+
+The project now exposes short, user-friendly routes without breaking existing pages that still POST to `/auth/*`.
+
+| Action | New route | Legacy route (compatibility) |
+|--------|----------|------------------------------|
+| Login | `/login` | `/auth/login` |
+| Register | `/register` | `/auth/cadastro` |
+| Logout | `/logout` | `/auth/logout` |
+
+### App
+
+- Home (after login): `/app/home`
+- Wines: `/app/vinhos`
+- Customers: `/app/clientes`
+
+### Other
+
+- Public home: `/home`
+
 ## Prerequisites
 * [Docker](https://docs.docker.com/get-docker/) installed and running.
 
@@ -25,7 +47,60 @@ docker run -it --rm \
 ```
 *Access the application at: `http://localhost:8080`*
 
+> If port `8080` is already in use, you can run on `8081` instead:
+>
+> ```bash
+> docker run -it --rm \
+>   -p 8081:8080 \
+>   -v "$(pwd)/src/main/webapp:/usr/local/tomcat/webapps/ROOT" \
+>   tomcat:10-jdk21
+> ```
+
 ---
+
+## 🐳 Running this repository image (project Dockerfile)
+
+To run exactly what is in this workspace (build the `.war` and pack it into a container), use:
+
+```bash
+docker build -t vinheriaagnello .
+docker run -it --rm -p 8080:8080 vinheriaagnello
+```
+
+*Access the application at: `http://localhost:8080`*
+
+
+If port `8080` is busy, publish it on `8081`:
+
+```bash
+docker run -it --rm -p 8081:8080 vinheriaagnello
+```
+
+---
+
+## ✅ What was changed in Java (new routes without touching the JSPs)
+
+Existing pages were still pointing to the legacy endpoints (`/auth/login`, `/auth/cadastro`). To allow “pretty routes” (e.g., `/login` and `/register`) **without changing the layout/JSPs**, the solution was to make the servlets accept **both routes**.
+
+This is done by using multiple `urlPatterns` in `@WebServlet`, preferably via constants in `br.com.fiap.vinheriaagnello.web.WebRoutes`.
+
+Example (login):
+
+```java
+@WebServlet(urlPatterns = { WebRoutes.AUTH_LOGIN, WebRoutes.LOGIN })
+public class LoginServlet extends HttpServlet {
+  // ...
+}
+```
+
+And the same concept for registration:
+
+```java
+@WebServlet(urlPatterns = { WebRoutes.AUTH_REGISTER, WebRoutes.REGISTER })
+public class ClienteCadastroServlet extends HttpServlet {
+  // ...
+}
+```
 
 ## 🚀 Production Environment (Immutable Artifact)
 

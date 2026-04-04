@@ -27,14 +27,16 @@ const app = {
         this.renderAdegaProducts();
         this.updateCartUI();
 
-        try {
-            const params = new URLSearchParams(window.location.search);
-            const view = params.get('view');
-            if (view === 'adega' || view === 'sobre' || view === 'home') {
-                this.navigate(view);
-            }
-        } catch (_) {
-        }
+    // Permite deep-linking: /home?view=adega|sobre
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const view = params.get('view');
+      if (view === 'adega' || view === 'sobre' || view === 'home') {
+        this.navigate(view);
+      }
+    } catch (_) {
+      // ignore
+    }
     },
 
     formatMoney(value) {

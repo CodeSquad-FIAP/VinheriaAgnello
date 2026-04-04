@@ -1,0 +1,13 @@
+br/com/fiap/vinheriaagnello/web/AuthFilter.class
+br/com/fiap/vinheriaagnello/web/ClienteListServlet.class
+br/com/fiap/vinheriaagnello/model/Vinho.class
+br/com/fiap/vinheriaagnello/model/Cliente.class
+br/com/fiap/vinheriaagnello/web/VinhoServlet.class
+br/com/fiap/vinheriaagnello/web/WebRoutes.class
+br/com/fiap/vinheriaagnello/web/HomeServlet.class
+br/com/fiap/vinheriaagnello/web/RootRedirectServlet.class
+br/com/fiap/vinheriaagnello/web/LogoutServlet.class
+br/com/fiap/vinheriaagnello/repository/InMemoryDatabase.class
+br/com/fiap/vinheriaagnello/web/LoginServlet.class
+br/com/fiap/vinheriaagnello/web/VitrineServlet.class
+br/com/fiap/vinheriaagnello/web/ClienteCadastroServlet.class
