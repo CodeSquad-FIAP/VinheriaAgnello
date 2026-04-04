@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <jsp:include page="/WEB-INF/jsp/components/header.jsp" />
 
@@ -9,9 +9,9 @@
       <section class="hidden lg:block relative overflow-hidden rounded-sm border border-sand-200 bg-white shadow-sm">
         <div class="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=2000&q=80"
-            alt="Adega"
-            class="w-full h-full object-cover"
+                  src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=2000&q=80"
+                  alt="Adega"
+                  class="w-full h-full object-cover"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-900/40 to-transparent"></div>
         </div>
@@ -53,4 +53,3 @@
 </main>
 
 <jsp:include page="/WEB-INF/jsp/components/footer.jsp" />
-

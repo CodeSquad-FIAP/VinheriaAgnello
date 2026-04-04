@@ -9,9 +9,9 @@
       <section class="hidden lg:block relative overflow-hidden rounded-sm border border-sand-200 bg-white shadow-sm">
         <div class="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=2000&q=80"
-            alt="Vinhedo"
-            class="w-full h-full object-cover"
+                  src="https://images.unsplash.com/photo-1556442281-77c90134c61f?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  alt="Vinhedo"
+                  class="w-full h-full object-cover"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-900/40 to-transparent"></div>
         </div>
@@ -57,4 +57,3 @@
 </main>
 
 <jsp:include page="/WEB-INF/jsp/components/footer.jsp" />
-

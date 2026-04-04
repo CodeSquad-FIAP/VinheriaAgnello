@@ -3,7 +3,7 @@
 <jsp:include page="/WEB-INF/jsp/components/header.jsp" />
 
 <main class="pt-16 md:pt-20 flex-grow">
-    
+
     <div id="view-home" class="view-section block">
         <section class="relative h-[85vh] md:h-[90vh] flex items-center overflow-hidden">
             <div class="absolute inset-0 z-0">
@@ -46,7 +46,7 @@
                 </div>
 
                 <div id="home-products" class="flex md:grid md:grid-cols-4 gap-6 overflow-x-auto no-scrollbar pb-4 snap-x"></div>
-                
+
                 <div class="mt-8 text-center md:hidden">
                     <button onclick="app.navigate('adega')" class="w-full border border-wine-800 text-wine-900 py-4 font-medium hover:bg-wine-50 transition-colors text-sm uppercase tracking-wide">
                         Ver Adega Completa
@@ -55,15 +55,15 @@
             </div>
         </section>
     </div>
-    
+
     <div id="view-adega" class="view-section hidden min-h-screen bg-sand-50 pb-10">
         <div class="bg-white border-b border-sand-200 sticky top-16 md:top-20 z-30 shadow-sm">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
                 <div class="relative">
                     <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-stone-400 w-5 h-5"></i>
-                    <input type="text" id="search-input" placeholder="Busque por uva, país ou nome..." 
-                        class="w-full bg-sand-100 border-transparent focus:border-wine-500 focus:bg-white focus:ring-0 rounded-sm py-3 pl-10 pr-4 text-sm transition-all outline-none"
-                        oninput="app.filterProducts(this.value)">
+                    <input type="text" id="search-input" placeholder="Busque por uva, país ou nome..."
+                           class="w-full bg-sand-100 border-transparent focus:border-wine-500 focus:bg-white focus:ring-0 rounded-sm py-3 pl-10 pr-4 text-sm transition-all outline-none"
+                           oninput="app.filterProducts(this.value)">
                 </div>
                 <div class="flex gap-2 mt-4 overflow-x-auto no-scrollbar pb-1">
                     <button onclick="app.filterCategory('all')" class="filter-btn active px-4 py-1.5 rounded-full border border-wine-800 bg-wine-800 text-white text-xs whitespace-nowrap transition-colors" data-cat="all">Todos</button>
@@ -84,7 +84,7 @@
             </div>
         </div>
     </div>
-    
+
     <div id="view-sobre" class="view-section hidden bg-white">
         <section class="py-16 md:py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -98,7 +98,7 @@
 
             <div class="prose prose-stone prose-lg mx-auto text-stone-600 leading-relaxed">
                 <p class="mb-6">Tudo começou com o balcão de madeira rústica, onde o Sr. Giulio, com seu sorriso acolhedor, passava horas entendendo não apenas o paladar, mas a história de cada cliente que entrava na Vinheria Agnello. <em>"O que você vai jantar hoje?"</em>, ele costumava perguntar. Essa era a chave para a garrafa perfeita.</p>
-                
+
                 <p class="mb-6">Por anos, fomos exclusivamente uma loja física. Acreditávamos que a experiência de escolher um vinho exigia o toque, o olhar e a conversa. Porém, o mundo mudou, e a saudade dos nossos clientes que se mudaram ou que não tinham mais tempo para visitas nos fez refletir.</p>
 
                 <h3 class="font-serif text-2xl text-stone-900 mt-10 mb-4">O Desafio do Digital</h3>
