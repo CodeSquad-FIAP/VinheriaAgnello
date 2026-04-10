@@ -33,7 +33,7 @@ Para testar, cadastre um usuário na tela de cadastro ou use qualquer e-mail/sen
 
 ### 1. Pré-requisitos locais
 
-- Google Cloud CLI instalado via tarball (Fedora 43 não tem suporte oficial ao repositório DNF do GCP)
+- Google Cloud CLI
 - Autenticação via `gcloud init`
 
 ### 2. Criar a VM
