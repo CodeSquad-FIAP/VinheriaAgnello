@@ -1,0 +1,501 @@
+ID_Venda,Data,Produto,Canal_Venda,Regiao,Valor_Total,Idade_Cliente,Lead_Time_Entrega,Sucesso_Venda
+1,2026-01-01,Chianti Classico Riserva,E-commerce,Centro-Oeste,230.00,57,5,Sim
+2,2026-01-01,Barolo DOCG,Loja Física,Sul,520.00,69,0,Sim
+3,2026-01-01,Chardonnay Reserva,Loja Física,Centro-Oeste,145.00,68,0,Sim
+4,2026-01-01,Barolo DOCG,Loja Física,Norte,520.00,34,0,Sim
+5,2026-01-02,Barolo DOCG,E-commerce,Sul,520.00,46,2,Sim
+6,2026-01-02,Malbec Gran Reserva,Loja Física,Centro-Oeste,210.00,24,0,Sim
+7,2026-01-02,Prosecco Valdobbiadene,E-commerce,Sul,165.00,63,3,Sim
+8,2026-01-02,Prosecco Valdobbiadene,E-commerce,Nordeste,165.00,18,20,Sim
+9,2026-01-03,Pinot Noir,E-commerce,Nordeste,350.00,25,16,Sim
+10,2026-01-03,Malbec Gran Reserva,E-commerce,Sul,210.00,32,4,Sim
+11,2026-01-04,Malbec Gran Reserva,E-commerce,Sul,210.00,41,3,Sim
+12,2026-01-04,Champagne Brut,E-commerce,Sul,490.00,75,2,Sim
+13,2026-01-04,Chianti Classico Riserva,E-commerce,Sul,230.00,34,5,Sim
+14,2026-01-04,Primitivo di Manduria,E-commerce,Nordeste,185.00,50,17,Não
+15,2026-01-05,Brunello di Montalcino DOCG,E-commerce,Nordeste,429.00,48,18,Sim
+16,2026-01-05,Chardonnay Reserva,E-commerce,Centro-Oeste,145.00,41,11,Sim
+17,2026-01-05,Pinot Noir,E-commerce,Centro-Oeste,350.00,32,6,Sim
+18,2026-01-05,Barolo DOCG,Loja Física,Nordeste,520.00,56,0,Sim
+19,2026-01-06,Primitivo di Manduria,E-commerce,Norte,185.00,61,10,Não
+20,2026-01-06,Pinot Noir,E-commerce,Nordeste,350.00,21,12,Sim
+21,2026-01-07,Brunello di Montalcino DOCG,E-commerce,Nordeste,429.00,49,14,Sim
+22,2026-01-07,Carmenère Estate,E-commerce,Centro-Oeste,110.00,62,5,Sim
+23,2026-01-07,Chardonnay Reserva,E-commerce,Sul,145.00,67,4,Sim
+24,2026-01-08,Chardonnay Reserva,Loja Física,Sudeste,145.00,33,0,Sim
+25,2026-01-08,Sauvignon Blanc,Loja Física,Sudeste,130.00,27,0,Sim
+26,2026-01-08,Champagne Brut,Loja Física,Centro-Oeste,490.00,73,0,Sim
+27,2026-01-09,Barolo DOCG,E-commerce,Norte,520.00,19,18,Sim
+28,2026-01-09,Chianti Classico Riserva,Loja Física,Norte,230.00,66,0,Sim
+29,2026-01-09,Barolo DOCG,E-commerce,Centro-Oeste,520.00,41,7,Sim
+30,2026-01-09,Chardonnay Reserva,E-commerce,Norte,145.00,28,13,Sim
+31,2026-01-10,Chardonnay Reserva,Loja Física,Centro-Oeste,145.00,53,0,Sim
+32,2026-01-10,Sauvignon Blanc,E-commerce,Norte,130.00,54,10,Não
+33,2026-01-10,Primitivo di Manduria,E-commerce,Nordeste,185.00,67,11,Sim
+34,2026-01-11,Sauvignon Blanc,E-commerce,Sudeste,130.00,53,3,Sim
+35,2026-01-11,Malbec Gran Reserva,Loja Física,Nordeste,210.00,44,0,Sim
+36,2026-01-11,Champagne Brut,E-commerce,Centro-Oeste,490.00,27,5,Sim
+37,2026-01-12,Sauvignon Blanc,E-commerce,Nordeste,130.00,38,16,Sim
+38,2026-01-12,Côtes de Provence,E-commerce,Centro-Oeste,180.00,56,9,Sim
+39,2026-01-12,Malbec Gran Reserva,E-commerce,Sudeste,210.00,48,1,Sim
+40,2026-01-12,Côtes de Provence,Loja Física,Sul,180.00,39,0,Sim
+41,2026-01-12,Carmenère Estate,E-commerce,Centro-Oeste,110.00,43,9,Sim
+42,2026-01-13,Brunello di Montalcino DOCG,Loja Física,Nordeste,429.00,28,0,Sim
+43,2026-01-13,Primitivo di Manduria,Loja Física,Sudeste,185.00,21,0,Sim
+44,2026-01-14,Côtes de Provence,E-commerce,Sul,180.00,37,5,Sim
+45,2026-01-14,Primitivo di Manduria,E-commerce,Nordeste,185.00,60,18,Não
+46,2026-01-14,Brunello di Montalcino DOCG,E-commerce,Nordeste,429.00,66,11,Sim
+47,2026-01-14,Champagne Brut,E-commerce,Norte,490.00,19,19,Sim
+48,2026-01-14,Prosecco Valdobbiadene,E-commerce,Centro-Oeste,165.00,18,7,Sim
+49,2026-01-14,Chardonnay Reserva,Loja Física,Nordeste,145.00,70,0,Sim
+50,2026-01-14,Sauvignon Blanc,E-commerce,Sudeste,130.00,25,5,Sim
+51,2026-01-15,Côtes de Provence,E-commerce,Centro-Oeste,180.00,23,9,Sim
+52,2026-01-15,Chianti Classico Riserva,E-commerce,Sul,230.00,75,5,Sim
+53,2026-01-16,Chardonnay Reserva,E-commerce,Nordeste,145.00,27,11,Não
+54,2026-01-16,Brunello di Montalcino DOCG,E-commerce,Sudeste,429.00,60,4,Sim
+55,2026-01-16,Champagne Brut,E-commerce,Nordeste,490.00,73,14,Sim
+56,2026-01-17,Primitivo di Manduria,E-commerce,Sul,185.00,34,3,Sim
+57,2026-01-17,Brunello di Montalcino DOCG,E-commerce,Sul,429.00,66,3,Não
+58,2026-01-17,Prosecco Valdobbiadene,E-commerce,Sudeste,165.00,72,1,Sim
+59,2026-01-17,Pinot Noir,E-commerce,Nordeste,350.00,60,12,Sim
+60,2026-01-17,Côtes de Provence,E-commerce,Sudeste,180.00,71,5,Sim
+61,2026-01-18,Sauvignon Blanc,Loja Física,Nordeste,130.00,59,0,Sim
+62,2026-01-18,Brunello di Montalcino DOCG,E-commerce,Nordeste,429.00,44,19,Não
+63,2026-01-18,Chardonnay Reserva,E-commerce,Nordeste,145.00,51,15,Sim
+64,2026-01-18,Chianti Classico Riserva,E-commerce,Norte,230.00,37,11,Sim
+65,2026-01-18,Carmenère Estate,E-commerce,Nordeste,110.00,64,10,Sim
+66,2026-01-18,Brunello di Montalcino DOCG,E-commerce,Sul,429.00,23,3,Sim
+67,2026-01-19,Sauvignon Blanc,E-commerce,Sudeste,130.00,31,5,Sim
+68,2026-01-19,Chardonnay Reserva,E-commerce,Sudeste,145.00,24,1,Sim
+69,2026-01-20,Pinot Noir,E-commerce,Nordeste,350.00,61,16,Sim
+70,2026-01-20,Pinot Noir,E-commerce,Nordeste,350.00,18,10,Sim
+71,2026-01-20,Barolo DOCG,Loja Física,Norte,520.00,44,0,Sim
+72,2026-01-20,Carmenère Estate,E-commerce,Nordeste,110.00,60,20,Sim
+73,2026-01-20,Malbec Gran Reserva,E-commerce,Sudeste,210.00,29,4,Sim
+74,2026-01-22,Primitivo di Manduria,E-commerce,Sudeste,185.00,26,3,Sim
+75,2026-01-22,Sauvignon Blanc,E-commerce,Sudeste,130.00,37,5,Sim
+76,2026-01-22,Pinot Noir,E-commerce,Sul,350.00,62,2,Não
+77,2026-01-22,Côtes de Provence,E-commerce,Centro-Oeste,180.00,37,12,Sim
+78,2026-01-22,Chianti Classico Riserva,Loja Física,Centro-Oeste,230.00,32,0,Sim
+79,2026-01-23,Côtes de Provence,E-commerce,Norte,180.00,22,15,Sim
+80,2026-01-23,Champagne Brut,Loja Física,Sudeste,490.00,42,0,Sim
+81,2026-01-23,Sauvignon Blanc,E-commerce,Sudeste,130.00,71,5,Sim
+82,2026-01-24,Carmenère Estate,E-commerce,Centro-Oeste,110.00,18,12,Sim
+83,2026-01-24,Chianti Classico Riserva,E-commerce,Sudeste,230.00,23,1,Sim
+84,2026-01-25,Prosecco Valdobbiadene,E-commerce,Norte,165.00,71,13,Sim
+85,2026-01-26,Sauvignon Blanc,Loja Física,Sudeste,130.00,60,0,Sim
+86,2026-01-26,Sauvignon Blanc,E-commerce,Nordeste,130.00,42,13,Não
+87,2026-01-26,Carmenère Estate,E-commerce,Sul,110.00,44,3,Sim
+88,2026-01-26,Sauvignon Blanc,Loja Física,Norte,130.00,63,0,Sim
+89,2026-01-26,Chardonnay Reserva,E-commerce,Centro-Oeste,145.00,57,5,Sim
+90,2026-01-26,Prosecco Valdobbiadene,E-commerce,Centro-Oeste,165.00,60,10,Sim
+91,2026-01-27,Brunello di Montalcino DOCG,E-commerce,Nordeste,429.00,35,15,Sim
+92,2026-01-27,Champagne Brut,E-commerce,Centro-Oeste,490.00,62,11,Sim
+93,2026-01-27,Barolo DOCG,E-commerce,Sudeste,520.00,61,3,Sim
+94,2026-01-27,Barolo DOCG,E-commerce,Norte,520.00,66,11,Não
+95,2026-01-27,Brunello di Montalcino DOCG,E-commerce,Centro-Oeste,429.00,35,11,Não
+96,2026-01-28,Pinot Noir,Loja Física,Norte,350.00,59,0,Sim
+97,2026-01-28,Côtes de Provence,E-commerce,Sudeste,180.00,52,1,Sim
+98,2026-01-30,Malbec Gran Reserva,Loja Física,Norte,210.00,61,0,Sim
+99,2026-01-30,Chianti Classico Riserva,E-commerce,Centro-Oeste,230.00,44,11,Sim
+100,2026-01-31,Chardonnay Reserva,Loja Física,Nordeste,145.00,38,0,Sim
+101,2026-01-31,Brunello di Montalcino DOCG,E-commerce,Norte,429.00,41,16,Não
+102,2026-01-31,Chardonnay Reserva,E-commerce,Norte,145.00,23,18,Não
+103,2026-01-31,Chianti Classico Riserva,E-commerce,Centro-Oeste,230.00,55,8,Sim
+104,2026-02-01,Côtes de Provence,E-commerce,Sudeste,180.00,40,1,Sim
+105,2026-02-01,Malbec Gran Reserva,Loja Física,Nordeste,210.00,36,0,Sim
+106,2026-02-01,Prosecco Valdobbiadene,E-commerce,Norte,165.00,57,12,Não
+107,2026-02-01,Pinot Noir,E-commerce,Sudeste,350.00,69,5,Sim
+108,2026-02-01,Chardonnay Reserva,E-commerce,Nordeste,145.00,18,16,Sim
+109,2026-02-02,Prosecco Valdobbiadene,E-commerce,Norte,165.00,62,14,Não
+110,2026-02-02,Brunello di Montalcino DOCG,E-commerce,Sudeste,429.00,74,5,Sim
+111,2026-02-02,Primitivo di Manduria,Loja Física,Sudeste,185.00,62,0,Sim
+112,2026-02-02,Côtes de Provence,E-commerce,Nordeste,180.00,26,12,Sim
+113,2026-02-02,Primitivo di Manduria,E-commerce,Norte,185.00,37,16,Não
+114,2026-02-03,Côtes de Provence,Loja Física,Sul,180.00,26,0,Sim
+115,2026-02-04,Prosecco Valdobbiadene,E-commerce,Norte,165.00,46,14,Não
+116,2026-02-05,Chianti Classico Riserva,E-commerce,Sudeste,230.00,40,3,Sim
+117,2026-02-05,Chianti Classico Riserva,Loja Física,Sudeste,230.00,30,0,Sim
+118,2026-02-05,Brunello di Montalcino DOCG,Loja Física,Sudeste,429.00,37,0,Sim
+119,2026-02-05,Barolo DOCG,E-commerce,Centro-Oeste,520.00,72,12,Sim
+120,2026-02-06,Sauvignon Blanc,E-commerce,Centro-Oeste,130.00,52,7,Sim
+121,2026-02-06,Chardonnay Reserva,Loja Física,Nordeste,145.00,54,0,Sim
+122,2026-02-06,Malbec Gran Reserva,E-commerce,Sudeste,210.00,18,1,Sim
+123,2026-02-07,Pinot Noir,E-commerce,Sudeste,350.00,34,1,Sim
+124,2026-02-07,Sauvignon Blanc,E-commerce,Sul,130.00,72,2,Sim
+125,2026-02-08,Primitivo di Manduria,E-commerce,Norte,185.00,72,14,Sim
+126,2026-02-08,Champagne Brut,E-commerce,Nordeste,490.00,43,17,Sim
+127,2026-02-08,Carmenère Estate,Loja Física,Norte,110.00,26,0,Sim
+128,2026-02-08,Barolo DOCG,Loja Física,Sudeste,520.00,73,0,Sim
+129,2026-02-09,Brunello di Montalcino DOCG,Loja Física,Sul,429.00,49,0,Sim
+130,2026-02-09,Brunello di Montalcino DOCG,E-commerce,Sudeste,429.00,72,1,Sim
+131,2026-02-09,Chardonnay Reserva,E-commerce,Centro-Oeste,145.00,62,7,Sim
+132,2026-02-09,Chianti Classico Riserva,E-commerce,Nordeste,230.00,36,11,Não
+133,2026-02-09,Chardonnay Reserva,E-commerce,Nordeste,145.00,36,11,Sim
+134,2026-02-10,Côtes de Provence,E-commerce,Nordeste,180.00,18,10,Sim
+135,2026-02-10,Chianti Classico Riserva,E-commerce,Centro-Oeste,230.00,33,5,Sim
+136,2026-02-10,Brunello di Montalcino DOCG,Loja Física,Sudeste,429.00,36,0,Sim
+137,2026-02-10,Barolo DOCG,Loja Física,Sul,520.00,54,0,Sim
+138,2026-02-10,Primitivo di Manduria,E-commerce,Nordeste,185.00,50,18,Não
+139,2026-02-10,Chardonnay Reserva,E-commerce,Sudeste,145.00,45,1,Sim
+140,2026-02-11,Champagne Brut,Loja Física,Sul,490.00,32,0,Sim
+141,2026-02-11,Côtes de Provence,E-commerce,Sul,180.00,70,4,Sim
+142,2026-02-11,Chianti Classico Riserva,E-commerce,Norte,230.00,23,16,Sim
+143,2026-02-11,Sauvignon Blanc,Loja Física,Centro-Oeste,130.00,24,0,Sim
+144,2026-02-12,Malbec Gran Reserva,E-commerce,Nordeste,210.00,49,14,Sim
+145,2026-02-12,Malbec Gran Reserva,E-commerce,Centro-Oeste,210.00,61,5,Sim
+146,2026-02-13,Brunello di Montalcino DOCG,Loja Física,Sudeste,429.00,70,0,Sim
+147,2026-02-13,Malbec Gran Reserva,E-commerce,Nordeste,210.00,58,15,Sim
+148,2026-02-14,Prosecco Valdobbiadene,E-commerce,Norte,165.00,38,12,Não
+149,2026-02-14,Côtes de Provence,E-commerce,Sul,180.00,30,5,Sim
+150,2026-02-14,Champagne Brut,Loja Física,Norte,490.00,24,0,Sim
+151,2026-02-14,Prosecco Valdobbiadene,Loja Física,Nordeste,165.00,40,0,Sim
+152,2026-02-14,Sauvignon Blanc,Loja Física,Nordeste,130.00,55,0,Sim
+153,2026-02-14,Malbec Gran Reserva,E-commerce,Sudeste,210.00,62,3,Sim
+154,2026-02-14,Prosecco Valdobbiadene,E-commerce,Centro-Oeste,165.00,24,9,Sim
+155,2026-02-15,Malbec Gran Reserva,E-commerce,Sul,210.00,54,4,Sim
+156,2026-02-15,Champagne Brut,E-commerce,Centro-Oeste,490.00,60,7,Sim
+157,2026-02-15,Sauvignon Blanc,E-commerce,Sudeste,130.00,59,2,Sim
+158,2026-02-15,Malbec Gran Reserva,E-commerce,Sul,210.00,27,5,Sim
+159,2026-02-16,Pinot Noir,E-commerce,Sul,350.00,47,5,Sim
+160,2026-02-16,Primitivo di Manduria,E-commerce,Nordeste,185.00,33,19,Sim
+161,2026-02-16,Primitivo di Manduria,E-commerce,Nordeste,185.00,57,15,Não
+162,2026-02-17,Sauvignon Blanc,E-commerce,Norte,130.00,33,10,Não
+163,2026-02-17,Primitivo di Manduria,E-commerce,Nordeste,185.00,20,12,Não
+164,2026-02-17,Carmenère Estate,E-commerce,Nordeste,110.00,19,20,Sim
+165,2026-02-17,Côtes de Provence,E-commerce,Nordeste,180.00,20,20,Sim
+166,2026-02-17,Pinot Noir,E-commerce,Norte,350.00,36,20,Sim
+167,2026-02-17,Primitivo di Manduria,Loja Física,Centro-Oeste,185.00,49,0,Sim
+168,2026-02-18,Côtes de Provence,Loja Física,Centro-Oeste,180.00,53,0,Sim
+169,2026-02-18,Prosecco Valdobbiadene,E-commerce,Sul,165.00,23,1,Sim
+170,2026-02-18,Malbec Gran Reserva,E-commerce,Norte,210.00,51,20,Sim
+171,2026-02-19,Côtes de Provence,E-commerce,Sul,180.00,65,4,Sim
+172,2026-02-19,Prosecco Valdobbiadene,E-commerce,Sudeste,165.00,25,4,Não
+173,2026-02-20,Pinot Noir,E-commerce,Sul,350.00,25,2,Sim
+174,2026-02-20,Primitivo di Manduria,E-commerce,Centro-Oeste,185.00,23,9,Sim
+175,2026-02-20,Malbec Gran Reserva,Loja Física,Centro-Oeste,210.00,50,0,Sim
+176,2026-02-20,Prosecco Valdobbiadene,Loja Física,Nordeste,165.00,60,0,Sim
+177,2026-02-21,Malbec Gran Reserva,E-commerce,Centro-Oeste,210.00,44,10,Sim
+178,2026-02-21,Brunello di Montalcino DOCG,Loja Física,Centro-Oeste,429.00,74,0,Sim
+179,2026-02-21,Malbec Gran Reserva,E-commerce,Sudeste,210.00,62,1,Sim
+180,2026-02-21,Chianti Classico Riserva,E-commerce,Norte,230.00,26,18,Sim
+181,2026-02-21,Primitivo di Manduria,E-commerce,Sudeste,185.00,40,2,Sim
+182,2026-02-22,Carmenère Estate,E-commerce,Sudeste,110.00,25,1,Sim
+183,2026-02-23,Brunello di Montalcino DOCG,E-commerce,Norte,429.00,39,13,Sim
+184,2026-02-23,Malbec Gran Reserva,E-commerce,Nordeste,210.00,46,16,Sim
+185,2026-02-23,Chianti Classico Riserva,Loja Física,Nordeste,230.00,25,0,Sim
+186,2026-02-23,Malbec Gran Reserva,E-commerce,Norte,210.00,20,12,Sim
+187,2026-02-24,Pinot Noir,Loja Física,Nordeste,350.00,62,0,Sim
+188,2026-02-25,Sauvignon Blanc,E-commerce,Centro-Oeste,130.00,55,6,Sim
+189,2026-02-25,Carmenère Estate,E-commerce,Nordeste,110.00,64,19,Não
+190,2026-02-25,Brunello di Montalcino DOCG,E-commerce,Nordeste,429.00,40,15,Sim
+191,2026-02-25,Brunello di Montalcino DOCG,E-commerce,Nordeste,429.00,51,16,Não
+192,2026-02-25,Barolo DOCG,E-commerce,Sudeste,520.00,47,3,Sim
+193,2026-02-26,Champagne Brut,Loja Física,Nordeste,490.00,52,0,Sim
+194,2026-02-26,Chianti Classico Riserva,Loja Física,Sudeste,230.00,28,0,Sim
+195,2026-02-27,Primitivo di Manduria,E-commerce,Nordeste,185.00,26,13,Sim
+196,2026-02-27,Carmenère Estate,Loja Física,Norte,110.00,70,0,Sim
+197,2026-02-27,Brunello di Montalcino DOCG,E-commerce,Norte,429.00,37,12,Sim
+198,2026-02-27,Prosecco Valdobbiadene,E-commerce,Sudeste,165.00,35,5,Sim
+199,2026-02-28,Malbec Gran Reserva,Loja Física,Norte,210.00,35,0,Sim
+200,2026-02-28,Malbec Gran Reserva,E-commerce,Sul,210.00,26,2,Sim
+201,2026-02-28,Barolo DOCG,E-commerce,Centro-Oeste,520.00,60,10,Não
+202,2026-02-28,Côtes de Provence,E-commerce,Sul,180.00,39,2,Sim
+203,2026-02-28,Chardonnay Reserva,E-commerce,Norte,145.00,55,15,Sim
+204,2026-02-28,Côtes de Provence,E-commerce,Norte,180.00,52,15,Sim
+205,2026-02-28,Barolo DOCG,E-commerce,Centro-Oeste,520.00,74,12,Sim
+206,2026-03-01,Primitivo di Manduria,E-commerce,Sudeste,185.00,56,4,Sim
+207,2026-03-01,Primitivo di Manduria,E-commerce,Nordeste,185.00,59,16,Sim
+208,2026-03-01,Côtes de Provence,E-commerce,Norte,180.00,39,19,Sim
+209,2026-03-01,Brunello di Montalcino DOCG,E-commerce,Sudeste,429.00,42,4,Sim
+210,2026-03-02,Champagne Brut,Loja Física,Norte,490.00,56,0,Sim
+211,2026-03-02,Malbec Gran Reserva,Loja Física,Sudeste,210.00,57,0,Sim
+212,2026-03-02,Pinot Noir,E-commerce,Norte,350.00,34,10,Sim
+213,2026-03-02,Chianti Classico Riserva,Loja Física,Centro-Oeste,230.00,29,0,Sim
+214,2026-03-03,Pinot Noir,E-commerce,Sudeste,350.00,35,1,Sim
+215,2026-03-03,Champagne Brut,E-commerce,Nordeste,490.00,63,14,Sim
+216,2026-03-03,Chianti Classico Riserva,E-commerce,Norte,230.00,63,12,Não
+217,2026-03-03,Chianti Classico Riserva,Loja Física,Norte,230.00,41,0,Sim
+218,2026-03-04,Barolo DOCG,E-commerce,Sudeste,520.00,37,4,Sim
+219,2026-03-04,Primitivo di Manduria,E-commerce,Sudeste,185.00,58,1,Sim
+220,2026-03-04,Champagne Brut,E-commerce,Nordeste,490.00,43,16,Sim
+221,2026-03-04,Champagne Brut,E-commerce,Sudeste,490.00,33,4,Sim
+222,2026-03-05,Primitivo di Manduria,E-commerce,Sul,185.00,56,3,Sim
+223,2026-03-05,Champagne Brut,Loja Física,Norte,490.00,39,0,Sim
+224,2026-03-05,Prosecco Valdobbiadene,E-commerce,Centro-Oeste,165.00,37,9,Sim
+225,2026-03-06,Sauvignon Blanc,E-commerce,Centro-Oeste,130.00,22,10,Sim
+226,2026-03-06,Malbec Gran Reserva,E-commerce,Sudeste,210.00,18,1,Sim
+227,2026-03-07,Sauvignon Blanc,Loja Física,Nordeste,130.00,66,0,Sim
+228,2026-03-08,Pinot Noir,E-commerce,Centro-Oeste,350.00,44,8,Sim
+229,2026-03-08,Chianti Classico Riserva,E-commerce,Sul,230.00,73,3,Sim
+230,2026-03-08,Prosecco Valdobbiadene,E-commerce,Sul,165.00,54,2,Sim
+231,2026-03-08,Prosecco Valdobbiadene,E-commerce,Nordeste,165.00,63,15,Sim
+232,2026-03-08,Sauvignon Blanc,E-commerce,Centro-Oeste,130.00,73,7,Sim
+233,2026-03-08,Sauvignon Blanc,Loja Física,Sudeste,130.00,40,0,Sim
+234,2026-03-09,Brunello di Montalcino DOCG,E-commerce,Norte,429.00,69,13,Não
+235,2026-03-09,Chardonnay Reserva,E-commerce,Centro-Oeste,145.00,51,11,Sim
+236,2026-03-09,Chardonnay Reserva,E-commerce,Sudeste,145.00,53,3,Sim
+237,2026-03-09,Chianti Classico Riserva,Loja Física,Centro-Oeste,230.00,24,0,Sim
+238,2026-03-09,Pinot Noir,Loja Física,Centro-Oeste,350.00,35,0,Sim
+239,2026-03-10,Primitivo di Manduria,E-commerce,Centro-Oeste,185.00,48,10,Sim
+240,2026-03-10,Pinot Noir,E-commerce,Nordeste,350.00,53,18,Sim
+241,2026-03-10,Chianti Classico Riserva,Loja Física,Nordeste,230.00,66,0,Sim
+242,2026-03-11,Côtes de Provence,Loja Física,Nordeste,180.00,68,0,Sim
+243,2026-03-12,Malbec Gran Reserva,E-commerce,Sudeste,210.00,48,2,Sim
+244,2026-03-12,Chianti Classico Riserva,E-commerce,Norte,230.00,46,13,Sim
+245,2026-03-12,Pinot Noir,E-commerce,Centro-Oeste,350.00,75,10,Não
+246,2026-03-12,Brunello di Montalcino DOCG,E-commerce,Sul,429.00,66,3,Sim
+247,2026-03-13,Champagne Brut,E-commerce,Nordeste,490.00,35,17,Não
+248,2026-03-13,Chardonnay Reserva,E-commerce,Nordeste,145.00,70,14,Não
+249,2026-03-13,Sauvignon Blanc,E-commerce,Sul,130.00,69,4,Sim
+250,2026-03-13,Champagne Brut,E-commerce,Centro-Oeste,490.00,44,8,Sim
+251,2026-03-13,Champagne Brut,E-commerce,Sul,490.00,25,2,Sim
+252,2026-03-14,Sauvignon Blanc,E-commerce,Nordeste,130.00,68,17,Sim
+253,2026-03-14,Chianti Classico Riserva,E-commerce,Sul,230.00,50,3,Sim
+254,2026-03-14,Primitivo di Manduria,E-commerce,Norte,185.00,30,19,Não
+255,2026-03-14,Côtes de Provence,Loja Física,Nordeste,180.00,68,0,Sim
+256,2026-03-14,Champagne Brut,E-commerce,Centro-Oeste,490.00,22,12,Sim
+257,2026-03-15,Brunello di Montalcino DOCG,E-commerce,Norte,429.00,31,10,Não
+258,2026-03-15,Sauvignon Blanc,E-commerce,Sul,130.00,32,3,Sim
+259,2026-03-15,Malbec Gran Reserva,Loja Física,Sul,210.00,36,0,Sim
+260,2026-03-15,Barolo DOCG,Loja Física,Centro-Oeste,520.00,73,0,Sim
+261,2026-03-16,Pinot Noir,Loja Física,Sul,350.00,64,0,Sim
+262,2026-03-16,Chardonnay Reserva,E-commerce,Sul,145.00,65,3,Sim
+263,2026-03-16,Brunello di Montalcino DOCG,E-commerce,Norte,429.00,61,20,Sim
+264,2026-03-16,Malbec Gran Reserva,E-commerce,Sudeste,210.00,44,1,Sim
+265,2026-03-17,Champagne Brut,Loja Física,Sudeste,490.00,45,0,Sim
+266,2026-03-17,Chardonnay Reserva,E-commerce,Sudeste,145.00,39,3,Não
+267,2026-03-17,Côtes de Provence,E-commerce,Norte,180.00,75,14,Sim
+268,2026-03-17,Pinot Noir,E-commerce,Sudeste,350.00,72,2,Sim
+269,2026-03-17,Carmenère Estate,E-commerce,Sudeste,110.00,35,1,Sim
+270,2026-03-17,Chardonnay Reserva,E-commerce,Norte,145.00,54,15,Sim
+271,2026-03-17,Pinot Noir,E-commerce,Norte,350.00,74,10,Sim
+272,2026-03-18,Primitivo di Manduria,E-commerce,Sul,185.00,29,5,Não
+273,2026-03-18,Sauvignon Blanc,Loja Física,Nordeste,130.00,63,0,Sim
+274,2026-03-18,Chianti Classico Riserva,E-commerce,Centro-Oeste,230.00,25,12,Sim
+275,2026-03-18,Sauvignon Blanc,E-commerce,Centro-Oeste,130.00,29,12,Sim
+276,2026-03-19,Carmenère Estate,Loja Física,Centro-Oeste,110.00,18,0,Sim
+277,2026-03-20,Malbec Gran Reserva,E-commerce,Sudeste,210.00,27,2,Sim
+278,2026-03-20,Chianti Classico Riserva,E-commerce,Sudeste,230.00,33,1,Sim
+279,2026-03-20,Côtes de Provence,Loja Física,Centro-Oeste,180.00,68,0,Sim
+280,2026-03-21,Carmenère Estate,Loja Física,Sudeste,110.00,56,0,Sim
+281,2026-03-21,Côtes de Provence,Loja Física,Sudeste,180.00,62,0,Sim
+282,2026-03-21,Chardonnay Reserva,Loja Física,Norte,145.00,52,0,Sim
+283,2026-03-21,Barolo DOCG,E-commerce,Centro-Oeste,520.00,26,8,Sim
+284,2026-03-21,Carmenère Estate,E-commerce,Norte,110.00,64,10,Não
+285,2026-03-21,Prosecco Valdobbiadene,Loja Física,Centro-Oeste,165.00,46,0,Sim
+286,2026-03-21,Chianti Classico Riserva,E-commerce,Sudeste,230.00,32,5,Sim
+287,2026-03-21,Pinot Noir,Loja Física,Norte,350.00,65,0,Sim
+288,2026-03-22,Pinot Noir,E-commerce,Norte,350.00,71,19,Sim
+289,2026-03-23,Prosecco Valdobbiadene,E-commerce,Sudeste,165.00,67,4,Sim
+290,2026-03-23,Sauvignon Blanc,Loja Física,Sul,130.00,36,0,Sim
+291,2026-03-24,Pinot Noir,E-commerce,Sudeste,350.00,70,2,Sim
+292,2026-03-24,Côtes de Provence,E-commerce,Sudeste,180.00,35,3,Sim
+293,2026-03-24,Chardonnay Reserva,E-commerce,Centro-Oeste,145.00,35,12,Sim
+294,2026-03-25,Chardonnay Reserva,Loja Física,Sudeste,145.00,68,0,Sim
+295,2026-03-25,Côtes de Provence,E-commerce,Norte,180.00,43,17,Sim
+296,2026-03-25,Prosecco Valdobbiadene,E-commerce,Sul,165.00,57,4,Sim
+297,2026-03-25,Sauvignon Blanc,Loja Física,Centro-Oeste,130.00,19,0,Sim
+298,2026-03-25,Prosecco Valdobbiadene,E-commerce,Centro-Oeste,165.00,22,7,Não
+299,2026-03-25,Sauvignon Blanc,E-commerce,Norte,130.00,30,15,Não
+300,2026-03-26,Côtes de Provence,E-commerce,Sul,180.00,72,3,Sim
+301,2026-03-26,Côtes de Provence,E-commerce,Centro-Oeste,180.00,38,7,Sim
+302,2026-03-26,Malbec Gran Reserva,Loja Física,Nordeste,210.00,26,0,Sim
+303,2026-03-26,Carmenère Estate,E-commerce,Norte,110.00,43,15,Sim
+304,2026-03-26,Primitivo di Manduria,Loja Física,Sul,185.00,26,0,Sim
+305,2026-03-27,Champagne Brut,Loja Física,Nordeste,490.00,43,0,Sim
+306,2026-03-27,Primitivo di Manduria,E-commerce,Centro-Oeste,185.00,28,6,Sim
+307,2026-03-27,Chardonnay Reserva,E-commerce,Nordeste,145.00,19,10,Não
+308,2026-03-27,Chardonnay Reserva,Loja Física,Nordeste,145.00,40,0,Sim
+309,2026-03-27,Chardonnay Reserva,E-commerce,Sul,145.00,44,2,Sim
+310,2026-03-27,Chardonnay Reserva,E-commerce,Centro-Oeste,145.00,36,5,Sim
+311,2026-03-28,Primitivo di Manduria,Loja Física,Sudeste,185.00,71,0,Sim
+312,2026-03-28,Malbec Gran Reserva,Loja Física,Nordeste,210.00,61,0,Sim
+313,2026-03-29,Barolo DOCG,E-commerce,Sudeste,520.00,25,5,Sim
+314,2026-03-29,Pinot Noir,E-commerce,Centro-Oeste,350.00,61,5,Sim
+315,2026-03-29,Barolo DOCG,E-commerce,Sudeste,520.00,57,4,Sim
+316,2026-03-29,Malbec Gran Reserva,E-commerce,Sudeste,210.00,64,5,Sim
+317,2026-03-29,Pinot Noir,E-commerce,Centro-Oeste,350.00,51,8,Não
+318,2026-03-30,Primitivo di Manduria,E-commerce,Sudeste,185.00,46,4,Sim
+319,2026-03-30,Carmenère Estate,Loja Física,Nordeste,110.00,31,0,Sim
+320,2026-03-30,Chardonnay Reserva,E-commerce,Centro-Oeste,145.00,36,10,Não
+321,2026-03-30,Malbec Gran Reserva,Loja Física,Nordeste,210.00,58,0,Sim
+322,2026-03-30,Pinot Noir,Loja Física,Centro-Oeste,350.00,71,0,Sim
+323,2026-03-31,Côtes de Provence,Loja Física,Sul,180.00,50,0,Sim
+324,2026-03-31,Chardonnay Reserva,E-commerce,Norte,145.00,24,11,Sim
+325,2026-03-31,Carmenère Estate,E-commerce,Sudeste,110.00,52,3,Sim
+326,2026-03-31,Malbec Gran Reserva,Loja Física,Norte,210.00,28,0,Sim
+327,2026-03-31,Barolo DOCG,Loja Física,Nordeste,520.00,29,0,Sim
+328,2026-04-01,Barolo DOCG,E-commerce,Nordeste,520.00,69,12,Sim
+329,2026-04-01,Prosecco Valdobbiadene,E-commerce,Sudeste,165.00,30,2,Sim
+330,2026-04-02,Prosecco Valdobbiadene,E-commerce,Sul,165.00,23,5,Sim
+331,2026-04-02,Barolo DOCG,E-commerce,Centro-Oeste,520.00,39,6,Não
+332,2026-04-02,Pinot Noir,E-commerce,Norte,350.00,45,17,Sim
+333,2026-04-02,Primitivo di Manduria,E-commerce,Centro-Oeste,185.00,39,5,Sim
+334,2026-04-03,Pinot Noir,E-commerce,Norte,350.00,68,14,Sim
+335,2026-04-04,Prosecco Valdobbiadene,E-commerce,Sudeste,165.00,43,5,Sim
+336,2026-04-04,Carmenère Estate,Loja Física,Sudeste,110.00,25,0,Sim
+337,2026-04-04,Malbec Gran Reserva,E-commerce,Sudeste,210.00,68,2,Sim
+338,2026-04-04,Barolo DOCG,E-commerce,Norte,520.00,35,20,Sim
+339,2026-04-05,Champagne Brut,E-commerce,Sudeste,490.00,51,5,Sim
+340,2026-04-05,Chianti Classico Riserva,E-commerce,Sul,230.00,28,5,Sim
+341,2026-04-06,Prosecco Valdobbiadene,Loja Física,Sul,165.00,32,0,Sim
+342,2026-04-06,Sauvignon Blanc,E-commerce,Sul,130.00,43,5,Sim
+343,2026-04-07,Malbec Gran Reserva,E-commerce,Sul,210.00,48,3,Sim
+344,2026-04-07,Pinot Noir,Loja Física,Centro-Oeste,350.00,40,0,Sim
+345,2026-04-07,Sauvignon Blanc,Loja Física,Sul,130.00,29,0,Sim
+346,2026-04-07,Primitivo di Manduria,E-commerce,Nordeste,185.00,20,19,Sim
+347,2026-04-08,Côtes de Provence,E-commerce,Sul,180.00,69,2,Sim
+348,2026-04-09,Côtes de Provence,E-commerce,Nordeste,180.00,73,17,Sim
+349,2026-04-09,Champagne Brut,E-commerce,Nordeste,490.00,44,17,Sim
+350,2026-04-09,Barolo DOCG,E-commerce,Centro-Oeste,520.00,25,12,Não
+351,2026-04-10,Chianti Classico Riserva,Loja Física,Nordeste,230.00,46,0,Sim
+352,2026-04-10,Champagne Brut,E-commerce,Sul,490.00,32,2,Sim
+353,2026-04-10,Carmenère Estate,E-commerce,Sudeste,110.00,20,3,Sim
+354,2026-04-11,Carmenère Estate,E-commerce,Norte,110.00,74,12,Sim
+355,2026-04-11,Barolo DOCG,E-commerce,Sudeste,520.00,21,4,Sim
+356,2026-04-11,Primitivo di Manduria,E-commerce,Sul,185.00,69,5,Sim
+357,2026-04-11,Primitivo di Manduria,E-commerce,Sudeste,185.00,29,1,Sim
+358,2026-04-12,Prosecco Valdobbiadene,Loja Física,Centro-Oeste,165.00,58,0,Sim
+359,2026-04-12,Champagne Brut,E-commerce,Sudeste,490.00,50,4,Sim
+360,2026-04-12,Barolo DOCG,E-commerce,Nordeste,520.00,46,13,Sim
+361,2026-04-12,Barolo DOCG,Loja Física,Centro-Oeste,520.00,71,0,Sim
+362,2026-04-12,Sauvignon Blanc,E-commerce,Sul,130.00,32,4,Sim
+363,2026-04-12,Chardonnay Reserva,Loja Física,Nordeste,145.00,39,0,Sim
+364,2026-04-13,Chianti Classico Riserva,E-commerce,Sul,230.00,74,5,Não
+365,2026-04-13,Barolo DOCG,Loja Física,Nordeste,520.00,32,0,Sim
+366,2026-04-13,Brunello di Montalcino DOCG,E-commerce,Nordeste,429.00,21,11,Sim
+367,2026-04-13,Brunello di Montalcino DOCG,Loja Física,Sudeste,429.00,73,0,Sim
+368,2026-04-14,Primitivo di Manduria,E-commerce,Nordeste,185.00,22,19,Não
+369,2026-04-14,Sauvignon Blanc,E-commerce,Norte,130.00,69,12,Não
+370,2026-04-14,Sauvignon Blanc,E-commerce,Norte,130.00,65,12,Sim
+371,2026-04-14,Prosecco Valdobbiadene,E-commerce,Norte,165.00,25,16,Sim
+372,2026-04-14,Champagne Brut,E-commerce,Sul,490.00,25,4,Sim
+373,2026-04-14,Malbec Gran Reserva,E-commerce,Centro-Oeste,210.00,26,5,Sim
+374,2026-04-15,Prosecco Valdobbiadene,E-commerce,Sul,165.00,23,3,Sim
+375,2026-04-15,Primitivo di Manduria,E-commerce,Sudeste,185.00,55,1,Sim
+376,2026-04-15,Barolo DOCG,E-commerce,Nordeste,520.00,58,19,Sim
+377,2026-04-15,Primitivo di Manduria,Loja Física,Sudeste,185.00,62,0,Sim
+378,2026-04-15,Brunello di Montalcino DOCG,E-commerce,Norte,429.00,32,20,Sim
+379,2026-04-16,Brunello di Montalcino DOCG,E-commerce,Sudeste,429.00,46,5,Sim
+380,2026-04-16,Primitivo di Manduria,E-commerce,Nordeste,185.00,72,13,Sim
+381,2026-04-16,Pinot Noir,E-commerce,Centro-Oeste,350.00,40,10,Sim
+382,2026-04-16,Champagne Brut,E-commerce,Sudeste,490.00,22,3,Sim
+383,2026-04-17,Pinot Noir,Loja Física,Centro-Oeste,350.00,44,0,Sim
+384,2026-04-17,Prosecco Valdobbiadene,E-commerce,Nordeste,165.00,63,10,Sim
+385,2026-04-18,Barolo DOCG,E-commerce,Nordeste,520.00,48,11,Não
+386,2026-04-18,Barolo DOCG,E-commerce,Centro-Oeste,520.00,52,10,Sim
+387,2026-04-18,Carmenère Estate,E-commerce,Sul,110.00,63,1,Sim
+388,2026-04-18,Brunello di Montalcino DOCG,E-commerce,Sudeste,429.00,47,4,Sim
+389,2026-04-18,Côtes de Provence,Loja Física,Sul,180.00,39,0,Sim
+390,2026-04-19,Chardonnay Reserva,E-commerce,Centro-Oeste,145.00,52,8,Sim
+391,2026-04-19,Carmenère Estate,E-commerce,Nordeste,110.00,36,13,Sim
+392,2026-04-19,Brunello di Montalcino DOCG,E-commerce,Norte,429.00,39,10,Não
+393,2026-04-20,Champagne Brut,E-commerce,Norte,490.00,41,17,Não
+394,2026-04-21,Sauvignon Blanc,E-commerce,Norte,130.00,58,12,Sim
+395,2026-04-21,Prosecco Valdobbiadene,Loja Física,Nordeste,165.00,59,0,Sim
+396,2026-04-22,Prosecco Valdobbiadene,Loja Física,Nordeste,165.00,19,0,Sim
+397,2026-04-22,Chianti Classico Riserva,E-commerce,Norte,230.00,30,20,Sim
+398,2026-04-22,Prosecco Valdobbiadene,Loja Física,Norte,165.00,72,0,Sim
+399,2026-04-22,Barolo DOCG,Loja Física,Norte,520.00,61,0,Sim
+400,2026-04-22,Brunello di Montalcino DOCG,E-commerce,Norte,429.00,35,10,Sim
+401,2026-04-23,Côtes de Provence,E-commerce,Norte,180.00,46,10,Não
+402,2026-04-24,Carmenère Estate,Loja Física,Centro-Oeste,110.00,23,0,Sim
+403,2026-04-24,Côtes de Provence,E-commerce,Sul,180.00,54,5,Sim
+404,2026-04-24,Champagne Brut,E-commerce,Norte,490.00,24,13,Sim
+405,2026-04-24,Chardonnay Reserva,E-commerce,Sudeste,145.00,66,3,Sim
+406,2026-04-24,Chianti Classico Riserva,E-commerce,Centro-Oeste,230.00,65,8,Sim
+407,2026-04-24,Malbec Gran Reserva,E-commerce,Sudeste,210.00,25,2,Sim
+408,2026-04-25,Carmenère Estate,E-commerce,Nordeste,110.00,36,14,Não
+409,2026-04-25,Primitivo di Manduria,E-commerce,Sul,185.00,29,4,Sim
+410,2026-04-26,Carmenère Estate,E-commerce,Centro-Oeste,110.00,46,10,Sim
+411,2026-04-26,Pinot Noir,E-commerce,Norte,350.00,23,11,Sim
+412,2026-04-26,Chardonnay Reserva,Loja Física,Nordeste,145.00,21,0,Sim
+413,2026-04-26,Chianti Classico Riserva,E-commerce,Nordeste,230.00,24,16,Não
+414,2026-04-27,Côtes de Provence,Loja Física,Centro-Oeste,180.00,38,0,Sim
+415,2026-04-27,Brunello di Montalcino DOCG,E-commerce,Sul,429.00,60,1,Sim
+416,2026-04-28,Chianti Classico Riserva,E-commerce,Sul,230.00,52,4,Sim
+417,2026-04-28,Carmenère Estate,E-commerce,Nordeste,110.00,25,19,Sim
+418,2026-04-29,Carmenère Estate,E-commerce,Centro-Oeste,110.00,56,5,Não
+419,2026-04-30,Prosecco Valdobbiadene,E-commerce,Centro-Oeste,165.00,22,5,Sim
+420,2026-04-30,Champagne Brut,E-commerce,Nordeste,490.00,28,18,Sim
+421,2026-04-30,Chardonnay Reserva,Loja Física,Sudeste,145.00,47,0,Sim
+422,2026-04-30,Malbec Gran Reserva,Loja Física,Norte,210.00,26,0,Sim
+423,2026-04-30,Pinot Noir,Loja Física,Sul,350.00,65,0,Sim
+424,2026-04-30,Chianti Classico Riserva,E-commerce,Centro-Oeste,230.00,20,9,Sim
+425,2026-05-01,Malbec Gran Reserva,E-commerce,Norte,210.00,59,17,Sim
+426,2026-05-01,Chardonnay Reserva,E-commerce,Sudeste,145.00,55,5,Sim
+427,2026-05-02,Chianti Classico Riserva,E-commerce,Norte,230.00,56,12,Não
+428,2026-05-02,Champagne Brut,E-commerce,Sul,490.00,35,2,Sim
+429,2026-05-02,Pinot Noir,E-commerce,Sul,350.00,43,2,Sim
+430,2026-05-03,Prosecco Valdobbiadene,Loja Física,Sudeste,165.00,58,0,Sim
+431,2026-05-03,Carmenère Estate,Loja Física,Sul,110.00,60,0,Sim
+432,2026-05-03,Barolo DOCG,E-commerce,Centro-Oeste,520.00,73,11,Sim
+433,2026-05-03,Barolo DOCG,Loja Física,Nordeste,520.00,51,0,Sim
+434,2026-05-03,Carmenère Estate,Loja Física,Sul,110.00,21,0,Sim
+435,2026-05-03,Barolo DOCG,E-commerce,Centro-Oeste,520.00,48,9,Sim
+436,2026-05-04,Champagne Brut,E-commerce,Sul,490.00,55,4,Sim
+437,2026-05-04,Sauvignon Blanc,E-commerce,Norte,130.00,55,12,Sim
+438,2026-05-04,Carmenère Estate,E-commerce,Sudeste,110.00,43,2,Sim
+439,2026-05-04,Brunello di Montalcino DOCG,E-commerce,Sul,429.00,29,1,Sim
+440,2026-05-04,Sauvignon Blanc,E-commerce,Norte,130.00,33,14,Sim
+441,2026-05-04,Chianti Classico Riserva,E-commerce,Sul,230.00,33,3,Sim
+442,2026-05-05,Chianti Classico Riserva,Loja Física,Norte,230.00,27,0,Sim
+443,2026-05-05,Sauvignon Blanc,E-commerce,Sudeste,130.00,65,1,Sim
+444,2026-05-05,Prosecco Valdobbiadene,Loja Física,Norte,165.00,68,0,Sim
+445,2026-05-05,Côtes de Provence,E-commerce,Centro-Oeste,180.00,64,11,Sim
+446,2026-05-05,Chardonnay Reserva,E-commerce,Nordeste,145.00,56,13,Sim
+447,2026-05-06,Brunello di Montalcino DOCG,E-commerce,Sudeste,429.00,74,1,Sim
+448,2026-05-06,Chardonnay Reserva,E-commerce,Nordeste,145.00,35,20,Não
+449,2026-05-06,Brunello di Montalcino DOCG,E-commerce,Sudeste,429.00,53,1,Sim
+450,2026-05-06,Brunello di Montalcino DOCG,E-commerce,Centro-Oeste,429.00,38,7,Sim
+451,2026-05-07,Pinot Noir,E-commerce,Centro-Oeste,350.00,44,8,Sim
+452,2026-05-07,Prosecco Valdobbiadene,Loja Física,Nordeste,165.00,62,0,Sim
+453,2026-05-07,Prosecco Valdobbiadene,E-commerce,Norte,165.00,33,13,Sim
+454,2026-05-07,Champagne Brut,Loja Física,Centro-Oeste,490.00,47,0,Sim
+455,2026-05-07,Chardonnay Reserva,E-commerce,Norte,145.00,57,10,Sim
+456,2026-05-07,Champagne Brut,E-commerce,Norte,490.00,32,16,Sim
+457,2026-05-08,Champagne Brut,Loja Física,Sul,490.00,52,0,Sim
+458,2026-05-09,Chianti Classico Riserva,Loja Física,Sudeste,230.00,75,0,Sim
+459,2026-05-09,Barolo DOCG,Loja Física,Centro-Oeste,520.00,30,0,Sim
+460,2026-05-09,Carmenère Estate,E-commerce,Sul,110.00,47,3,Sim
+461,2026-05-09,Barolo DOCG,E-commerce,Centro-Oeste,520.00,54,10,Sim
+462,2026-05-09,Primitivo di Manduria,E-commerce,Sudeste,185.00,74,4,Sim
+463,2026-05-11,Malbec Gran Reserva,Loja Física,Centro-Oeste,210.00,30,0,Sim
+464,2026-05-12,Carmenère Estate,Loja Física,Centro-Oeste,110.00,61,0,Sim
+465,2026-05-12,Barolo DOCG,Loja Física,Sudeste,520.00,45,0,Sim
+466,2026-05-12,Côtes de Provence,E-commerce,Centro-Oeste,180.00,38,9,Sim
+467,2026-05-12,Barolo DOCG,E-commerce,Nordeste,520.00,23,10,Não
+468,2026-05-12,Prosecco Valdobbiadene,E-commerce,Nordeste,165.00,38,20,Não
+469,2026-05-13,Malbec Gran Reserva,E-commerce,Nordeste,210.00,21,14,Não
+470,2026-05-13,Brunello di Montalcino DOCG,E-commerce,Sudeste,429.00,62,4,Sim
+471,2026-05-13,Chianti Classico Riserva,Loja Física,Sudeste,230.00,52,0,Sim
+472,2026-05-13,Prosecco Valdobbiadene,Loja Física,Nordeste,165.00,23,0,Sim
+473,2026-05-14,Malbec Gran Reserva,E-commerce,Nordeste,210.00,26,16,Sim
+474,2026-05-14,Côtes de Provence,Loja Física,Sul,180.00,21,0,Sim
+475,2026-05-14,Prosecco Valdobbiadene,E-commerce,Sul,165.00,69,2,Sim
+476,2026-05-14,Sauvignon Blanc,E-commerce,Sudeste,130.00,62,2,Sim
+477,2026-05-14,Champagne Brut,E-commerce,Sudeste,490.00,45,4,Sim
+478,2026-05-15,Carmenère Estate,E-commerce,Sudeste,110.00,19,1,Sim
+479,2026-05-15,Malbec Gran Reserva,E-commerce,Norte,210.00,24,14,Sim
+480,2026-05-15,Prosecco Valdobbiadene,Loja Física,Sudeste,165.00,69,0,Sim
+481,2026-05-15,Prosecco Valdobbiadene,E-commerce,Centro-Oeste,165.00,52,12,Sim
+482,2026-05-16,Chardonnay Reserva,E-commerce,Sul,145.00,70,4,Sim
+483,2026-05-16,Primitivo di Manduria,E-commerce,Centro-Oeste,185.00,58,7,Sim
+484,2026-05-16,Chianti Classico Riserva,E-commerce,Norte,230.00,59,16,Sim
+485,2026-05-16,Chardonnay Reserva,E-commerce,Norte,145.00,49,10,Não
+486,2026-05-17,Brunello di Montalcino DOCG,Loja Física,Sudeste,429.00,49,0,Sim
+487,2026-05-18,Carmenère Estate,Loja Física,Nordeste,110.00,57,0,Sim
+488,2026-05-19,Carmenère Estate,Loja Física,Norte,110.00,24,0,Sim
+489,2026-05-19,Chianti Classico Riserva,Loja Física,Nordeste,230.00,51,0,Sim
+490,2026-05-20,Prosecco Valdobbiadene,E-commerce,Sul,165.00,71,1,Sim
+491,2026-05-20,Chianti Classico Riserva,E-commerce,Sul,230.00,41,2,Sim
+492,2026-05-21,Champagne Brut,E-commerce,Nordeste,490.00,75,12,Sim
+493,2026-05-21,Primitivo di Manduria,E-commerce,Sudeste,185.00,40,1,Sim
+494,2026-05-21,Barolo DOCG,E-commerce,Nordeste,520.00,24,18,Sim
+495,2026-05-21,Champagne Brut,Loja Física,Centro-Oeste,490.00,44,0,Sim
+496,2026-05-22,Chianti Classico Riserva,E-commerce,Centro-Oeste,230.00,36,11,Sim
+497,2026-05-22,Pinot Noir,E-commerce,Nordeste,350.00,73,12,Não
+498,2026-05-22,Chardonnay Reserva,E-commerce,Centro-Oeste,145.00,20,8,Sim
+499,2026-05-22,Prosecco Valdobbiadene,Loja Física,Sudeste,165.00,24,0,Sim
+500,2026-05-22,Chardonnay Reserva,E-commerce,Nordeste,145.00,35,15,Não
