@@ -1,0 +1,6 @@
+@VinheriaAgnello.API_HostAddress = http://localhost:5057
+
+GET {{VinheriaAgnello.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

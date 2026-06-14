@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/VinheriaAgnello.API/VinheriaAgnello.API.csproj" />
+    <Project Path="src/VinheriaAgnello.Domain/VinheriaAgnello.Domain.csproj" />
+    <Project Path="src/VinheriaAgnello.Infrastructure/VinheriaAgnello.Infrastructure.csproj" />
+    <Project Path="src/VinheriaAgnello.Services/VinheriaAgnello.Services.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/VinheriaAgnello.Tests/VinheriaAgnello.Tests.csproj" />
+  </Folder>
+</Solution>
