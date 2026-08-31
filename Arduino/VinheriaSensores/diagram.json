@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "author": "CodeSquad-FIAP",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-arduino-uno",
+      "id": "uno",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -150,
+      "left": -200,
+      "attrs": {
+        "temperature": "14",
+        "humidity": "70"
+      }
+    },
+    {
+      "type": "wokwi-photoresistor-sensor",
+      "id": "ldr1",
+      "top": -150,
+      "left": 100,
+      "attrs": {
+        "lux": "10"
+      }
+    }
+  ],
+  "connections": [
+    ["dht1:VCC", "uno:5V", "red", ["v0"]],
+    ["dht1:GND", "uno:GND.1", "black", ["v0"]],
+    ["dht1:SDA", "uno:2", "green", ["v0"]],
+    ["ldr1:VCC", "uno:5V", "red", ["v0"]],
+    ["ldr1:GND", "uno:GND.2", "black", ["v0"]],
+    ["ldr1:AO", "uno:A0", "yellow", ["v0"]]
+  ]
+}

@@ -1,0 +1,167 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{listings}
+
+\geometry{a4paper,margin=2.5cm}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+
+\definecolor{codegreen}{rgb}{0,0.45,0}
+\definecolor{codegray}{rgb}{0.45,0.45,0.45}
+\definecolor{codepurple}{rgb}{0.5,0,0.7}
+\definecolor{backcolour}{rgb}{0.96,0.96,0.94}
+
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  captionpos=b,
+  keepspaces=true,
+  numbers=left,
+  numbersep=5pt,
+  columns=fullflexible,
+  showstringspaces=false,
+  tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\title{\textbf{Vinheria IoT}\\Adega Climatizada da Vinheria Agnello}
+\author{
+  \textbf{Equipe CodeSquad-FIAP}\\
+  Roger Viana Gonçalves de Alencar\\
+  {\small RM 97540 --- Hardware e circuito}\\
+  Kevin Benevides\\
+  {\small Firmware Arduino e integração serial}
+}
+\date{Agosto de 2026}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\section{Objetivo e contextualização}
+
+O projeto apresenta uma solução de Internet das Coisas para monitorar a adega
+climatizada da Vinheria Agnello. A conservação de vinhos exige controle
+ambiental constante: variações de temperatura aceleram o envelhecimento,
+umidade inadequada prejudica as rolhas e a exposição luminosa pode provocar
+degradação fotoquímica da bebida.
+
+A solução coleta temperatura, umidade e luminosidade, transmite as medições em
+JSON pela porta serial e permite que o Node-RED encaminhe os dados ao dashboard
+e a um broker MQTT.
+
+\section{Sensores e justificativas}
+
+\subsection{Temperatura e umidade: DHT22}
+
+O DHT22 foi selecionado por fornecer temperatura e umidade em um único sensor
+digital. Para a conservação dos vinhos, a temperatura deve permanecer estável,
+idealmente entre 12\(^{\circ}\)C e 18\(^{\circ}\)C, enquanto a umidade deve ficar
+próxima de 70\%. Um ambiente seco pode retrair as rolhas e permitir a entrada
+de oxigênio; um ambiente excessivamente úmido favorece fungos e danos aos
+rótulos.
+
+\subsection{Luminosidade: módulo LDR}
+
+O módulo LDR mede a incidência de luz na adega. Exposição luminosa excessiva,
+especialmente à radiação ultravioleta, pode desencadear reações nos compostos
+de enxofre do vinho e produzir o defeito conhecido como \textit{light strike}.
+O monitoramento permite detectar iluminação esquecida ou entrada indevida de
+luz externa.
+
+\section{Arquitetura de hardware}
+
+O circuito é simulado no Wokwi com um Arduino Uno e possui a seguinte pinagem:
+
+\begin{itemize}
+  \item DHT22: alimentação em 5 V, terra comum e dados no pino digital D2;
+  \item módulo LDR: alimentação em 5 V, terra comum e saída analógica no A0.
+\end{itemize}
+
+O arquivo executável do circuito está versionado em
+\path{Arduino/VinheriaSensores/diagram.json}. A listagem completa aparece na
+Seção~\ref{sec:fontes}.
+
+\section{Firmware e formato dos dados}
+
+O firmware inicializa o DHT22, configura o LDR e realiza uma amostragem a cada
+4000 ms. O intervalo é controlado com \texttt{millis()}, sem bloquear o
+microcontrolador com \texttt{delay()}.
+
+Apesar de o circuito possuir dois sensores físicos, o DHT22 produz duas
+medições. Assim, cada mensagem contém três campos semânticos:
+
+\begin{lstlisting}[caption={Mensagem serial produzida pelo firmware}]
+{"temperatura":14.2,"umidade":70.0,"luminosidade":512}
+\end{lstlisting}
+
+Temperatura é expressa em graus Celsius, umidade em percentual e luminosidade
+como leitura bruta do conversor analógico do Arduino Uno, entre 0 e 1023. Se o
+DHT22 falhar, temperatura e umidade são publicadas como \texttt{null}; desse
+modo o documento continua sendo JSON válido e a leitura independente do LDR
+não é perdida.
+
+\section{Integração com Node-RED e MQTT}
+
+O Arduino Uno utilizado não possui interface de rede. Portanto, a publicação
+MQTT é responsabilidade do Node-RED, conforme o fluxo:
+
+\begin{center}
+Arduino Uno \(\rightarrow\) Serial \(\rightarrow\) Node-RED
+\(\rightarrow\) HiveMQ \(\rightarrow\) Dashboard
+\end{center}
+
+A serial opera em 9600 baud, 8 bits de dados, sem paridade e um bit de parada.
+Cada mensagem termina com \texttt{\textbackslash n}. No Node-RED, um nó serial
+separa as linhas, um nó JSON converte a mensagem e os valores podem alimentar
+gráficos ou ser publicados em um tópico MQTT.
+
+Essa separação mantém o firmware responsável apenas pela aquisição e pelo
+protocolo serial, enquanto conectividade, armazenamento e visualização ficam
+na camada de integração.
+
+\section{Reprodução e validação}
+
+O diretório \path{Arduino/VinheriaSensores} reúne o sketch, o circuito e a
+lista de bibliotecas. Para reproduzir a simulação:
+
+\begin{enumerate}
+  \item abrir um projeto Arduino Uno no Wokwi;
+  \item copiar \path{VinheriaSensores.ino}, \path{diagram.json} e
+        \path{libraries.txt};
+  \item iniciar a simulação e abrir o monitor serial;
+  \item alterar temperatura, umidade e luminosidade no simulador;
+  \item confirmar uma linha JSON válida a cada quatro segundos.
+\end{enumerate}
+
+Para a compilação local, utiliza-se o Arduino CLI com o core AVR e a biblioteca
+DHT da Adafruit.
+
+\newpage
+\section{Códigos-fonte}
+\label{sec:fontes}
+
+Os arquivos abaixo são incluídos diretamente no relatório para evitar que a
+documentação fique diferente da versão executável.
+
+\subsection{Esquema de hardware}
+
+\lstinputlisting[caption={Circuito Wokwi em diagram.json}]{../../Arduino/VinheriaSensores/diagram.json}
+
+\subsection{Firmware Arduino}
+
+\lstinputlisting[language=C++,caption={Firmware VinheriaSensores.ino}]{../../Arduino/VinheriaSensores/VinheriaSensores.ino}
+
+\end{document}
