@@ -1,0 +1,191 @@
+[
+    {
+        "id": "a0b1c2d3e4f50001",
+        "type": "tab",
+        "label": "Vinheria Agnello - MQTT",
+        "disabled": false,
+        "info": "Recebe JSON do bridge do Wokwi e publica no HiveMQ."
+    },
+    {
+        "id": "a0b1c2d3e4f50002",
+        "type": "http in",
+        "z": "a0b1c2d3e4f50001",
+        "name": "Receber leitura do Wokwi",
+        "url": "/vinheria/sensores",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 120,
+        "wires": [
+            [
+                "a0b1c2d3e4f50003"
+            ]
+        ]
+    },
+    {
+        "id": "a0b1c2d3e4f50003",
+        "type": "json",
+        "z": "a0b1c2d3e4f50001",
+        "name": "Garantir objeto JSON",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 430,
+        "y": 120,
+        "wires": [
+            [
+                "a0b1c2d3e4f50004"
+            ]
+        ]
+    },
+    {
+        "id": "a0b1c2d3e4f50004",
+        "type": "function",
+        "z": "a0b1c2d3e4f50001",
+        "name": "Definir tópico MQTT",
+        "func": "// Tópico definido para a turma 3 ESOA e grupo CodeSquad.\n// Usamos \"3ESOA\" sem espaço para manter o tópico MQTT padronizado.\nmsg.topic = \"Fiap/iot/3ESOA/CodeSquad/sensor\";\nmsg.qos = 0;\nmsg.retain = false;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 120,
+        "wires": [
+            [
+                "a0b1c2d3e4f50005",
+                "a0b1c2d3e4f50006",
+                "a0b1c2d3e4f50007"
+            ]
+        ]
+    },
+    {
+        "id": "a0b1c2d3e4f50005",
+        "type": "mqtt out",
+        "z": "a0b1c2d3e4f50001",
+        "name": "Publicar no HiveMQ",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "application/json",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "a0b1c2d3e4f50010",
+        "x": 960,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "a0b1c2d3e4f50006",
+        "type": "debug",
+        "z": "a0b1c2d3e4f50001",
+        "name": "JSON enviado",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 950,
+        "y": 130,
+        "wires": []
+    },
+    {
+        "id": "a0b1c2d3e4f50007",
+        "type": "http response",
+        "z": "a0b1c2d3e4f50001",
+        "name": "Responder ao bridge",
+        "statusCode": "200",
+        "headers": {},
+        "x": 960,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "a0b1c2d3e4f50008",
+        "type": "mqtt in",
+        "z": "a0b1c2d3e4f50001",
+        "name": "Conferir mensagens MQTT",
+        "topic": "Fiap/iot/3ESOA/CodeSquad/#",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "a0b1c2d3e4f50010",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 280,
+        "wires": [
+            [
+                "a0b1c2d3e4f50009"
+            ]
+        ]
+    },
+    {
+        "id": "a0b1c2d3e4f50009",
+        "type": "debug",
+        "z": "a0b1c2d3e4f50001",
+        "name": "Mensagem recebida do HiveMQ",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "a0b1c2d3e4f50010",
+        "type": "mqtt-broker",
+        "name": "HiveMQ Cloud - CONFIGURAR",
+        "broker": "6a36d866d0dc4fffbace6eff6490dba4.s1.eu.hivemq.cloud",
+        "port": "8883",
+        "tls": "a0b1c2d3e4f50011",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "a0b1c2d3e4f50011",
+        "type": "tls-config",
+        "name": "TLS HiveMQ",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    }
+]

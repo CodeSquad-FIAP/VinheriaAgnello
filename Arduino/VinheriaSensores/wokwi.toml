@@ -1,0 +1,5 @@
+[wokwi]
+version = 1
+firmware = "build/VinheriaSensores.ino.hex"
+elf = "build/VinheriaSensores.ino.elf"
+rfc2217ServerPort = 4000
