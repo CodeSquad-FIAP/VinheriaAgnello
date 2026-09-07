@@ -1,0 +1,438 @@
+[
+    {
+        "id": "a0b1c2d3e4f50001",
+        "type": "tab",
+        "label": "Vinheria Agnello - MQTT",
+        "disabled": false,
+        "info": "Recebe JSON do bridge do Wokwi e publica no HiveMQ."
+    },
+    {
+        "id": "a0b1c2d3e4f50002",
+        "type": "http in",
+        "z": "a0b1c2d3e4f50001",
+        "name": "Receber leitura do Wokwi",
+        "url": "/vinheria/sensores",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 120,
+        "wires": [
+            [
+                "a0b1c2d3e4f50003"
+            ]
+        ]
+    },
+    {
+        "id": "a0b1c2d3e4f50003",
+        "type": "json",
+        "z": "a0b1c2d3e4f50001",
+        "name": "Garantir objeto JSON",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 430,
+        "y": 120,
+        "wires": [
+            [
+                "a0b1c2d3e4f50004"
+            ]
+        ]
+    },
+    {
+        "id": "a0b1c2d3e4f50004",
+        "type": "function",
+        "z": "a0b1c2d3e4f50001",
+        "name": "Definir tópico MQTT",
+        "func": "// Tópico definido para a turma 3 ESOA e grupo CodeSquad.\n// Usamos \"3ESOA\" sem espaço para manter o tópico MQTT padronizado.\nmsg.topic = \"Fiap/iot/3ESOA/CodeSquad/sensor\";\nmsg.qos = 0;\nmsg.retain = false;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 120,
+        "wires": [
+            [
+                "a0b1c2d3e4f50005",
+                "a0b1c2d3e4f50006",
+                "a0b1c2d3e4f50007"
+            ]
+        ]
+    },
+    {
+        "id": "a0b1c2d3e4f50005",
+        "type": "mqtt out",
+        "z": "a0b1c2d3e4f50001",
+        "name": "Publicar no HiveMQ",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "application/json",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "a0b1c2d3e4f50010",
+        "x": 960,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "a0b1c2d3e4f50006",
+        "type": "debug",
+        "z": "a0b1c2d3e4f50001",
+        "name": "JSON enviado",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 950,
+        "y": 130,
+        "wires": []
+    },
+    {
+        "id": "a0b1c2d3e4f50007",
+        "type": "http response",
+        "z": "a0b1c2d3e4f50001",
+        "name": "Responder ao bridge",
+        "statusCode": "200",
+        "headers": {},
+        "x": 960,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "a0b1c2d3e4f50008",
+        "type": "mqtt in",
+        "z": "a0b1c2d3e4f50001",
+        "name": "Conferir mensagens MQTT",
+        "topic": "Fiap/iot/3ESOA/CodeSquad/#",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "a0b1c2d3e4f50010",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 280,
+        "wires": [
+            [
+                "a0b1c2d3e4f50009"
+            ]
+        ]
+    },
+    {
+        "id": "a0b1c2d3e4f50009",
+        "type": "debug",
+        "z": "a0b1c2d3e4f50001",
+        "name": "Mensagem recebida do HiveMQ",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "a0b1c2d3e4f50010",
+        "type": "mqtt-broker",
+        "name": "HiveMQ Cloud - CONFIGURAR",
+        "broker": "6a36d866d0dc4fffbace6eff6490dba4.s1.eu.hivemq.cloud",
+        "port": "8883",
+        "tls": "a0b1c2d3e4f50011",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "a0b1c2d3e4f50011",
+        "type": "tls-config",
+        "name": "TLS HiveMQ",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    },
+    {
+        "id": "e0e1e2e3e4f50001",
+        "type": "tab",
+        "label": "Vinheria Agnello - Dashboard",
+        "disabled": false,
+        "info": "Assina o tópico de sensores, exibe a leitura serial no debug e alimenta os indicadores/gráficos do Dashboard em tempo real."
+    },
+    {
+        "id": "e0e1e2e3e4f50002",
+        "type": "mqtt in",
+        "z": "e0e1e2e3e4f50001",
+        "name": "Assinar tópico de sensores",
+        "topic": "Fiap/iot/3ESOA/CodeSquad/sensor",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "a0b1c2d3e4f50010",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 120,
+        "wires": [
+            [
+                "e0e1e2e3e4f50003"
+            ]
+        ]
+    },
+    {
+        "id": "e0e1e2e3e4f50003",
+        "type": "json",
+        "z": "e0e1e2e3e4f50001",
+        "name": "Garantir objeto JSON",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 430,
+        "y": 120,
+        "wires": [
+            [
+                "e0e1e2e3e4f50004",
+                "e0e1e2e3e4f50005"
+            ]
+        ]
+    },
+    {
+        "id": "e0e1e2e3e4f50004",
+        "type": "debug",
+        "z": "e0e1e2e3e4f50001",
+        "name": "Leitura serial (via MQTT) no debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "e0e1e2e3e4f50005",
+        "type": "function",
+        "z": "e0e1e2e3e4f50001",
+        "name": "Separar sensores para os widgets",
+        "func": "// Recebe o objeto {temperatura, umidade, luminosidade}\n// e distribui um valor por saída, já rotulado para o\n// Dashboard (gauges e gráfico combinado).\nvar leitura = msg.payload || {};\n\nvar msgTemperatura = {\n    payload: leitura.temperatura,\n    topic: \"Temperatura (°C)\"\n};\nvar msgUmidade = {\n    payload: leitura.umidade,\n    topic: \"Umidade (%)\"\n};\nvar msgLuminosidade = {\n    payload: leitura.luminosidade,\n    topic: \"Luminosidade (lux)\"\n};\n\nreturn [msgTemperatura, msgUmidade, msgLuminosidade];",
+        "outputs": 3,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 120,
+        "wires": [
+            [
+                "e0e1e2e3e4f50011",
+                "e0e1e2e3e4f50014"
+            ],
+            [
+                "e0e1e2e3e4f50012",
+                "e0e1e2e3e4f50014"
+            ],
+            [
+                "e0e1e2e3e4f50013",
+                "e0e1e2e3e4f50014"
+            ]
+        ]
+    },
+    {
+        "id": "e0e1e2e3e4f50011",
+        "type": "ui_gauge",
+        "z": "e0e1e2e3e4f50001",
+        "name": "Gauge Temperatura",
+        "group": "e0e1e2e3e4f50021",
+        "order": 1,
+        "width": 4,
+        "height": 4,
+        "gtype": "gauge",
+        "title": "Temperatura",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": "-10",
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "20",
+        "seg2": "35",
+        "diff": false,
+        "className": "",
+        "x": 990,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "e0e1e2e3e4f50012",
+        "type": "ui_gauge",
+        "z": "e0e1e2e3e4f50001",
+        "name": "Gauge Umidade",
+        "group": "e0e1e2e3e4f50021",
+        "order": 2,
+        "width": 4,
+        "height": 4,
+        "gtype": "gauge",
+        "title": "Umidade",
+        "label": "%",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "100",
+        "colors": [
+            "#ca3838",
+            "#e6e600",
+            "#00b500"
+        ],
+        "seg1": "30",
+        "seg2": "60",
+        "diff": false,
+        "className": "",
+        "x": 990,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "e0e1e2e3e4f50013",
+        "type": "ui_gauge",
+        "z": "e0e1e2e3e4f50001",
+        "name": "Gauge Luminosidade",
+        "group": "e0e1e2e3e4f50021",
+        "order": 3,
+        "width": 4,
+        "height": 4,
+        "gtype": "gauge",
+        "title": "Luminosidade",
+        "label": "lux",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "1023",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "400",
+        "seg2": "800",
+        "diff": false,
+        "className": "",
+        "x": 1000,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "e0e1e2e3e4f50014",
+        "type": "ui_chart",
+        "z": "e0e1e2e3e4f50001",
+        "name": "Gráfico temporal dos sensores",
+        "group": "e0e1e2e3e4f50022",
+        "order": 1,
+        "width": 12,
+        "height": 7,
+        "label": "Sensores em tempo real",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "Aguardando leituras...",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "1",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "colors": [
+            "#1f77b4",
+            "#e6550d",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5",
+            "#8c564b",
+            "#c49c94"
+        ],
+        "useOneColor": false,
+        "useUTC": false,
+        "className": "",
+        "x": 990,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e0e1e2e3e4f50021",
+        "type": "ui_group",
+        "name": "Indicadores em Tempo Real",
+        "tab": "e0e1e2e3e4f50020",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "e0e1e2e3e4f50022",
+        "type": "ui_group",
+        "name": "Histórico dos Sensores",
+        "tab": "e0e1e2e3e4f50020",
+        "order": 2,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "e0e1e2e3e4f50020",
+        "type": "ui_tab",
+        "name": "Vinheria Agnello",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
