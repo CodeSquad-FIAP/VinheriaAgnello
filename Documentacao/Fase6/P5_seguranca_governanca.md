@@ -252,7 +252,7 @@ Nenhum serviço recebe dado pessoal de que não precise: catálogo, estoque, qua
 |---|---|---|
 | Serviço | `ms-` + domínio, minúsculo, *kebab-case* | `ms-qualidade`, `ms-pagamentos` |
 | Tópico de evento | `dominio.evento`, minúsculo, sem prefixo de turma | `pedido.criado`, `estoque.reservado`, `qualidade.alerta` |
-| Chamada REST | `/v1/recurso`, substantivo no plural | `/v1/v1/vinhos` → `/v1/vinhos` |
+| Chamada REST | `/v1/recurso`, substantivo no plural, sem verbo na URL | `GET /v1/vinhos`, `POST /v1/pedidos` (e não `/v1/listarVinhos`, `/v1/v1/...`) |
 | Banco/esquema | `db_<serviço>` | `db_estoque` |
 | Fila morta | `<topico>.DLQ` | `pedido.criado.DLQ` |
 
@@ -284,7 +284,7 @@ Arquivos curtos em `Documentacao/Fase6/adr/`, um por decisão: contexto → deci
 |---|---|---|
 | Nomes definitivos dos serviços e donos do dado | Estimados a partir do repositório e da proposta do P1 | Lista congelada do **P1** (21/09) — esta seção usa os mesmos nomes assim que congelados |
 | Papéis da matriz de autorização por serviço | Definidos por domínio funcional | Revisão final contra o diagrama do **P2** e a matriz do **P4** |
-| Nomes dos tópicos Kafka | Propostos aqui e iguais aos do desenho | Confirmação cruzada com **P4** (fonte única: `pedido.criado`, `estoque.reservado`, `pagamento.aprovado`, `qualidade.leitura`, `qualidade.alerta`, `lote.criado`, `notificacao.enviar`) |
+| Nomes dos tópicos Kafka | Propostos aqui e iguais aos do desenho | Confirmação cruzada com **P4** (fonte única: `pedido.criado`, `estoque.reservado`, `pagamento.aprovado`, `pagamento.recusado`, `lote.criado`, `qualidade.leitura`, `qualidade.alerta`, `notificacao.enviar`; eventos de privacidade: `cliente.anonimizado`) |
 | Cifra do banco Room e fluxo PKCE no mobile | Especificado nesta seção | Execução depende do time mobile (fase de implementação, não desta atividade) |
 | Política de retenção formal (parecer jurídico) | Valores propostos com base em prática de mercado e LGPD | Validação do professor/instituição, se exigida |
 
