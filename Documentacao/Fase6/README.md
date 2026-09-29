@@ -8,7 +8,7 @@ Prazo do grupo: **16/09/2026 → 16/10/2026** (entrega única em `.docx`, 5 seç
 | Parte | Item da atividade | Responsável | Prazo | Arquivo |
 |---|---|---|---|---|
 | 1 | Identificação dos serviços | Roger | 16/09 → 21/09 (congelamento) | `P1_servicos.md` |
-| 2 | Diagrama de arquitetura | Kevin | 22/09 → 28/09 | `P2_arquitetura.*` |
+| 2 | Diagrama de arquitetura | Kevin | 22/09 → 28/09 | [`P2_arquitetura.md`](P2_arquitetura.md) · `.drawio` · `.png` · `.svg` |
 | 3 | Padrões de arquitetura justificados | André | 22/09 → 30/09 | `P3_padroes.md` |
 | 4 | Integração (síncrono x assíncrono) | Arthur | 29/09 → 05/10 | `P4_integracao.md` |
 | 5 | **Segurança, governança e consolidação** | **Yasmin** | Parte 1: 16/09 → 24/09 · Parte 2 (`.docx`): 06/10 → 13/10 | [`P5_seguranca_governanca.md`](P5_seguranca_governanca.md) |
