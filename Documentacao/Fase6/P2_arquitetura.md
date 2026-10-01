@@ -88,6 +88,8 @@ drawio -x -f png -b 10 -s 2 -p 3 -o P2_arquitetura_d2_eventos.png  P2_arquitetur
 drawio -x -f png -b 10 -s 2 -p 4 -o P2_arquitetura_d3_iot_migracao.png P2_arquitetura.drawio
 ```
 
+> **Aten\u00e7\u00e3o:** a exportação direta em PNG (`-f png`) corta a coluna da direita do desenho: em 01/10/2026 as figuras saíram com `ms-fornecedores`, `ms-qualidade` e a última coluna da tabela do Kafka fatiadas na borda. O caminho seguro é exportar em PDF com `--crop` e rasterizar com PyMuPDF (mesmo roteiro do SVG, abaixo); as figuras entregues foram geradas assim, em 3600 px de largura.
+
 Para o `.docx`, **não** usar o "Exportar como SVG" padrão do draw.io: ele grava o texto em `foreignObject` (HTML) — no arquivo da visão geral são 210 ocorrências —, que o Word não renderiza ("Text is not SVG - cannot display"). O SVG precisa ter o texto em curvas. O caminho com `pdftocairo` (usado na primeira versão) exige poppler instalado; onde ele não está disponível, o MuPDF/PyMuPDF faz o mesmo a partir do PDF de todas as páginas:
 
 ```bash
