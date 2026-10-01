@@ -15,6 +15,8 @@ Prazo do grupo: **16/09/2026 → 16/10/2026** (entrega única em `.docx`, 5 seç
 
 Decisões registradas (ADR): [`adr/`](adr/)
 
+Rodada de revisão cruzada (11/10 a 13/10/2026): [`REVISAO_CRUZADA.md`](REVISAO_CRUZADA.md)
+
 ## Regras de consistência (valem para todos os arquivos)
 
 1. **Uma única grafia** para nome de serviço (`ms-<dominio>`), tópico (`dominio.evento`) e papel de usuário. A lista congelada do P1 é a fonte; quem precisar mudar, avisa no grupo antes — diagrama e texto precisam bater.
