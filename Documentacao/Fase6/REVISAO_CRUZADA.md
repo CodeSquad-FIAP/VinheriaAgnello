@@ -94,5 +94,5 @@ Preencher uma linha por achado. A Pessoa 5 consolida, o autor corrige no `.md` d
 ## Dúvidas que a rodada precisa fechar
 
 1. **Contagem de serviços:** 9 de núcleo + 3 satélites (item 1.2) contra o piso literal de 10 núcleos do enunciado. Fecha como está ou extrai o carrinho do `ms-pedidos`?
-2. **`recebimento.confirmado`:** mantido como tópico proposto (seções 1.7, 2.5 e 4.2). Confirma ou remove dos três lugares?
+2. **`recebimento.confirmado`:** decidido em 01/10/2026 — mantido, com o mesmo nome nas seções 2, 4 e no Apêndice D. Reabrir apenas se o nome mudar, e nesse caso ajustar os três lugares no mesmo commit.
 3. **Revisão cruzada e depois?** Quem faz a conferência final do `.docx` (nomes de arquivo, capa, sumário) antes do upload de 16/10.

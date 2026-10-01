@@ -51,7 +51,7 @@ Cada linha representa uma relação direta. A chamada passa pelo API Gateway qua
 | `ms-qualidade` → Kafka → `ms-notificacoes` | Solicitar aviso operacional sobre uma condição crítica | Assíncrono Kafka | `notificacao.enviar` | — |
 | `ms-clientes` → Kafka → `ms-pedidos`, `ms-analytics` e `ms-notificacoes` | Propagar anonimização sem varredura manual em cópias derivadas; no `ms-notificacoes` o evento só limpa preferência de canal e não dispara envio | Assíncrono Kafka | `cliente.anonimizado` | — |
 
-`recebimento.confirmado` é mantido porque aparece no P2 como tópico proposto para ligar `ms-fornecedores` a `ms-estoque`. Caso o grupo remova essa proposta, a linha deve ser removida simultaneamente do P2 e deste catálogo.
+`recebimento.confirmado` liga `ms-fornecedores` a `ms-estoque` e aparece no diagrama do P2 e neste catálogo com o mesmo nome, o mesmo produtor e o mesmo consumidor. Alterar o nome exige ajustar os dois lugares no mesmo commit.
 
 ## 3. Catálogo de eventos e tópicos
 
@@ -107,7 +107,7 @@ Separadamente, para a operação diária, o app mobile solicita `GET /v1/estoque
 ## 6. Consistência com P1, P2 e P5
 
 - Serviços: foram usados somente os 12 nomes congelados no glossário do P1.
-- Tópicos: aparecem os 10 tópicos do P2: `pedido.criado`, `estoque.reservado`, `pagamento.aprovado`, `pagamento.recusado`, `lote.criado`, `recebimento.confirmado`, `qualidade.leitura`, `qualidade.alerta`, `notificacao.enviar` e `cliente.anonimizado`. Os consumidores de `pedido.criado` e `notificacao.enviar` também incluem `ms-clientes`/`ms-analytics`, conforme o P2. `recebimento.confirmado` permanece marcado como proposta; se for retirado pelo grupo, deve ser removido dos dois documentos.
+- Tópicos: aparecem os 10 tópicos do P2: `pedido.criado`, `estoque.reservado`, `pagamento.aprovado`, `pagamento.recusado`, `lote.criado`, `recebimento.confirmado`, `qualidade.leitura`, `qualidade.alerta`, `notificacao.enviar` e `cliente.anonimizado`. Os consumidores de `pedido.criado` e `notificacao.enviar` também incluem `ms-clientes`/`ms-analytics`, conforme o P2. o `recebimento.confirmado` aparece com o mesmo nome no diagrama do P2 (onde o asterisco indica apenas que o tópico foi introduzido nesta fase) e neste catálogo.
 - **Checagem de consistência de 01/10/2026:** `lote.criado` passou a ter produtor `ms-lotes` e consumidores `ms-estoque`, `ms-catalogo`, `ms-qualidade` e `ms-analytics`; `cliente.anonimizado` recuperou `ms-pedidos` entre os consumidores. As duas linhas agora são idênticas às da tabela do P2, que é a fonte do desenho.
 - **Chamadas síncronas internas:** a matriz lista três relações que o P2 ainda não desenha (`ms-pedidos` → `ms-catalogo`, `ms-pedidos` → `ms-clientes` e `ms-pagamentos` → `ms-pedidos`), e o P2 desenha uma que a matriz não tinha (`ms-pedidos` → `ms-estoque`, "saldo, timeout 3 s") — agora incluída. As três primeiras são chamadas da malha com mTLS e prazo do P5 (§6.1); as três foram desenhadas na página 1 do P2 em 01/10/2026, junto da linha `ms-pedidos` → `ms-estoque` que já existia.
 - Resiliência: timeout, Circuit Breaker, retry restrito a operações idempotentes, DLQ, idempotência por `idEvento` e monitoramento de lag seguem os parâmetros da seção 6 do P5.

@@ -53,7 +53,7 @@ O enunciado pede **os principais serviços** do sistema e exemplifica quatro dom
 - **Núcleo (9)** — os que carregam a cadeia de valor da vinícola: `ms-catalogo`, `ms-producao`, `ms-lotes`, `ms-estoque`, `ms-pedidos`, `ms-fornecedores`, `ms-qualidade`, `ms-clientes` e `ms-pagamentos`;
 - **Satélites (3)** — capacidades de plataforma que servem a todos os domínios sem pertencer a nenhum: `ms-identidade`, `ms-notificacoes` e `ms-analytics`.
 
-Optamos por não inflar a lista para arredondar um número: entre criar um serviço a mais só para fechar uma contagem e manter apenas serviços com responsabilidade genuinamente coesa, ficamos com a segunda opção — o mesmo critério usado para descartar os seis itens do item 3. Se o grupo quiser um serviço de núcleo a mais, o único candidato natural é extrair o carrinho do `ms-pedidos` (avaliado e descartado no item 3 por ser estado efêmero do mesmo agregado); a decisão está registrada no item 7.
+Optamos por não inflar a lista para arredondar um número: entre criar um serviço a mais só para fechar uma contagem e manter apenas serviços com responsabilidade genuinamente coesa, ficamos com a segunda opção — o mesmo critério usado para descartar os seis itens do item 3. Se o grupo quiser um serviço de núcleo a mais, o único candidato natural é extrair o carrinho do `ms-pedidos` (avaliado e descartado no item 3 por ser estado efêmero do mesmo agregado); a decisão está registrada no Apêndice D.
 
 ### 1.3 Critérios de aceite — conferência
 
@@ -168,13 +168,13 @@ Esta é a nomenclatura definitiva dos serviços. Os itens 2, 3 e 4 desta ativida
 
 Tópicos de evento seguem a lista já escrita na parte 5, para não haver duas grafias: `pedido.criado`, `estoque.reservado`, `pagamento.aprovado`, `pagamento.recusado`, `lote.criado`, `qualidade.leitura`, `qualidade.alerta`, `notificacao.enviar` e `cliente.anonimizado`. Formato `<dominio>.<evento>`, minúsculo, sem prefixo de turma; fila morta como `<topico>.DLQ`.
 
-## 7. Pontos a confirmar com o grupo
+## Premissas adotadas e decisões registradas
 
-Registrado em 22/09/2026, antes do início das partes 2 e 3:
+Registrado em 22/09/2026, antes do início das partes 2 e 3, e confirmado nas revisões seguintes:
 
-- **Evento `recebimento.confirmado`** — proposto neste item para ligar o recebimento de compra (`ms-fornecedores`) ao `ms-estoque`. Ele **não** está na lista de tópicos já escrita na parte 5; a confirmação do nome fica com a parte 4 (comunicação entre serviços).
-- **Serviços de núcleo** — 9 de núcleo e 3 satélites, total de 12 (item 1.2). Se o grupo quiser um serviço de núcleo a mais, o candidato é extrair o carrinho do `ms-pedidos`.
-- **`MovimentacaoEstoque`** — nome canônico da entidade que hoje existe como `TransacaoEstoque.cs`; a parte 3 usa este nome no Database per Service.
+- **Evento `recebimento.confirmado`** — adotado como o evento que liga o recebimento de compra (`ms-fornecedores`) ao `ms-estoque`; a seção 4 o inclui no catálogo com os mesmos produtor e consumidor. Alterar o nome exige ajustar o diagrama e o catálogo no mesmo commit.
+- **Serviços de núcleo** — decidido manter 9 serviços de núcleo e 3 satélites, total de 12 (item 1.2). O único candidato a virar núcleo, se a contagem for revista, é extrair o carrinho do `ms-pedidos`, hoje descartado por ser estado efêmero do mesmo agregado.
+- **`MovimentacaoEstoque`** — nome canônico da entidade que existe como `TransacaoEstoque.cs`; é o nome usado na seção 3 (Database per Service) e no diagrama.
 
 ## Registro de revisão
 

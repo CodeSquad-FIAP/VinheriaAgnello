@@ -137,11 +137,11 @@ O critério que vale para os **padrões de arquitetura** desta entrega continua 
 
 ---
 
-## 6. Pontos a confirmar com o grupo
+## Premissas adotadas e decisões registradas
 
-- **Saga por coreografia:** esta entrega assume coreografia porque o P2 mostra os serviços reagindo a eventos no Kafka e não apresenta um orquestrador separado.
-- **Service Discovery:** a escolha feita no item 1.2 assume plataforma orquestrada (descoberta nativa por `Service` + DNS interno), pelo ambiente que o P5 já adota. O P2 desenha o registry/discovery sem nomear a tecnologia; se o grupo preferir declarar Consul ou Eureka, ou nomear a plataforma explicitamente no P5, o parágrafo do item 1.2 muda em uma linha.
-- **Padrões adicionais futuros:** Outbox e CQRS só devem entrar no P3 se forem também representados no P2, para preservar a consistência entre texto e diagrama. Os padrões de resiliência (Circuit Breaker, Retry, Bulkhead, DLQ, idempotência) permanecem no P5, para o documento não repetir a mesma explicação em duas seções.
+- **Saga por coreografia** — adotada: o diagrama (seção 2) mostra os serviços reagindo a eventos no Kafka e não há orquestrador separado, então a coreografia é o padrão que descreve o que está desenhado. A seção 4 detalha as mensagens de cada passo e a compensação da falha de pagamento.
+- **Service Discovery** — adotada a descoberta nativa da plataforma orquestrada (`Service` + DNS interno), a mesma do ambiente descrito na seção 5. O diagrama representa o registry sem nomear tecnologia; declarar Consul ou Eureka seria uma troca de uma linha no item 1.2.
+- **Padrões adicionais** — Outbox e CQRS só entram na seção 3 se também forem representados no diagrama, para o texto e o desenho não divergirem. Os padrões de resiliência (Circuit Breaker, Retry, Bulkhead, DLQ e idempotência) permanecem na seção 5, para o documento não repetir a mesma explicação em duas seções.
 
 ---
 
