@@ -7,7 +7,7 @@
 | Responsável | Kevin Benevides da Silva Romariz — RM 557898 |
 | Período | 22/09/2026 → 28/09/2026 |
 | Fonte dos nomes | Glossário do P1 (item 6) e lista de tópicos do P5 |
-| Revisão de consolidação | 29/09/2026 (Yasmin Kimura, P5): figuras de detalhe para o critério de legibilidade, citações de caminho do repositório e correção do rótulo do monolito |
+| Revisão de consolidação | 29/09/2026 (Yasmin Kimura, P5): figuras de detalhe para o critério de legibilidade, citações de caminho do repositório e correção do rótulo do monolito; conferência cruzada com o P4 em 01/10/2026 (tópicos, produtores e consumidores) |
 
 ![Arquitetura de microsserviços da Vinheria Agnello](P2_arquitetura.png)
 
@@ -68,9 +68,12 @@ As figuras de detalhe não acrescentam conteúdo novo ao sistema desenhado: repe
 ## 2.5 Pontos a confirmar com o grupo
 
 - **`recebimento.confirmado`** — aparece no diagrama com asterisco, como proposta do P1 (item 7). Se o P4 mudar o nome, ajustar a linha da tabela no `.drawio` e reexportar.
-- **Produtores e consumidores por tópico** — a tabela é a proposta desta parte. Principais escolhas: o `ms-notificacoes` consome apenas `notificacao.enviar` (contrato de entrada único), e `qualidade.alerta` vai para estoque, produção e analytics. O Arthur (P4) deve usar a mesma tabela em "quem fala com quem"; se discordar de alguma linha, avisar antes de 30/09.
+- **Produtores e consumidores por tópico** — a tabela é a proposta desta parte. Principais escolhas: o `ms-notificacoes` só dispara comunicação a partir de `notificacao.enviar` (contrato de entrada único) — o `cliente.anonimizado` que ele também assina serve apenas para limpar preferência de canal e não gera envio; e `qualidade.alerta` vai para estoque, produção e analytics. O Arthur (P4) deve usar a mesma tabela em "quem fala com quem"; a conferência linha a linha foi feita em 01/10/2026 e as divergências encontradas estão registradas nos itens abaixo.
 - **Nome dos arquivos** — o card pedia `fase6_arquitetura.*`; o repositório usa `P2_arquitetura.*`, no padrão das outras partes (`P1_servicos.md`, `P3_padroes.md`, `P4_integracao.md`) e da tabela do `README.md` desta pasta. Mantivemos o padrão do repositório, para a consolidação não ter dois nomes para o mesmo item; se o professor exigir o nome literal do card, renomear é uma troca de arquivo, sem impacto no conteúdo.
-- **Revisão cruzada com André (P3) e Arthur (P4)** — combinada para 26–28/09, ainda não registrada no repositório: cada padrão justificado no P3 deve existir no desenho, e a tabela de tópicos do P4 deve sair igual à da página 3.
+- **Revisão cruzada com André (P3) e Arthur (P4)** — combinada para 26–28/09 e concluída em 01/10/2026: cada padrão justificado no P3 existe no desenho, e a tabela de tópicos do P4 foi conferida linha a linha contra a página 3 deste diagrama.
+- **`lote.criado`** — produtor `ms-lotes` e consumidores `ms-estoque`, `ms-catalogo` e `ms-qualidade` (mais `ms-analytics`, pelo rodapé da tabela), conforme a posse de Lote, Genealogia e QR no P1 (item 1.4). O P4 foi alinhado a esta linha na revisão de 01/10/2026; a frase do card que dizia "o ms-producao cria o lote" fica superada por esta decisão, e o `ms-producao` segue dono da safra e do ciclo produtivo.
+- **`cliente.anonimizado`** — consumidores `ms-pedidos`, `ms-notificacoes` e `ms-analytics`, como na tabela, e não só os dois últimos. No `ms-notificacoes` o evento apenas limpa preferência de canal: quem dispara comunicação continua sendo `notificacao.enviar`, conforme a correção do item anterior.
+- **Chamadas síncronas internas** — a página 1 desenha uma única seta entre serviços (`ms-pedidos → ms-estoque`, rótulo "saldo, timeout 3 s"). A matriz do P4 lista ainda `ms-pedidos → ms-catalogo`, `ms-pedidos → ms-clientes` e `ms-pagamentos → ms-pedidos`: são chamadas da malha, com mTLS e prazo definido no P5 (seção 6), coerentes com a legenda, mas ainda não desenhadas. Representá-las exige três setas novas na página 1 e reexportação dos `.png`/`.svg` — pendência de desenho, não de texto.
 
 ## Como editar e reexportar
 
@@ -102,3 +105,4 @@ Conferência depois de reexportar: o `.svg` não pode ter `foreignObject` e prec
 
 - **v1.0 (29/09/2026)** — diagrama, legenda e texto do item 2 (Kevin Benevides, branch `docs/fase6-p2-arquitetura`, PR #3).
 - **v1.1 (29/09/2026)** — revisão de consolidação (Yasmin Kimura, P5): páginas de detalhe 1–3 no `.drawio` e seus `.png`/`.svg` (critério "fonte ≥ 12 no tamanho final"), medições de impressão no item 2.4, citações de caminho do repositório no item 2.1 (regra 4 do `README.md` da fase) e correção do rótulo do monolito (a API .NET tem banco SQLite **próprio**, configurado em `appsettings.json`; o web JSP usa `InMemoryDatabase.java` — não há banco compartilhado entre os dois).
+- **v1.2 (01/10/2026)** — revisão de consolidação (Yasmin Kimura, P5): corrigida a contradição do item 2.5 sobre o `ms-notificacoes` (ele assina `cliente.anonimizado`, que apenas limpa preferência de canal, e só dispara envio por `notificacao.enviar`); registrada a conferência cruzada com o P4 (01/10/2026), com a decisão sobre `lote.criado` e a pendência de desenho das chamadas síncronas internas que a matriz do P4 lista.
