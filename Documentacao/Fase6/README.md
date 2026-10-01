@@ -41,8 +41,8 @@ Rodada de revisão cruzada (11/10 a 13/10/2026): [`REVISAO_CRUZADA.md`](REVISAO_
 
 | Arquivo | Observação |
 |---|---|
-| [`entrega/YasminKimura_557413_3ESOA_fase6_atividade.docx`](entrega/YasminKimura_557413_3ESOA_fase6_atividade.docx) | documento editável (Word), 45 páginas, 6,3 MB |
-| [`entrega/YasminKimura_557413_3ESOA_fase6_atividade.pdf`](entrega/YasminKimura_557413_3ESOA_fase6_atividade.pdf) | PDF com o mesmo conteúdo, 6,2 MB |
+| [`entrega/YasminKimura_557413_3ESOA_fase6_atividade.docx`](entrega/YasminKimura_557413_3ESOA_fase6_atividade.docx) | documento editável (Word), 6,3 MB — a paginação é a do Word, não fixada em 45 |
+| [`entrega/YasminKimura_557413_3ESOA_fase6_atividade.pdf`](entrega/YasminKimura_557413_3ESOA_fase6_atividade.pdf) | PDF com o mesmo conteúdo, 45 páginas, 6,2 MB |
 
 O enunciado pede "um arquivo PDF" e nomeia o arquivo `.docx`; por isso os dois formatos são entregues com o mesmo prefixo e o mesmo conteúdo: as 5 seções na ordem do enunciado, capa com os integrantes e RMs, sumário, 28 tabelas numeradas e 4 figuras (o diagrama em 4 páginas paisagem).
 
