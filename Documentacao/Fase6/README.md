@@ -36,3 +36,22 @@ Rodada de revisão cruzada (11/10 a 13/10/2026): [`REVISAO_CRUZADA.md`](REVISAO_
 
 - Arquivo único `.docx`: `Nomecompleto_rm_turma_fase6_atividade.docx` (turma **3ESOA**), com capa (nome, RM, turma), sumário, as 5 seções e, no fim, a tabela de divisão de tarefas.
 - Se o portal exigir PDF, gerar o PDF com o mesmo prefixo. Se o upload for individual (padrão FIAP), cada integrante sobe a mesma versão com o próprio nome/RM.
+
+### Versão final consolidada (01/10/2026)
+
+| Arquivo | Observação |
+|---|---|
+| [`entrega/YasminKimura_557413_3ESOA_fase6_atividade.docx`](entrega/YasminKimura_557413_3ESOA_fase6_atividade.docx) | documento editável (Word), 45 páginas, 6,3 MB |
+| [`entrega/YasminKimura_557413_3ESOA_fase6_atividade.pdf`](entrega/YasminKimura_557413_3ESOA_fase6_atividade.pdf) | PDF com o mesmo conteúdo, 6,2 MB |
+
+O enunciado pede "um arquivo PDF" e nomeia o arquivo `.docx`; por isso os dois formatos são entregues com o mesmo prefixo e o mesmo conteúdo: as 5 seções na ordem do enunciado, capa com os integrantes e RMs, sumário, 28 tabelas numeradas e 4 figuras (o diagrama em 4 páginas paisagem).
+
+O documento é gerado a partir dos `.md` desta pasta, com a numeração de seções, tabelas e figuras padronizada e as remissões internas reescritas para as seções do documento (a Pessoa 5 regenera depois de qualquer correção nas partes).
+
+Para o upload individual, cada integrante sobe a **mesma** versão trocando o nome:
+
+- `RogerViana_97540_3ESOA_fase6_atividade.docx`
+- `KevinBenevides_557898_3ESOA_fase6_atividade.docx`
+- `AndreLuiz_554952_3ESOA_fase6_atividade.docx`
+- `ArthurCorrea_97781_3ESOA_fase6_atividade.docx`
+- `YasminKimura_557413_3ESOA_fase6_atividade.docx`

@@ -48,16 +48,16 @@ Para que a parte 3 (Database per Service) e o diagrama da parte 2 não encontrem
 
 ### 1.2 Sobre a contagem
 
-A sugestão do brief foi "manter **10–12 serviços de núcleo** e citar 2–3 satélites". A entrega tem **9 de núcleo + 3 satélites = 12 serviços**. Há duas leituras possíveis dessa faixa, e registramos a divergência em vez de escondê-la:
+O enunciado pede **os principais serviços** do sistema e exemplifica quatro domínios (produção, rastreamento de lotes, pedidos/compras/fornecedores/estoque e qualidade). A decomposição do grupo chegou a **12 serviços: 9 de núcleo + 3 satélites**, pelos critérios de fronteira do item 2:
 
-- se os 10–12 forem lidos como **total de serviços**, os 12 entregues estão dentro da faixa;
-- se forem lidos como **núcleo apenas**, a entrega está 1 abaixo do piso.
+- **Núcleo (9)** — os que carregam a cadeia de valor da vinícola: `ms-catalogo`, `ms-producao`, `ms-lotes`, `ms-estoque`, `ms-pedidos`, `ms-fornecedores`, `ms-qualidade`, `ms-clientes` e `ms-pagamentos`;
+- **Satélites (3)** — capacidades de plataforma que servem a todos os domínios sem pertencer a nenhum: `ms-identidade`, `ms-notificacoes` e `ms-analytics`.
 
-Optamos por não inflar a lista para fechar a conta: entre criar um décimo serviço só para arredondar e manter apenas serviços com responsabilidade genuinamente coesa, ficamos com a segunda opção — o mesmo critério que usamos para descartar os seis itens do item 3. Se o grupo preferir fechar o piso literal de 10 núcleos antes de o diagrama ser desenhado, o único candidato natural é extrair o carrinho do `ms-pedidos` (descartado no item 3 por ser estado efêmero do mesmo agregado); a decisão é do grupo, com aviso no chat conforme o combinado do congelamento.
+Optamos por não inflar a lista para arredondar um número: entre criar um serviço a mais só para fechar uma contagem e manter apenas serviços com responsabilidade genuinamente coesa, ficamos com a segunda opção — o mesmo critério usado para descartar os seis itens do item 3. Se o grupo quiser um serviço de núcleo a mais, o único candidato natural é extrair o carrinho do `ms-pedidos` (avaliado e descartado no item 3 por ser estado efêmero do mesmo agregado); a decisão está registrada no item 7.
 
 ### 1.3 Critérios de aceite — conferência
 
-| Critério do brief | Onde é atendido |
+| Critério do enunciado | Onde é atendido |
 |---|---|
 | Cada serviço tem responsabilidade única e não compartilha tabela com outro | Coluna "Responsabilidade única" da tabela do item 1 e regras de posse do item 1.1 |
 | Cada serviço diz quem é o dono do dado (uma entidade por linha) | Coluna "Dados dos quais é dono" da tabela do item 1, com as cópias derivadas declaradas no item 1.1 |
@@ -128,15 +128,24 @@ Nada disso veio de teoria abstrata. Cada corte foi ancorado em algo que o grupo 
 | `Arduino/VinheriaSensores/VinheriaSensores.ino` + `MQTT/node_red_vinheria_flow.json` + `MQTT/README_MQTT.md` | `ms-qualidade` (o Node-RED atua como gateway de integração) |
 | `Web/historico_vendas-vinheria_agnello.csv` + `Web/vinheria dashboard.twbx` | `ms-analytics` |
 
-## 5. Reconciliação com a lista de partida
+## 5. Reconciliação com os domínios do enunciado
 
-A lista de partida do brief tinha 12 nomes de serviço. O resultado da análise:
+O enunciado pede os principais serviços e exemplifica quatro domínios. A tabela abaixo é a correspondência entre cada exemplo do enunciado e os serviços propostos nesta entrega, com a razão de ter havido separação em mais de um serviço.
 
-- **Mantidos (12 de 12):** `ms-catalogo`, `ms-producao`, `ms-lotes`, `ms-estoque`, `ms-pedidos`, `ms-fornecedores`, `ms-qualidade`, `ms-clientes`, `ms-pagamentos`, `ms-notificacoes`, `ms-identidade`, `ms-analytics`. Nenhum nome foi reescrito, então a lista congelada no glossário do item 6 é a mesma que o diagrama (parte 2), os padrões (parte 3) e a comunicação (parte 4) devem usar.
-- **Renomeados:** nenhum serviço. Uma entidade muda de nome no alvo: `TransacaoEstoque` → `MovimentacaoEstoque`.
+| Exemplo do enunciado | Serviços propostos | Por que não é um serviço só |
+|---|---|---|
+| **Gestão de Produção** — registro de colheitas, fermentação, armazenamento | `ms-producao` (a armazenagem é posição de estoque e fica no `ms-estoque`) | A safra e o ciclo produtivo são um domínio coeso; a posição física do vinho pertence ao estoque, que é escrito só por ele (regra 3 do item 1.1) |
+| **Rastreamento de Vinhos** — controle de lotes, histórico de produção | `ms-lotes` (a safra vem do `ms-producao`) | Lote, genealogia, código de rastreio e histórico são um domínio só, que muda por exigência regulatória — não pelo motivo comercial do catálogo (item 2) |
+| **Gestão de Pedidos** — controle de compras, fornecedores e estoque | `ms-pedidos`, `ms-fornecedores` e `ms-estoque` | São três verdades com donos diferentes: `Pedido` (venda, cliente, receita), `PedidoCompra` (suprimento, custo, prazo) e Posição de Estoque (o que existe de fato) — separação justificada nos cortes "Fornecedores × pedidos" e "Compras e recebimento × estoque" (item 2) |
+| **Monitoramento de Qualidade** — temperatura, umidade e análises laboratoriais | `ms-qualidade` | Um serviço só, com banco de série temporal: recebe a telemetria da adega e publica os alertas (seções 2 e 4) |
+
+O resultado da análise dos dois lados:
+
+- **Sem correspondência direta no enunciado (6):** `ms-catalogo` (vitrine comercial dos vinhos), `ms-clientes` (cadastro, perfil e consentimento LGPD), `ms-pagamentos` (cobrança e conciliação), `ms-identidade` (credencial e RBAC), `ms-notificacoes` (e-mail, WhatsApp e push) e `ms-analytics` (indicadores e previsão) — todos ancorados em algo que já existe no repositório (item 4).
+- **Nomes:** nenhum serviço foi renomeado; o glossário do item 6 é a mesma nomenclatura que o diagrama (seção 2), os padrões (seção 3) e a comunicação (seção 4) usam. Uma entidade muda de nome no alvo: `TransacaoEstoque` → `MovimentacaoEstoque`.
 - **Cortados:** nenhum serviço. O carrinho foi avaliado e **não** promovido a serviço; permanece como agregado dentro do `ms-pedidos` (justificativa no item 3).
-- **Acrescentados:** nenhum serviço novo. O que a análise acrescentou em relação à lista de partida foi a **classificação núcleo/satélite** e a separação explícita entre `ms-clientes` (dado de cliente e LGPD) e `ms-identidade` (credencial e RBAC), que na lista apareciam apenas como itens soltos.
-- **Contagem:** 12 serviços (9 núcleo + 3 satélites). A divergência em relação ao piso literal de 10 núcleos está registrada no item 1.2 e vai para a decisão do grupo.
+- **Separação que o enunciado não pede explicitamente:** a **classificação núcleo/satélite** e a divisão entre `ms-clientes` (dado de cliente e LGPD) e `ms-identidade` (credencial e RBAC), que sem ela ficariam no mesmo serviço de plataforma.
+- **Contagem:** 12 serviços (9 núcleo + 3 satélites), conforme o item 1.2.
 
 ## 6. Glossário de nomes
 
@@ -164,7 +173,7 @@ Tópicos de evento seguem a lista já escrita na parte 5, para não haver duas g
 Registrado em 22/09/2026, antes do início das partes 2 e 3:
 
 - **Evento `recebimento.confirmado`** — proposto neste item para ligar o recebimento de compra (`ms-fornecedores`) ao `ms-estoque`. Ele **não** está na lista de tópicos já escrita na parte 5; a confirmação do nome fica com a parte 4 (comunicação entre serviços).
-- **Contagem de serviços** — 9 de núcleo e 3 satélites, total de 12 (item 1.2). Se o grupo decidir levar o núcleo a 10, o candidato é extrair o carrinho do `ms-pedidos`.
+- **Serviços de núcleo** — 9 de núcleo e 3 satélites, total de 12 (item 1.2). Se o grupo quiser um serviço de núcleo a mais, o candidato é extrair o carrinho do `ms-pedidos`.
 - **`MovimentacaoEstoque`** — nome canônico da entidade que hoje existe como `TransacaoEstoque.cs`; a parte 3 usa este nome no Database per Service.
 
 ## Registro de revisão
