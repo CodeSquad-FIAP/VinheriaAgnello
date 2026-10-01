@@ -9,7 +9,7 @@
 | Período | 22/09/2026 → 30/09/2026 |
 | Dependências | `P1_servicos.md` e `P2_arquitetura.md` |
 | Fonte dos nomes | Glossário congelado do P1 e componentes representados no P2 |
-| Versão | 1.0 — entrega inicial do Item 3 |
+| Versão | 1.1 — revisão de consolidação de 30/09/2026 (Service Discovery justificado pelo ambiente-alvo e fronteira explícita com a seção 6 do P5) |
 
 ---
 
@@ -29,9 +29,9 @@
 
 **O que resolve →** O Service Discovery permite que os componentes da arquitetura localizem instâncias dos serviços sem depender de endereços IP fixos. Isso é importante em um ambiente distribuído, porque instâncias podem ser reiniciadas, substituídas ou replicadas sem exigir reconfiguração manual dos consumidores.
 
-**Como aparece no nosso sistema →** O P2 representa explicitamente um componente de **Service registry / discovery**, responsável por registrar e localizar réplicas e por disponibilizar informações de *health check*. Dessa forma, serviços como `ms-pedidos`, `ms-estoque` e `ms-pagamentos` podem ser localizados pela plataforma sem acoplamento a um endereço fixo. Como o diagrama não congela Kubernetes, Consul ou Eureka, esta entrega justifica o padrão pelo registry/discovery já representado, sem assumir uma tecnologia ainda não definida pelo grupo.
+**Como aparece no nosso sistema →** O P2 representa explicitamente um componente de **Service registry / discovery**, responsável por registrar e localizar réplicas e por disponibilizar informações de *health check*. Dessa forma, serviços como `ms-pedidos`, `ms-estoque` e `ms-pagamentos` podem ser localizados pela plataforma sem acoplamento a um endereço fixo. A escolha aqui é pelo **ambiente**, não por moda: o alvo do grupo é uma plataforma orquestrada, como o próprio P5 assume ao dimensionar por *pod*, com HPA e mínimo de 2 réplicas nos serviços de núcleo (P5, seção 5). Nesse ambiente a descoberta é nativa — cada serviço é exposto por um `Service` com DNS interno, e as réplicas entram e saem do balanceamento conforme o *readiness probe*, sem catálogo externo de endpoints. Consul ou Eureka se justificariam **fora** de um orquestrador, onde esse catálogo não existe: mantê-los aqui acrescentaria um segundo plano de controle para resolver o que o DNS interno já resolve. O padrão permanece o mesmo — muda só quem executa o papel de registry/discovery.
 
-**Trade-off/limitação →** A descoberta de serviços adiciona infraestrutura e operação ao ambiente. Se o registry estiver indisponível ou com informações desatualizadas, novas chamadas podem não localizar uma instância saudável. Por isso, esse componente também precisa de alta disponibilidade e monitoramento.
+**Trade-off/limitação →** A descoberta de serviços adiciona infraestrutura e operação ao ambiente. Se o registry estiver indisponível ou com informações desatualizadas, novas chamadas podem não localizar uma instância saudável. Por isso, esse componente também precisa de alta disponibilidade e monitoramento. Delegar a descoberta à plataforma transfere essa responsabilidade para ela: `Service`, DNS interno e *probes* passam a ser parte do caminho crítico, e um *readiness probe* mal configurado tira do balanceamento uma instância que está no ar.
 
 ---
 
@@ -95,7 +95,7 @@ Os padrões abaixo foram escolhidos entre os extras sugeridos na atividade porqu
 
 **O que resolve →** O Service Mesh centraliza preocupações da comunicação entre serviços, principalmente segurança do tráfego interno. O uso de mTLS permite que as duas pontas da comunicação se autentiquem mutuamente e que os dados trafeguem cifrados dentro da malha.
 
-**Como aparece no nosso sistema →** O P2 representa um **Service mesh (mTLS)** como componente transversal e informa que toda chamada interna da malha utiliza mTLS, com canal cifrado e rotação automática de certificados. Assim, comunicações entre serviços como `ms-pedidos`, `ms-estoque`, `ms-pagamentos`, `ms-clientes` e os demais participantes não dependem apenas da proteção aplicada na borda pelo API Gateway.
+**Como aparece no nosso sistema →** O P2 representa um **Service mesh (mTLS)** como componente transversal e informa que toda chamada interna da malha utiliza mTLS, com canal cifrado e rotação automática de certificados. Assim, comunicações entre serviços como `ms-pedidos`, `ms-estoque`, `ms-pagamentos`, `ms-clientes` e os demais participantes não dependem apenas da proteção aplicada na borda pelo API Gateway. A política de certificados e de identidade entre serviços é detalhada na seção 3.4 do P5; neste item o *service mesh* é justificado como decisão de arquitetura, sem repetir o texto daquela seção.
 
 **Trade-off/limitação →** O service mesh adiciona complexidade operacional à plataforma, pois exige gerenciamento dos componentes da malha, certificados, políticas e observabilidade. Também adiciona uma camada extra ao caminho de comunicação, que precisa ser corretamente configurada e monitorada para não dificultar o diagnóstico de falhas.
 
@@ -103,9 +103,12 @@ Os padrões abaixo foram escolhidos entre os extras sugeridos na atividade porqu
 
 ## 3. Padrões avaliados e não incluídos nesta versão
 
-A atividade sugere outros padrões que poderiam fortalecer a arquitetura, como Circuit Breaker, Retry com backoff, Bulkhead, Transactional Outbox, Idempotent Consumer e CQRS. Eles não foram incluídos como padrões principais desta versão porque o critério definido para o Item 3 exige consistência com o diagrama do P2.
+A atividade sugere outros padrões que poderiam fortalecer a arquitetura, como Circuit Breaker, Retry com backoff, Bulkhead, Transactional Outbox, Idempotent Consumer e CQRS. Eles não entram nesta lista por dois motivos distintos, que não devem ser confundidos:
 
-A decisão desta entrega foi priorizar somente padrões que possuem representação explícita ou suporte direto no desenho atual. Caso algum desses padrões seja adicionado posteriormente ao P2, esta seção pode ser revista antes da consolidação final.
+- **Circuit Breaker, Retry com backoff, Bulkhead, dead letter queue e idempotência no consumidor estão na arquitetura** — são tratados como **políticas de resiliência** na seção 6 do P5, com parâmetros definidos (janela de erro, número de tentativas, retenção da DLQ). Aqui não são repetidos para não duplicar texto entre as seções do mesmo documento: o P3 justifica o padrão, o P5 detalha a política.
+- **CQRS e Transactional Outbox continuam fora** porque não existem no desenho do P2: não há read model de catálogo nem tabela de *outbox* representados. Se entrarem no P2 antes da consolidação, esta seção é revista; caso contrário, citá-los aqui seria justificar um padrão que o diagrama não sustenta.
+
+O critério que vale para os **padrões de arquitetura** desta entrega continua sendo o do diagrama: só entra o que tem representação explícita ou suporte direto no P2. O que muda na redação é não tratar os itens acima como se estivessem fora da arquitetura — os de resiliência estão nela, descritos na parte do P5 que é dona desse assunto.
 
 ---
 
@@ -119,6 +122,7 @@ A decisão desta entrega foi priorizar somente padrões que possuem representaç
 | Saga compara coreografia e orquestração | Atendido no item 1.4 |
 | Saga escolhe uma abordagem com argumento | Atendido: coreografia, por ser a abordagem representada no P2 |
 | Padrões extras aparecem no diagrama | Atendido: Strangler Fig, Redis/API Composition e Service Mesh com mTLS |
+| Padrões de resiliência não duplicados entre P3 e P5 | Atendido: Circuit Breaker, Retry, Bulkhead, DLQ e idempotência ficam como política na seção 6 do P5 (item 3) |
 | Nomes dos serviços seguem o glossário congelado do P1 | Atendido |
 | Nenhum serviço novo foi inventado | Atendido |
 
@@ -129,18 +133,19 @@ A decisão desta entrega foi priorizar somente padrões que possuem representaç
 - **P1 — Roger:** fornece a lista congelada de serviços, responsabilidades e posse de dados usada principalmente no Database per Service.
 - **P2 — Kevin:** fornece o desenho que valida quais padrões realmente aparecem na arquitetura.
 - **P4 — Arthur:** detalha a comunicação entre serviços e o fluxo de mensagens. Neste P3, a Saga é apresentada apenas como padrão arquitetural e justificada pelo seu propósito.
-- **P5 — Yasmin:** pode reutilizar estas decisões na seção de governança, segurança, tolerância a falhas e consolidação.
+- **P5 — Yasmin:** reutiliza estas decisões na seção de governança, segurança, tolerância a falhas e consolidação. Fronteira acordada: o P3 justifica o padrão (o "porquê"); as políticas de resiliência, com parâmetros, ficam na seção 6 do P5 (o "como"), para não haver texto repetido entre as duas seções.
 
 ---
 
 ## 6. Pontos a confirmar com o grupo
 
 - **Saga por coreografia:** esta entrega assume coreografia porque o P2 mostra os serviços reagindo a eventos no Kafka e não apresenta um orquestrador separado.
-- **Service Discovery:** o P2 define registry/discovery, mas não congela uma tecnologia específica. Por isso, esta parte não escolhe Kubernetes, Consul ou Eureka.
-- **Padrões adicionais futuros:** Circuit Breaker, Outbox e CQRS só devem entrar no P3 se forem também representados no P2, para preservar a consistência entre texto e diagrama.
+- **Service Discovery:** a escolha feita no item 1.2 assume plataforma orquestrada (descoberta nativa por `Service` + DNS interno), pelo ambiente que o P5 já adota. O P2 desenha o registry/discovery sem nomear a tecnologia; se o grupo preferir declarar Consul ou Eureka, ou nomear a plataforma explicitamente no P5, o parágrafo do item 1.2 muda em uma linha.
+- **Padrões adicionais futuros:** Outbox e CQRS só devem entrar no P3 se forem também representados no P2, para preservar a consistência entre texto e diagrama. Os padrões de resiliência (Circuit Breaker, Retry, Bulkhead, DLQ, idempotência) permanecem no P5, para o documento não repetir a mesma explicação em duas seções.
 
 ---
 
 ## Registro de revisão
 
-- **v1.0 (30/09/2026)** — versão inicial do Item 3, com os quatro padrões obrigatórios e três padrões adicionais consistentes com o P1 e o P2.
+- **v1.0 (30/09/2026)** — versão inicial do Item 3, com os quatro padrões obrigatórios e três padrões adicionais consistentes com o P1 e o P2 (André Luiz dos Santos Flores).
+- **v1.1 (30/09/2026)** — revisão de consolidação (Yasmin Kimura, P5): Service Discovery justificado pelo ambiente-alvo (plataforma orquestrada, `Service` + DNS interno) em vez de manter a tecnologia indefinida; fronteira explícita com a seção 6 do P5 na lista de padrões não incluídos, para o documento não afirmar que Circuit Breaker, Bulkhead e idempotência estão fora da arquitetura.
