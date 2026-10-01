@@ -8,7 +8,7 @@
 | Período | 29/09/2026 → 05/10/2026 |
 | Dependências | `P1_servicos.md`, `P2_arquitetura.md`, `P3_padroes.md` e `P5_seguranca_governanca.md` |
 | Fonte dos nomes | Glossário congelado do P1 e tópicos representados no P2 |
-| Versão | 1.3 — revisão de consolidação de 01/10/2026 |
+| Versão | 1.4 — revisão de consolidação de 01/10/2026 |
 
 Este item define **como** os serviços se integram. O P3 explica **por que** a compra usa Saga por coreografia; aqui estão os canais, contratos e decisões concretas dessa Saga.
 
@@ -109,7 +109,7 @@ Separadamente, para a operação diária, o app mobile solicita `GET /v1/estoque
 - Serviços: foram usados somente os 12 nomes congelados no glossário do P1.
 - Tópicos: aparecem os 10 tópicos do P2: `pedido.criado`, `estoque.reservado`, `pagamento.aprovado`, `pagamento.recusado`, `lote.criado`, `recebimento.confirmado`, `qualidade.leitura`, `qualidade.alerta`, `notificacao.enviar` e `cliente.anonimizado`. Os consumidores de `pedido.criado` e `notificacao.enviar` também incluem `ms-clientes`/`ms-analytics`, conforme o P2. `recebimento.confirmado` permanece marcado como proposta; se for retirado pelo grupo, deve ser removido dos dois documentos.
 - **Checagem de consistência de 01/10/2026:** `lote.criado` passou a ter produtor `ms-lotes` e consumidores `ms-estoque`, `ms-catalogo`, `ms-qualidade` e `ms-analytics`; `cliente.anonimizado` recuperou `ms-pedidos` entre os consumidores. As duas linhas agora são idênticas às da tabela do P2, que é a fonte do desenho.
-- **Chamadas síncronas internas:** a matriz lista três relações que o P2 ainda não desenha (`ms-pedidos` → `ms-catalogo`, `ms-pedidos` → `ms-clientes` e `ms-pagamentos` → `ms-pedidos`), e o P2 desenha uma que a matriz não tinha (`ms-pedidos` → `ms-estoque`, "saldo, timeout 3 s") — agora incluída. As três primeiras são chamadas da malha com mTLS e prazo do P5 (§6.1); se o grupo quiser representá-las no desenho, são três setas novas na página 1, com reexportação dos `.png`/`.svg`. A pendência está registrada no item 2.5 do P2.
+- **Chamadas síncronas internas:** a matriz lista três relações que o P2 ainda não desenha (`ms-pedidos` → `ms-catalogo`, `ms-pedidos` → `ms-clientes` e `ms-pagamentos` → `ms-pedidos`), e o P2 desenha uma que a matriz não tinha (`ms-pedidos` → `ms-estoque`, "saldo, timeout 3 s") — agora incluída. As três primeiras são chamadas da malha com mTLS e prazo do P5 (§6.1); as três foram desenhadas na página 1 do P2 em 01/10/2026, junto da linha `ms-pedidos` → `ms-estoque` que já existia.
 - Resiliência: timeout, Circuit Breaker, retry restrito a operações idempotentes, DLQ, idempotência por `idEvento` e monitoramento de lag seguem os parâmetros da seção 6 do P5.
 - Segurança: clientes entram pelo gateway; chamadas internas usam mTLS; nenhum serviço acessa diretamente o banco de outro serviço.
 
@@ -117,3 +117,4 @@ Separadamente, para a operação diária, o app mobile solicita `GET /v1/estoque
 
 - **v1.2 (01/10/2026)** — revisão editorial para alinhar cabeçalho ao padrão das demais partes e distinguir a proposta de envelope de evento de um contrato já implementado.
 - **v1.3 (01/10/2026)** — revisão de consolidação (Yasmin Kimura, P5): conferência cruzada da matriz e do catálogo contra a página 3 do `P2_arquitetura.drawio`; `lote.criado` alinhado ao P1 (item 1.4 — Lote, Genealogia e QR são do `ms-lotes`) e ao P2; `cliente.anonimizado` com o consumidor `ms-pedidos` restaurado; incluídas as linhas `API Gateway → monolito atual` (Strangler Fig) e `ms-pedidos → ms-estoque`; linha de autenticação corrigida para o fluxo OIDC do P5 (a emissão de token não passa pelo gateway); caminhos de arquivo no fluxo IoT (regra 4 do `README.md` da fase); nova seção 5 com a conferência dos critérios de aceite.
+- **v1.4 (01/10/2026)** — as três chamadas síncronas internas que faltavam no desenho foram acrescentadas à página 1 do `P2_arquitetura.drawio` (itens 2.1 e 2.5 do P2), então a matriz e o diagrama passam a mostrar as mesmas quatro relações síncronas entre serviços.

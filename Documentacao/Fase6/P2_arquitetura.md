@@ -7,7 +7,7 @@
 | Responsável | Kevin Benevides da Silva Romariz — RM 557898 |
 | Período | 22/09/2026 → 28/09/2026 |
 | Fonte dos nomes | Glossário do P1 (item 6) e lista de tópicos do P5 |
-| Revisão de consolidação | 29/09/2026 (Yasmin Kimura, P5): figuras de detalhe para o critério de legibilidade, citações de caminho do repositório e correção do rótulo do monolito; conferência cruzada com o P4 em 01/10/2026 (tópicos, produtores e consumidores) |
+| Revisão de consolidação | 29/09/2026 (Yasmin Kimura, P5): figuras de detalhe para o critério de legibilidade, citações de caminho do repositório e correção do rótulo do monolito; conferência cruzada com o P4 em 01/10/2026 (tópicos, produtores e consumidores) e setas síncronas internas na página 1 |
 
 ![Arquitetura de microsserviços da Vinheria Agnello](P2_arquitetura.png)
 
@@ -17,7 +17,7 @@
 
 O desenho é lido da esquerda para a direita. Os **clientes** — web (páginas JSP atuais, em `Web/src/main/java/br/com/fiap/vinheriaagnello/`), app mobile (Android/Room, em `Mobile/app/src/main/java/com/example/myapplication/data/local/`) e painel interno da adega — só entram no sistema pelo **API Gateway**. Ele roteia por prefixo (`/api/<dominio>` → `ms-<dominio>`), valida o JWT emitido pelo `ms-identidade` (Keycloak, ADR-002 — `Documentacao/Fase6/adr/ADR-002-validacao-token-gateway.md`), aplica o *rate limit* com contadores no Redis e faz a agregação (BFF) do app mobile. Dentro da **malha de serviços**, toda chamada trafega com mTLS.
 
-Os **12 serviços** da lista congelada do P1 aparecem com os mesmos nomes: 9 de núcleo e 3 satélites de plataforma. Cada um tem **seu próprio banco** (Database per Service): PostgreSQL na maioria, MongoDB no `ms-catalogo`, TimescaleDB (série temporal) no `ms-qualidade` e um read-model PostgreSQL no `ms-analytics`. Nenhuma linha liga um serviço ao banco de outro.
+Os **12 serviços** da lista congelada do P1 aparecem com os mesmos nomes: 9 de núcleo e 3 satélites de plataforma. Cada um tem **seu próprio banco** (Database per Service): PostgreSQL na maioria, MongoDB no `ms-catalogo`, TimescaleDB (série temporal) no `ms-qualidade` e um read-model PostgreSQL no `ms-analytics`. Nenhuma linha liga um serviço ao banco de outro. As setas azuis contínuas dentro da malha são as chamadas **síncronas** entre serviços: `ms-pedidos → ms-estoque` (consulta de saldo), `ms-pedidos → ms-catalogo` e `ms-pedidos → ms-clientes` (validação na criação do pedido) e `ms-pagamentos → ms-pedidos` (consulta administrativa de conciliação). Elas existem onde a resposta é necessária para continuar; todo o resto da conversa entre serviços é evento no Kafka.
 
 A camada assíncrona é o **Apache Kafka**. A tabela dentro do bloco lista cada tópico com seu produtor e seus consumidores. O fluxo de compra segue a saga do P5: `pedido.criado` → `estoque.reservado` → `pagamento.aprovado` ou `pagamento.recusado` → confirmação ou cancelamento → `notificacao.enviar`.
 
@@ -73,11 +73,11 @@ As figuras de detalhe não acrescentam conteúdo novo ao sistema desenhado: repe
 - **Revisão cruzada com André (P3) e Arthur (P4)** — combinada para 26–28/09 e concluída em 01/10/2026: cada padrão justificado no P3 existe no desenho, e a tabela de tópicos do P4 foi conferida linha a linha contra a página 3 deste diagrama.
 - **`lote.criado`** — produtor `ms-lotes` e consumidores `ms-estoque`, `ms-catalogo` e `ms-qualidade` (mais `ms-analytics`, pelo rodapé da tabela), conforme a posse de Lote, Genealogia e QR no P1 (item 1.4). O P4 foi alinhado a esta linha na revisão de 01/10/2026; a frase do card que dizia "o ms-producao cria o lote" fica superada por esta decisão, e o `ms-producao` segue dono da safra e do ciclo produtivo.
 - **`cliente.anonimizado`** — consumidores `ms-pedidos`, `ms-notificacoes` e `ms-analytics`, como na tabela, e não só os dois últimos. No `ms-notificacoes` o evento apenas limpa preferência de canal: quem dispara comunicação continua sendo `notificacao.enviar`, conforme a correção do item anterior.
-- **Chamadas síncronas internas** — a página 1 desenha uma única seta entre serviços (`ms-pedidos → ms-estoque`, rótulo "saldo, timeout 3 s"). A matriz do P4 lista ainda `ms-pedidos → ms-catalogo`, `ms-pedidos → ms-clientes` e `ms-pagamentos → ms-pedidos`: são chamadas da malha, com mTLS e prazo definido no P5 (seção 6), coerentes com a legenda, mas ainda não desenhadas. Representá-las exige três setas novas na página 1 e reexportação dos `.png`/`.svg` — pendência de desenho, não de texto.
+- **Chamadas síncronas internas** — resolvido em 01/10/2026: a página 1 passou a desenhar as quatro chamadas entre serviços que a matriz do P4 lista (`ms-pedidos → ms-estoque`, `ms-pedidos → ms-catalogo`, `ms-pedidos → ms-clientes` e `ms-pagamentos → ms-pedidos`), em setas azuis contínuas com os rótulos "saldo (timeout 3 s)", "valida produto e preço", "valida cliente e consentimento" e "conciliação (leitura)". Os prazos de cada chamada são os do P5 (seção 6).
 
 ## Como editar e reexportar
 
-Abrir `P2_arquitetura.drawio` no draw.io (desktop ou app.diagrams.net). A página 1 é a visão geral; as páginas 2 a 4 são os detalhes. Para exportar **uma** página:
+Abrir `P2_arquitetura.drawio` no draw.io (desktop ou app.diagrams.net). A página 1 é a visão geral; as páginas 2 a 4 são os detalhes. No Windows o CLI é o binário `"C:\Program Files\draw.io\draw.io.exe"` (é o mesmo `drawio` dos exemplos abaixo). Para exportar **uma** página:
 
 ```bash
 # PNG (a opção -p é 1-based; NÃO usar --theme: na versão 30.3.6 ela faz o CLI
@@ -106,3 +106,4 @@ Conferência depois de reexportar: o `.svg` não pode ter `foreignObject` e prec
 - **v1.0 (29/09/2026)** — diagrama, legenda e texto do item 2 (Kevin Benevides, branch `docs/fase6-p2-arquitetura`, PR #3).
 - **v1.1 (29/09/2026)** — revisão de consolidação (Yasmin Kimura, P5): páginas de detalhe 1–3 no `.drawio` e seus `.png`/`.svg` (critério "fonte ≥ 12 no tamanho final"), medições de impressão no item 2.4, citações de caminho do repositório no item 2.1 (regra 4 do `README.md` da fase) e correção do rótulo do monolito (a API .NET tem banco SQLite **próprio**, configurado em `appsettings.json`; o web JSP usa `InMemoryDatabase.java` — não há banco compartilhado entre os dois).
 - **v1.2 (01/10/2026)** — revisão de consolidação (Yasmin Kimura, P5): corrigida a contradição do item 2.5 sobre o `ms-notificacoes` (ele assina `cliente.anonimizado`, que apenas limpa preferência de canal, e só dispara envio por `notificacao.enviar`); registrada a conferência cruzada com o P4 (01/10/2026), com a decisão sobre `lote.criado` e a pendência de desenho das chamadas síncronas internas que a matriz do P4 lista.
+- **v1.3 (01/10/2026)** — revisão de consolidação (Yasmin Kimura, P5): desenhadas na página 1 as três chamadas síncronas internas que faltavam (`ms-pedidos → ms-catalogo`, `ms-pedidos → ms-clientes` e `ms-pagamentos → ms-pedidos`), em setas azuis contínuas com rótulo, completando as quatro relações síncronas da matriz do P4; `.png` e `.svg` reexportados com os mesmos parâmetros do item 2.4 (tamanho e menor fonte medidos novamente: 3992 × 3126 px e 8,6 pt, sem alteração); acrescentado o caminho do CLI do draw.io no Windows.
