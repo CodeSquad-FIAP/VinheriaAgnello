@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseUrls("http://0.0.0.0:8080");
 var app = builder.Build();
 
-const string Versao = "1.0.0";
+const string Versao = "1.1.0";
 const string CatalogoHost = "catalogo.vinheria.local";
 const int CatalogoPorta = 8080;
 
