@@ -1,0 +1,5 @@
+# Zona direta vinheria.local — registros A dos hosts internos
+172.28.0.53   dns.vinheria.local ns1.vinheria.local dns
+172.28.0.10   catalogo.vinheria.local catalogo
+172.28.0.11   pedidos.vinheria.local pedidos
+172.28.0.100  cliente.vinheria.local cliente

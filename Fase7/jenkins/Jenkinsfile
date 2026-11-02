@@ -1,0 +1,59 @@
+pipeline {
+    agent any
+
+    options {
+        timestamps()
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+        disableConcurrentBuilds()
+    }
+
+    environment {
+        // pasta de publicação (simula o IIS/produção).
+        // No host: Fase7/jenkins/publicacao
+        PUBLISH_DIR  = '/var/jenkins_home/publicacao'
+        SERVICES_DIR = 'Fase7/services'
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                echo "Deploy da Vinheria"
+                sh '''#!/bin/sh
+                    set -eu
+                    echo "SDK: $(dotnet --version)"
+                    dotnet publish "$SERVICES_DIR/catalogo-api/Catalogo.Api.csproj" -c Release -o out/catalogo
+                    dotnet publish "$SERVICES_DIR/pedidos-api/Pedidos.Api.csproj" -c Release -o out/pedidos
+                    echo "artefatos gerados:"
+                    ls -1 out/catalogo/*.dll | head -5
+                '''
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh '''#!/bin/sh
+                    set -eu
+                    COMMIT=$(git rev-parse --short HEAD)
+                    DIA_HORA=$(date '+%Y-%m-%d %H:%M:%S')
+                    for svc in catalogo pedidos; do
+                        rm -rf "$PUBLISH_DIR/$svc"
+                        mkdir -p "$PUBLISH_DIR/$svc"
+                        cp -R out/$svc/. "$PUBLISH_DIR/$svc"/
+                        printf 'servico=%s\\nbuild=%s\\ncommit=%s\\nbranch=%s\\ndata_hora=%s\\n' \\
+                            "$svc" "$BUILD_NUMBER" "$COMMIT" "${GIT_BRANCH:-main}" "$DIA_HORA" \\
+                            > "$PUBLISH_DIR/$svc/BUILD_INFO.txt"
+                        echo "publicado: $PUBLISH_DIR/$svc"
+                    done
+                    echo "--- prova do deploy (arquivo publicado com data/hora) ---"
+                    ls -l "$PUBLISH_DIR"/*/BUILD_INFO.txt
+                    cat "$PUBLISH_DIR/pedidos/BUILD_INFO.txt"
+                '''
+            }
+        }
+    }
+
+    post {
+        success { echo "Build ${env.BUILD_NUMBER} publicado em ${env.PUBLISH_DIR}" }
+        failure { echo "Build ${env.BUILD_NUMBER} FALHOU" }
+    }
+}

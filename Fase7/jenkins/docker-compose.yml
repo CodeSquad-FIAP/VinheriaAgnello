@@ -1,0 +1,15 @@
+services:
+  jenkins:
+    build: .
+    container_name: vinheria-jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      # pasta de publicação (simula o IIS/produção): visível no host em Fase7/jenkins/publicacao
+      - ./publicacao:/var/jenkins_home/publicacao
+    restart: unless-stopped
+
+volumes:
+  jenkins_home:

@@ -1,0 +1,8 @@
+# artefatos de build local dos microsserviços
+services/**/bin/
+services/**/obj/
+out/
+
+# pasta de publicação do Jenkins (conteúdo gerado nos builds; só o .gitignore é versionado)
+jenkins/publicacao/*
+!jenkins/publicacao/.gitignore

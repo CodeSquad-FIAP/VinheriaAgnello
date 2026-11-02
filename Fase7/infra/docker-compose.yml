@@ -1,0 +1,81 @@
+services:
+  # --- Servidor DNS interno (dnsmasq): zona vinheria.local + DHCP da simulação ---
+  dns:
+    build: ./dns
+    container_name: vinheria-dns
+    hostname: dns
+    cap_add: [NET_ADMIN, NET_RAW]
+    networks:
+      vinheria-net:
+        ipv4_address: 172.28.0.53
+    volumes:
+      - ./dns/dnsmasq.conf:/etc/dnsmasq.conf:ro
+      - ./dns/hosts.vinheria:/etc/dnsmasq.d/hosts.vinheria:ro
+      # reservas ficam FORA de /etc/dnsmasq.d para não serem lidas como config geral
+      - ./dhcp/dhcp-hosts.conf:/etc/dhcp-hosts.conf:ro
+      - leases:/var/lib/misc
+    restart: unless-stopped
+
+  # --- Microsserviço Catálogo de Vinhos ---
+  catalogo:
+    build:
+      context: ../services/catalogo-api
+    container_name: vinheria-catalogo
+    hostname: catalogo
+    dns:
+      - 172.28.0.53
+    networks:
+      vinheria-net:
+        ipv4_address: 172.28.0.10
+    restart: unless-stopped
+
+  # --- Microsserviço de Pedidos (chama o Catálogo pelo nome) ---
+  pedidos:
+    build:
+      context: ../services/pedidos-api
+    container_name: vinheria-pedidos
+    hostname: pedidos
+    dns:
+      - 172.28.0.53
+    networks:
+      vinheria-net:
+        ipv4_address: 172.28.0.11
+    restart: unless-stopped
+
+  # --- Container de testes: nslookup / getent / curl dentro da rede ---
+  cliente:
+    build: ./cliente
+    container_name: vinheria-cliente
+    hostname: cliente
+    dns:
+      - 172.28.0.53
+    networks:
+      vinheria-net:
+        ipv4_address: 172.28.0.100
+    command: ["sleep", "infinity"]
+    restart: unless-stopped
+
+  # --- Cliente DHCP: pede endereço ao dnsmasq e mostra a concessão (DORA) ---
+  dhcp-cliente:
+    build: ./dhcp-cliente
+    container_name: vinheria-dhcp-cliente
+    hostname: dhcp-cliente
+    cap_add: [NET_ADMIN, NET_RAW]
+    mac_address: "02:42:ac:1c:00:96"   # MAC fixo -> tem reserva no DHCP (172.28.0.150)
+    networks:
+      vinheria-net:
+        ipv4_address: 172.28.0.99      # IP inicial em uso; o DHCP entrega o reservado
+    command: ["sleep", "infinity"]
+    restart: unless-stopped
+
+networks:
+  vinheria-net:
+    name: vinheria-net
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/24
+          gateway: 172.28.0.1
+
+volumes:
+  leases:
