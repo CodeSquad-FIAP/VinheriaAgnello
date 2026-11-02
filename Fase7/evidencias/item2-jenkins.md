@@ -77,6 +77,13 @@ BUILD_INFO.txt  Catalogo.Api  Catalogo.Api.deps.json  Catalogo.Api.dll
 Catalogo.Api.pdb  Catalogo.Api.runtimeconfig.json  Catalogo.Api.staticwebassets.endpoints.json  web.config
 ```
 
+## Prints (imagens)
+
+- `Fase7/evidencias/jenkins-historico-builds.png` — builds #1 e #2 no histórico do job
+- `Fase7/evidencias/jenkins-console-build2.png` — console do build #2 (checkout do commit `a7fd682`)
+- `Fase7/evidencias/prints/publicacao.png` — pasta de publicação vista do host, com `BUILD_INFO.txt` e
+  a data/hora do build
+
 ## Como reproduzir
 
 ```bash

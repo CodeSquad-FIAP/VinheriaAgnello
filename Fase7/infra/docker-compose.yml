@@ -22,6 +22,7 @@ services:
       context: ../services/catalogo-api
     container_name: vinheria-catalogo
     hostname: catalogo
+    mac_address: "02:42:ac:1c:00:0a"   # reserva DHCP de catalogo.vinheria.local (172.28.0.10)
     dns:
       - 172.28.0.53
     networks:
@@ -35,6 +36,7 @@ services:
       context: ../services/pedidos-api
     container_name: vinheria-pedidos
     hostname: pedidos
+    mac_address: "02:42:ac:1c:00:0b"   # reserva DHCP de pedidos.vinheria.local (172.28.0.11)
     dns:
       - 172.28.0.53
     networks:

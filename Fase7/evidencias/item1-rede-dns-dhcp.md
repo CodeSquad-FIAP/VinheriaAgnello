@@ -95,6 +95,50 @@ dnsmasq-dhcp[1]: 1666301516 DHCPACK(eth0) 172.28.0.150 02:42:ac:1c:00:96 dhcp-cl
 dnsmasq-dhcp[1]: 1666301516 broadcast response
 ```
 
+## 5. Reserva DHCP por serviço (catálogo e pedidos)
+
+Os dois microsserviços têm MAC fixo (`mac_address` no `docker-compose.yml`) e reserva própria no
+`dhcp-hostsfile`; o pedido de IP de cada um devolve exatamente o IP do seu registro DNS:
+
+```
+02:42:ac:1c:00:0a,catalogo.vinheria.local,172.28.0.10,12h
+02:42:ac:1c:00:0b,pedidos.vinheria.local,172.28.0.11,12h
+02:42:ac:1c:00:96,dhcp-cliente.vinheria.local,172.28.0.150,12h
+```
+
+```
+### reserva do serviço catalogo (MAC 02:42:ac:1c:00:0a)
+udhcpc: broadcasting select for 172.28.0.10, server 172.28.0.53
+udhcpc: lease of 172.28.0.10 obtained from 172.28.0.53, lease time 43200
+LEASE CONCEDIDA: ip=172.28.0.10 mascara=24 gateway=172.28.0.1 dns=172.28.0.53 dominio=vinheria.local lease=43200s servidor_dhcp=172.28.0.53
+    inet 172.28.0.10/24 scope global eth0
+
+### reserva do serviço pedidos (MAC 02:42:ac:1c:00:0b)
+udhcpc: broadcasting select for 172.28.0.11, server 172.28.0.53
+udhcpc: lease of 172.28.0.11 obtained from 172.28.0.53, lease time 43200
+LEASE CONCEDIDA: ip=172.28.0.11 mascara=24 gateway=172.28.0.1 dns=172.28.0.53 dominio=vinheria.local lease=43200s servidor_dhcp=172.28.0.53
+    inet 172.28.0.11/24 scope global eth0
+```
+
+Leases ativos no servidor (as três reservas):
+
+```
+$ docker compose exec dns cat /var/lib/misc/dnsmasq.leases
+1793674458 02:42:ac:1c:00:0b 172.28.0.11 pedidos 01:02:42:ac:1c:00:0b
+1793674456 02:42:ac:1c:00:0a 172.28.0.10 catalogo 01:02:42:ac:1c:00:0a
+1793674584 02:42:ac:1c:00:96 172.28.0.150 dhcp-cliente 01:02:42:ac:1c:00:96
+```
+
+## 6. Prints (imagens)
+
+Em `Fase7/evidencias/prints/` — cada PNG é a transcrição renderizada da saída real capturada nesta
+execução (mesmo texto dos blocos acima, sem edição de conteúdo):
+
+- `rede.png` — subnet fixa e IP por serviço
+- `dns.png` — pesquisa direta, reversa (PTR) e alias (CNAME) + `getent hosts`
+- `dhcp.png` — concessão, reservas por serviço e troca DORA no log do servidor
+- `chamada.png` — resposta de Pedidos com o IP do Catálogo resolvido por DNS
+
 ## Configuração usada
 
 - Escopo: `172.28.0.100`–`172.28.0.200`, máscara `255.255.255.0`, concessão de 12h
