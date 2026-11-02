@@ -71,3 +71,9 @@ publicação, com `BUILD_INFO.txt` contendo build, data e hora).
   timestamp — é a prova de que o deploy rodou.
 
 Evidências: `evidencias/item2-jenkins.md`.
+
+## Evidências (execução real em 02/11/2026)
+
+- `evidencias/item1-rede-dns-dhcp.md` — rede, DNS (direto/reverso/CNAME) e concessão DHCP com reserva
+- `evidencias/item2-jenkins.md` — dois builds verdes, console e artefato publicado
+- `evidencias/jenkins-historico-builds.png` e `evidencias/jenkins-console-build2.png` — prints do Jenkins
