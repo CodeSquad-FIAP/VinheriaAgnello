@@ -1,3 +1,4 @@
+
 services:
   # --- Servidor DNS interno (dnsmasq): zona vinheria.local + DHCP da simulação ---
   dns:
@@ -20,6 +21,14 @@ services:
   catalogo:
     build:
       context: ../services/catalogo-api
+    environment:
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET_nao_configurado}
+      JWT_CLIENT_ID: ${JWT_CLIENT_ID:?JWT_CLIENT_ID_nao_configurado}
+      JWT_CLIENT_PASSWORD: ${JWT_CLIENT_PASSWORD:?JWT_CLIENT_PASSWORD_nao_configurada}
+      TLS_CERT_PATH: /certs/catalogo.pfx
+      TLS_CERT_PASSWORD: ${TLS_CERT_PASSWORD:?TLS_CERT_PASSWORD_nao_configurada}
+    volumes:
+      - ./certs/catalogo.pfx:/certs/catalogo.pfx:ro
     container_name: vinheria-catalogo
     hostname: catalogo
     mac_address: "02:42:ac:1c:00:0a"   # reserva DHCP de catalogo.vinheria.local (172.28.0.10)
@@ -34,6 +43,11 @@ services:
   pedidos:
     build:
       context: ../services/pedidos-api
+    environment:
+      JWT_CLIENT_ID: ${JWT_CLIENT_ID:?JWT_CLIENT_ID_nao_configurado}
+      JWT_CLIENT_PASSWORD: ${JWT_CLIENT_PASSWORD:?JWT_CLIENT_PASSWORD_nao_configurada}
+    volumes:
+      - ./certs/catalogo.crt:/usr/local/share/ca-certificates/catalogo.crt:ro
     container_name: vinheria-pedidos
     hostname: pedidos
     mac_address: "02:42:ac:1c:00:0b"   # reserva DHCP de pedidos.vinheria.local (172.28.0.11)

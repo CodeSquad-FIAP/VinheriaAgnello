@@ -6,3 +6,7 @@ out/
 # pasta de publicação do Jenkins (conteúdo gerado nos builds; só o .gitignore é versionado)
 jenkins/publicacao/*
 !jenkins/publicacao/.gitignore
+
+infra/.env
+evidencias/seguranca/*.pcap*
+infra/certs/
